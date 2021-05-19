@@ -44,7 +44,7 @@ Giảng viên: Thầy Nguyễn Lê Minh. 
 4. Mở PHPMyAdmin (http://localhost:8080/phpmyadmin) (tùy vào cổng mà thay đổi 8080 thành cổng hiện tại trong xampp).
 5. Tạo cơ sở dữ liệu với tên spa
 6. Nhập tệp spa.sql (trong thư mục tệp SQL File)
-7. Vào trình duyệt gõ đường dẫn http://localhost:8080/Beauty/spa  (tùy vào cổng mà thay đổi 8080 thành cổng hiện tại trong xampp).
+7. Vào trình duyệt gõ đường dẫn http://localhost:8080/spa  (tùy vào cổng mà thay đổi 8080 thành cổng hiện tại trong xampp).
 
 
 Xin cám ơn!
