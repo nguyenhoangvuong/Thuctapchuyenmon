@@ -35,6 +35,7 @@ Giảng viên: Thầy Nguyễn Lê Minh. 
 6. Nhận xét và đánh giá sản phẩm
 7. Lấy mật khẩu thông qua gửi gmail.
 8. Duyệt đơn hàng.
+9. Xuất hóa đơn.
 
 
 ## Hướng dẫn sử dụng:
