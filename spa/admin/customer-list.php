@@ -46,7 +46,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                 <div class="tables">
                     <h3 class="title1">Danh sách khách hàng</h3>
                     <div class="table-responsive bs-example widget-shadow">
-                        <h4>Danh sách khách hàng:</h4>
+                        <h4>Danh sách khách hàng: <a href="add-customer.php"><button>Thêm khách hàng</button></a> </h4>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>

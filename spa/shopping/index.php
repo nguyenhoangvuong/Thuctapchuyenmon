@@ -66,7 +66,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                 <div class="row">
 
                     <div class="col-xs-12 col-sm-12 col-md-3 sidebar">
-                        <?php include('includes/side-menu.php');?>
+                    <?php include('includes/side-menu.php');?>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-9 homebanner-holder">
                         <div id="hero" class="homepage-slider3">

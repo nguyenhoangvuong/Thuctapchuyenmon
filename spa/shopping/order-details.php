@@ -22,13 +22,10 @@ include('includes/config.php');
 	    <link rel="stylesheet" href="assets/css/green.css">
 	    <link rel="stylesheet" href="assets/css/owl.carousel.css">
 		<link rel="stylesheet" href="assets/css/owl.transitions.css">
-		<!--<link rel="stylesheet" href="assets/css/owl.theme.css">-->
 		<link href="assets/css/lightbox.css" rel="stylesheet">
 		<link rel="stylesheet" href="assets/css/animate.min.css">
 		<link rel="stylesheet" href="assets/css/rateit.css">
 		<link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
-
-		<!-- Demo Purpose Only. Should be removed in production -->
 		<link rel="stylesheet" href="assets/css/config.css">
 
 		<link href="assets/css/green.css" rel="alternate stylesheet" title="Green color">
@@ -49,32 +46,25 @@ if(!popUpWin.closed) popUpWin.close();
 }
 popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width='+600+',height='+600+',left='+left+', top='+top+',screenX='+left+',screenY='+top+'');
 }
-
 </script>
 
 	</head>
     <body class="cnt-home">
-	
-		
-	
-		<!-- ============================================== HEADER ============================================== -->
 <header class="header-style-1">
 <?php include('includes/top-header.php');?>
 <?php include('includes/main-header.php');?>
 <?php include('includes/menu-bar.php');?>
 </header>
-<!-- ============================================== HEADER : END ============================================== -->
 <div class="breadcrumb">
 	<div class="container">
 		<div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
 				<li><a href="#">Home</a></li>
-				<li class='active'>Shopping Cart</li>
+				<li class='active'>Giỏ hàng</li>
 			</ul>
-		</div><!-- /.breadcrumb-inner -->
-	</div><!-- /.container -->
-</div><!-- /.breadcrumb -->
-
+		</div>
+	</div>
+</div>
 <div class="body-content outer-top-xs">
 	<div class="container">
 		<div class="row inner-bottom-sm">
@@ -82,32 +72,30 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 				<div class="col-md-12 col-sm-12 shopping-cart-table ">
 	<div class="table-responsive">
 <form name="cart" method="post">	
-
 		<table class="table table-bordered">
 			<thead>
 				<tr>
 					<th class="cart-romove item">#</th>
-					<th class="cart-description item">Image</th>
-					<th class="cart-product-name item">Product Name</th>
+					<th class="cart-description item">Hình ảnh</th>
+					<th class="cart-product-name item">Tên sản phẩm</th>
 			
-					<th class="cart-qty item">Quantity</th>
-					<th class="cart-sub-total item">Price Per unit</th>
-					<th class="cart-total item">Grandtotal</th>
-					<th class="cart-total item">Payment Method</th>
-					<th class="cart-description item">Order Date</th>
-					<th class="cart-total last-item">Action</th>
+					<th class="cart-qty item">Số lượng</th>
+					<th class="cart-sub-total item">Giá mỗi spham</th>
+					<th class="cart-total item">Tổng</th>
+					<th class="cart-total item">Phương thức thanh toán</th>
+					<th class="cart-description item">Ngày order</th>
+					<th class="cart-total last-item">Thao tác</th>
 				</tr>
-			</thead><!-- /thead -->
-			
+			</thead>
 			<tbody>
 <?php 
 $orderid=$_POST['orderid'];
-$email=$_POST['email'];
-$ret = mysqli_query($con,"select t.email,t.id from (select usr.email,odrs.id from users as usr join orders as odrs on usr.id=odrs.userId) as t where  t.email='$email' and (t.id='$orderid')");
+//$email=$_POST['email'];
+$ret = mysqli_query($con,"select t.Email,t.Id from (select usr.Email,odrs.Id from tblusers as usr join tblorders as odrs on usr.Id=odrs.UserId) as t where (t.Id='$orderid')");
 $num=mysqli_num_rows($ret);
 if($num>0)
 {
-$query=mysqli_query($con,"select products.productImage1 as pimg1,products.productName as pname,orders.productId as opid,orders.quantity as qty,products.productPrice as pprice,orders.paymentMethod as paym,orders.orderDate as odate,orders.id as orderid from orders join products on orders.productId=products.id where orders.id='$orderid' and orders.paymentMethod is not null");
+$query=mysqli_query($con,"select tblsanpham.Hinhanh1 as pimg1,tblsanpham.Tensanpham as pname,tblorders.SanphamId as opid,tblorders.Soluong as qty,tblsanpham.Giasanpham as pprice,tblorders.Phuongthucthanhtoan as paym,tblorders.Ngayorder as odate,tblorders.Id as orderid from tblorders join tblsanpham on tblorders.SanphamId=tblsanpham.Id where tblorders.Id='$orderid' and tblorders.Phuongthucthanhtoan is not null");
 $cnt=1;
 while($row=mysqli_fetch_array($query))
 {
@@ -116,7 +104,7 @@ while($row=mysqli_fetch_array($query))
 					<td><?php echo $cnt;?></td>
 					<td class="cart-image">
 						<a class="entry-thumbnail" href="detail.html">
-						    <img src="admin/productimages/<?php echo $row['pname'];?>/<?php echo $row['pimg1'];?>" alt="" width="84" height="146">
+							<img src="admin/productimages/<?php echo htmlentities($row['pname']);?>/<?php echo htmlentities($row['pimg1']);?>" alt="<?php echo htmlentities($row['pimg1']);?>" width="60" height="100">
 						</a>
 					</td>
 					<td class="cart-product-name-info">
@@ -150,7 +138,7 @@ while($row=mysqli_fetch_array($query))
 		</div> <!-- /.row -->
 		</form>
 		<!-- ============================================== BRANDS CAROUSEL ============================================== -->
-<?php echo include('includes/brands-slider.php');?>
+<?php include('includes/brands-slider.php');?>
 <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->	</div><!-- /.container -->
 </div><!-- /.body-content -->
 <?php include('includes/footer.php');?>

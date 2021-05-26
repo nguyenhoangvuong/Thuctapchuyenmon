@@ -1,12 +1,11 @@
 <?php
 session_start();
 error_reporting(0);
-include('includes/config.php');
+include('../includes/dbconnection.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<!-- Meta -->
 		<meta charset="utf-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -15,7 +14,7 @@ include('includes/config.php');
 	    <meta name="keywords" content="MediaCenter, Template, eCommerce">
 	    <meta name="robots" content="all">
 
-	    <title>Track Orders</title>
+	    <title>Theo dõi đơn hàng</title>
 	    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	    <link rel="stylesheet" href="assets/css/main.css">
 	    <link rel="stylesheet" href="assets/css/green.css">
@@ -36,25 +35,17 @@ include('includes/config.php');
 		<link rel="shortcut icon" href="assets/images/favicon.ico">
 	</head>
     <body class="cnt-home">
-	
 <header class="header-style-1">
-
-	<!-- ============================================== TOP MENU ============================================== -->
 <?php include('includes/top-header.php');?>
-<!-- ============================================== TOP MENU : END ============================================== -->
 <?php include('includes/main-header.php');?>
-	<!-- ============================================== NAVBAR ============================================== -->
 <?php include('includes/menu-bar.php');?>
-<!-- ============================================== NAVBAR : END ============================================== -->
-
 </header>
-<!-- ============================================== HEADER : END ============================================== -->
 <div class="breadcrumb">
 	<div class="container">
 		<div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
 				<li><a href="home.html">Home</a></li>
-				<li class='active'>Track your orders</li>
+				<li class='active'>Theo dõi đơn của bạn</li>
 			</ul>
 		</div><!-- /.breadcrumb-inner -->
 	</div><!-- /.container -->
@@ -65,25 +56,24 @@ include('includes/config.php');
 		<div class="track-order-page inner-bottom-sm">
 			<div class="row">
 				<div class="col-md-12">
-	<h2>Track your Order</h2>
-	<span class="title-tag inner-top-vs">Please enter your Order ID in the box below and press Enter. This was given to you on your receipt and in the confirmation email you should have received. </span>
+	<h2>Theo dõi đơn hàng của bạn</h2>
+	<span class="title-tag inner-top-vs">Vui lòng nhập ID đơn hàng của bạn vào ô bên dưới và nhấn Enter.</span>
 	<form class="register-form outer-top-xs" role="form" method="post" action="order-details.php">
 		<div class="form-group">
-		    <label class="info-title" for="exampleOrderId1">Order ID</label>
+		    <label class="info-title" for="exampleOrderId1">ID</label>
 		    <input type="text" class="form-control unicase-form-control text-input" name="orderid" id="exampleOrderId1" >
 		</div>
 	  	<div class="form-group">
-		    <label class="info-title" for="exampleBillingEmail1">Registered Email</label>
-		    <input type="email" class="form-control unicase-form-control text-input" name="email" id="exampleBillingEmail1" >
+		    <label class="info-title" for="exampleBillingEmail1">Email đã đăng ký</label>
+		    <input type="email" class="form-control unicase-form-control text-input" name="email" id="exampleBillingEmail1" value="<?php echo $_SESSION['login'] ?>" readonly>
 		</div>
-	  	<button type="submit" name="submit" class="btn-upper btn btn-primary checkout-page-button">Track</button>
+	  	<button type="submit" name="submit" class="btn-upper btn btn-primary checkout-page-button">Theo dõi</button>
 	</form>	
-</div>			</div><!-- /.row -->
-		</div><!-- /.sigin-in-->
-		<!-- ============================================== BRANDS CAROUSEL ============================================== -->
-<div 
+</div>			</div>
+		</div>
+<div>
 
-<?php echo include('includes/brands-slider.php');?>
+<?php include('includes/brands-slider.php');?>
 </div>
 </div>
 <?php include('includes/footer.php');?>

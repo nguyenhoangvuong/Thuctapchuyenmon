@@ -44,14 +44,14 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="tables">
-                    <h3 class="title1">Tất cả cuộc hẹnt</h3>
+                    <h3 class="title1">Tất cả cuộc hẹn</h3>
                     <div class="table-responsive bs-example widget-shadow">
                         <h4>Tất cả cuộc hẹnt:</h4>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th> Số cuộc hẹn</th>
+                                    <th>Số cuộc hẹn</th>
                                     <th>Tên</th>
                                     <th>Sô điện thoại</th>
                                     <th>Ngày hẹn</th>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 error_reporting(0);
-include('include/config.php');
+include('../includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
   } else{
@@ -13,15 +13,15 @@ if (strlen($_SESSION['bpmsaid']==0)) {
     {
         $category=$_POST['sername'];
         $description=$_POST['description'];
-    $sql=mysqli_query($con,"insert into category(categoryName,categoryDescription) values('$category','$description')");
-    $_SESSION['msg']="Category Created !!";
+    $sql=mysqli_query($con,"insert into tbltheloai(Tentheloai,Motatheloai) values('$category','$description')");
+    $_SESSION['msg']="Tạo thể loại thành công !!";
     
     }
     
     if(isset($_GET['del']))
               {
-                      mysqli_query($con,"delete from category where id = '".$_GET['id']."'");
-                      $_SESSION['delmsg']="Category deleted !!";
+                      mysqli_query($con,"delete from tbltheloai where Id = '".$_GET['id']."'");
+                      $_SESSION['delmsg']="Xóa thành công !!";
               }
     
   ?>
@@ -54,6 +54,50 @@ if (strlen($_SESSION['bpmsaid']==0)) {
     <script src="js/metisMenu.min.js"></script>
     <script src="js/custom.js"></script>
     <link href="css/custom.css" rel="stylesheet">
+    <style>
+        .alert-success {
+            background: #eaf4e2;
+            border-color: #c1dea9;
+            color: #61a06f;
+        }
+            .alert .close {
+            position: relative;
+            top: 1px;
+            right:-10px;
+            line-height: 20px;
+        }
+        button.close {
+            padding: 0;
+            cursor: pointer;
+            background: transparent;
+            border: 0;
+            -webkit-appearance: none;
+        }.close {
+            float: right;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 20px;
+            color: #000000;
+            text-shadow: 0 1px 0 #ffffff;
+            opacity: 0.2;
+            filter: alpha(opacity=20);
+        }
+        .alert {
+            padding: 8px 35px 8px 14px;
+            margin-bottom: 20px;
+            text-shadow: 0 1px 0 rgb(255 255 255 / 50%);
+            background-color: #fcf8e3;
+            border: 1px solid #fbeed5;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+        }
+        .alert-danger, .alert-error {
+            background: #f7e7e4;
+            border-color: #ecbeb6;
+            color: #b55351;
+        }
+    </style>
 </head>
 
 <body class="cbp-spmenu-push">
@@ -63,9 +107,29 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="tables">
-                <h3 class="title1">Thêm dịch vụ</h3>
+                <h3 class="title1">Thêm thể loại</h3>
                     <div class="form-grids row widget-shadow" data-example-id="basic-forms">
                         <div class="form-body">
+                        <?php if(isset($_POST['submit']))
+								{?>
+                                <div class="alert alert-success">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                    <strong>Succesfull !</strong>
+                                    <?php echo htmlentities($_SESSION['msg']);?><?php echo htmlentities($_SESSION['msg']="");?>
+                                </div>
+                                
+                                <?php } ?>
+
+                                <?php if(isset($_GET['del']))
+								{?>
+                                <div class="alert alert-error"> 
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                    <strong>Wrong !</strong>
+                                    <?php echo htmlentities($_SESSION['delmsg']);?><?php echo htmlentities($_SESSION['delmsg']="");?>
+                                </div>
+                                <?php } ?>
+
+                                <br />
                             <form method="post">
                                 <p style="font-size:16px; color:red" align="center">
                                     <?php if($msg){
@@ -98,18 +162,19 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                             </thead>
                             <tbody>
                                 <?php
-							$ret=mysqli_query($con,"select * from  category");
+							$ret=mysqli_query($con,"select * from  tbltheloai");
 							$cnt=1;
 							while ($row=mysqli_fetch_array($ret)) {
 								?>
                                 <tr>
+                                
                                     <th scope="row"><?php echo $cnt;?></th>
-                                    <td><?php  echo $row['categoryName'];?></td>
-                                    <td><?php  echo $row['categoryDescription'];?></td>
-                                    <td><?php  echo $row['creationDate'];?></td>
-                                    <td><?php  echo $row['updationDate'];?></td>
-                                    <td><a href="edit-services.php?editid=<?php echo $row['id'];?>">Sửa</a> || <a
-                                     href="manage-category.php?id=<?php echo $row['id']?>&del=delete" onClick="return confirm('Are you sure you want to delete?')"><i class="icon-remove-sign"></i>Xóa</a></td>
+                                    <td><?php  echo $row['Tentheloai'];?></td>
+                                    <td><?php  echo $row['Motatheloai'];?></td>
+                                    <td><?php  echo $row['Ngaytao'];?></td>
+                                    <td><?php  echo $row['Ngaycapnhat'];?></td>
+                                    <td><a href="edit-category.php?editid=<?php echo $row['Id'];?>">Sửa</a> || <a
+                                     href="manage-category.php?id=<?php echo $row['Id']?>&del=delete" onClick="return confirm('Bạn chắc chắn muốn xóa ?')"><i class="icon-remove-sign"></i>Xóa</a></td>
                                 </tr> <?php 
 								$cnt=$cnt+1;
 								}?>

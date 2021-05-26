@@ -76,6 +76,7 @@ else{
             <div class="row inner-bottom-sm">
                 <div class="shopping-cart">
                     <div class="col-md-12 col-sm-12 shopping-cart-table ">
+                    <h2 align="center" style="margin-top:-20px">Lịch sử đơn hàng</h2>
                         <div class="table-responsive">
                             <form name="cart" method="post">
 

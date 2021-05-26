@@ -80,9 +80,9 @@ $_SESSION['aptno']=$result['Socuochen'];
 	          	<img class="one-third align-self-end order-md-last img-fluid" src="images/bg_1.png" alt="">
 		          <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
 		          	<div class="text mt-5">
-		          		<span class="subheading">Beauty Parlour</span>
-			            <h1 class="mb-4">Get Pretty Look</h1>
-			            <p class="mb-4">We pride ourselves on our high quality work and attention to detail. The products we use are of top quality branded products.</p>
+		          		<span class="subheading">Dịch vụ làm đẹp</span>
+			            <h1 class="mb-4">Làm cho vẻ ngoài trở nên xinh đẹp</h1>
+			            <p class="mb-4">Chúng tôi tự hào về công việc chất lượng cao và sự chú ý đến từng chi tiết. Sản phẩm chúng tôi sử dụng là những sản phẩm có thương hiệu chất lượng hàng đầu.</p>
 						<a href="./shopping/index.php"><button class="shopping-now">Shopping Now</button></a>
 		            </div>
 		          </div>
@@ -97,9 +97,9 @@ $_SESSION['aptno']=$result['Socuochen'];
 	          	<img class="one-third align-self-end order-md-last img-fluid" src="images/bg_2.png" alt="">
 		          <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
 		          	<div class="text mt-5">
-		          		<span class="subheading">Natural Beauty</span>
+		          		<span class="subheading">Vẻ đẹp tự nhiên</span>
 			            <h1 class="mb-4">Beauty Salon</h1>
-			            <p class="mb-4">This parlour provides huge facilities with advanced technology equipments and best quality service. Here we offer best treatment that you might have never experienced before.</p>
+			            <p class="mb-4">Spa cung cấp cơ sở vật chất khổng lồ với thiết bị công nghệ tiên tiến và chất lượng dịch vụ tốt nhất. Tại đây chúng tôi cung cấp phương pháp điều trị tốt nhất mà bạn có thể chưa từng trải qua.</p>
 			            <a href="./shopping/index.php"><button class="shopping-now">Shopping Now</button></a>
 		            </div>
 		          </div>
@@ -118,13 +118,13 @@ $_SESSION['aptno']=$result['Socuochen'];
     				<div class="text">
     					<div class="overlay"></div>
     					<div class="appointment-wrap">
-    						<span class="subheading">Reservation</span>
-								<h3 class="mb-2">Make an Appointment</h3>
+    						<span class="subheading">Đặt lịch</span>
+								<h3 class="mb-2">Đặt cuộc hẹn</h3>
 		    				<form action="#" method="post" class="appointment-form">
 			            <div class="row">
 			              <div class="col-sm-12">
 			                <div class="form-group">
-					              <input type="text" class="form-control" id="name" placeholder="Name" name="name" required="true">
+					              <input type="text" class="form-control" id="name" placeholder="Tên" name="name" required="true">
 					            </div>
 			              </div>
 			              <div class="col-sm-12">
@@ -137,7 +137,7 @@ $_SESSION['aptno']=$result['Socuochen'];
 					              <div class="select-wrap">
 		                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
 		                      <select name="services" id="services" required="true" class="form-control">
-		                      	<option value="">Select Services</option>
+		                      	<option value="">Chọn dịch vụ</option>
 		                      	<?php $query=mysqli_query($con,"select * from tbldichvu");
               while($row=mysqli_fetch_array($query))
               {
@@ -150,22 +150,22 @@ $_SESSION['aptno']=$result['Socuochen'];
 			              </div>
 			              <div class="col-sm-12">
 			                <div class="form-group">
-			                  <input type="text" class="form-control appointment_date" placeholder="Date" name="adate" id='adate' required="true">
+			                  <input type="text" class="form-control appointment_date" placeholder="Ngày" name="adate" id='adate' required="true">
 			                </div>    
 			              </div>
 			              <div class="col-sm-12">
 			                <div class="form-group">
-			                  <input type="text" class="form-control appointment_time" placeholder="Time" name="atime" id='atime' required="true">
+			                  <input type="text" class="form-control appointment_time" placeholder="Thời gian" name="atime" id='atime' required="true">
 			                </div>
 			              </div>
 			              <div class="col-sm-12">
 			                <div class="form-group">
-			                  <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" required="true" maxlength="10" pattern="[0-9]+">
+			                  <input type="text" class="form-control" id="phone" name="phone" placeholder="Số điện thoại" required="true" maxlength="10" pattern="[0-9]+">
 			                </div>
 			              </div>
 				          </div>
 				          <div class="form-group">
-			              <input type="submit" name="submit" value="Make an Appointment" class="btn btn-primary">
+			              <input type="submit" name="submit" value="Tạo cuộc hẹn" class="btn btn-primary">
 			            </div>
 			          </form>
 		          </div>

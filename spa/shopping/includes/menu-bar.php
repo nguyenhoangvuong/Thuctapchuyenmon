@@ -16,16 +16,13 @@
                         <ul class="nav navbar-nav">
                             <li class="active dropdown yamm-fw">
                                 <a href="index.php" data-hover="dropdown" class="dropdown-toggle">Home</a>
-
                             </li>
                             <?php $sql=mysqli_query($con,"select Id,Tentheloai  from tbltheloai limit 6");
                                 while($row=mysqli_fetch_array($sql))
                                 {
                             ?>
                             <li class="dropdown yamm">
-                                <a href="category.php?cid=<?php echo $row['Id'];?>">
-                                    <?php echo $row['Tentheloai'];?></a>
-
+                                <a href="category.php?cid=<?php echo $row['Id'];?>"><?php echo $row['Tentheloai'];?></a>
                             </li>
                             <?php } ?>
                         </ul>

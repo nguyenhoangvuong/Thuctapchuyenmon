@@ -81,7 +81,7 @@ if(!empty($_SESSION['cart'])){
 				$totalprice += $subtotal;
 				$_SESSION['qnty']=$totalqunty+=$quantity;
 
-	?>
+                ?>
                         <li>
                             <div class="cart-item product-summary">
                                 <div class="row">

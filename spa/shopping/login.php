@@ -147,6 +147,7 @@ if(isset($_POST['login']))
 									echo htmlentities($_SESSION['errmsg']="");
 								?>
                             </span>
+                            <p></p>
                             <div class="form-group">
                                 <label class="info-title" for="exampleInputEmail1">Địa chỉ Email <span>*</span></label>
                                 <input type="email" name="email" class="form-control unicase-form-control text-input"

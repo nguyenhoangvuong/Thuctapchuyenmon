@@ -90,7 +90,7 @@ button#showLeftPush:hover {
     height: 100%;
     top: 76px;
     z-index: 1000;
-    background-color:#4F52BA;
+    background-color:#333;
 	padding: 2em 0;
 }
 .cbp-spmenu-left {
@@ -543,8 +543,8 @@ i.fa.fa-tasks{
     color: #FFF;
     background: #8BC34A;
     line-height: 15px;
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     border-radius: 2em;
     -webkit-border-radius: 2em;
     -moz-border-radius: 2em;

@@ -6,6 +6,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
 	$id=intval($_GET['id']);
 	if(isset($_SESSION['cart'][$id])){
 		$_SESSION['cart'][$id]['quantity']++;
+        header('location:index.php');
         echo "<script>alert('Sản phẩm đã được cập nhật số lượng vào giỏ hàng')</script>";
         
 	}else{
@@ -14,7 +15,8 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
 		if(mysqli_num_rows($query_p)!=0){
 			$row_p=mysqli_fetch_array($query_p);
 			$_SESSION['cart'][$row_p['Id']]=array("quantity" => 1, "price" => $row_p['Giasanpham']);
-					echo "<script>alert('Sản phẩm đã được thêm vào giỏ hàng')</script>";
+            header('location:index.php');
+            echo "<script>alert('Sản phẩm đã được thêm vào giỏ hàng')</script>";
 		}else{
 			$message="ID sản phẩm không hợp lệ";
 		}
@@ -29,9 +31,8 @@ header('location:login.php');
 else
 {
 mysqli_query($con,"insert into tblyeuthich(UserId,SanphamId) values('".$_SESSION['id']."','$pid')");
-echo "<script>alert('Đã thêm vào danh sách yêu thich');</script>";
 header('location:my-wishlist.php');
-
+echo "<script>alert('Đã thêm vào danh sách yêu thich');</script>";
 }
 }
 if(isset($_POST['submit']))
@@ -50,6 +51,7 @@ if(isset($_POST['submit']))
 <html lang="en">
 
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -80,6 +82,8 @@ if(isset($_POST['submit']))
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 </head>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0&appId=110064847734070&autoLogAppEvents=1" nonce="1EoTn8vC"></script>
 
 <body class="cnt-home">
     <header class="header-style-1">
@@ -140,7 +144,7 @@ if(isset($_POST['submit']))
                                     <div class="products">
                                         <div class="hot-deal-wrapper">
                                             <div class="image">
-                                                <img src="admin/productimages/<?php echo htmlentities($rws['Id']);?>/<?php echo htmlentities($rws['Hinhanh1']);?>"
+                                                <img src="../admin/productimages/<?php echo htmlentities($rws['Id']);?>/<?php echo htmlentities($rws['Hinhanh1']);?>"
                                                     width="200" height="334" alt="">
                                             </div>
                                         </div>
@@ -202,33 +206,33 @@ if(isset($_POST['submit']))
                                     <div class="single-product-gallery-item" id="slide1">
                                         <a data-lightbox="image-1"
                                             data-title="<?php echo htmlentities($row['Tensanpham']);?>"
-                                            href="admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>">
+                                            href="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>">
                                             <img class="img-responsive" alt="" src="assets/images/blank.gif"
-                                                data-echo="admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
+                                                data-echo="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
                                                 width="370" height="350" />
                                         </a>
                                     </div>
                                     <div class="single-product-gallery-item" id="slide1">
                                         <a data-lightbox="image-1"
                                             data-title="<?php echo htmlentities($row['Tensanpham']);?>"
-                                            href="admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>">
+                                            href="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>">
                                             <img class="img-responsive" alt="" src="assets/images/blank.gif"
-                                                data-echo="admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
+                                                data-echo="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
                                                 width="370" height="350" />
                                         </a>
                                     </div>
                                     <div class="single-product-gallery-item" id="slide2">
                                         <a data-lightbox="image-1" data-title="Gallery"
-                                            href="admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh2']);?>">
+                                            href="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh2']);?>">
                                             <img class="img-responsive" alt="" src="assets/images/blank.gif"
-                                                data-echo="admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh2']);?>" />
+                                                data-echo="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh2']);?>" />
                                         </a>
                                     </div>
                                     <div class="single-product-gallery-item" id="slide3">
                                         <a data-lightbox="image-1" data-title="Gallery"
-                                            href="admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh3']);?>">
+                                            href="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh3']);?>">
                                             <img class="img-responsive" alt="" src="assets/images/blank.gif"
-                                                data-echo="admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh3']);?>" />
+                                                data-echo="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh3']);?>" />
                                         </a>
                                     </div>
                                 </div>
@@ -239,7 +243,7 @@ if(isset($_POST['submit']))
                                             <a class="horizontal-thumb active" data-target="#owl-single-product"
                                                 data-slide="1" href="#slide1">
                                                 <img class="img-responsive" alt="" src="assets/images/blank.gif"
-                                                    data-echo="admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>" />
+                                                    data-echo="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>" />
                                             </a>
                                         </div>
                                         <div class="item">
@@ -247,7 +251,7 @@ if(isset($_POST['submit']))
                                                 href="#slide2">
                                                 <img class="img-responsive" width="85" alt=""
                                                     src="assets/images/blank.gif"
-                                                    data-echo="admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh2']);?>" />
+                                                    data-echo="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh2']);?>" />
                                             </a>
                                         </div>
                                         <div class="item">
@@ -256,7 +260,7 @@ if(isset($_POST['submit']))
                                                 href="#slide3">
                                                 <img class="img-responsive" width="85" alt=""
                                                     src="assets/images/blank.gif"
-                                                    data-echo="admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh3']);?>"
+                                                    data-echo="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh3']);?>"
                                                     height="200" />
                                             </a>
                                         </div>
@@ -400,6 +404,7 @@ if(isset($_POST['submit']))
                                     <span class="social-label">Chia sẻ :</span>
                                     <div class="social-icons">
                                         <ul class="list-inline">
+                                            <div class="fb-share-button" data-href="http://localhost:8080/Manage_Spa/spa/shopping/product-details.php?pid=2" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2FManage_Spa%2Fspa%2Fshopping%2Fproduct-details.php%3Fpid%3D2&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
                                             <li><a class="fa fa-facebook" href="http://facebook.com/vuongml0123"></a>
                                             </li>
                                             <li><a class="fa fa-twitter" href="#"></a></li>
@@ -440,11 +445,7 @@ if(isset($_POST['submit']))
 											?>
                                                 <div class="reviews" style="border: solid 1px #000; padding-left: 2% ">
                                                     <div class="review">
-                                                        <div class="review-title"><span
-                                                                class="summary"><?php echo htmlentities($rvw['Tomluoc']);?></span><span
-                                                                class="date"><i
-                                                                    class="fa fa-calendar"></i><span><?php echo htmlentities($rvw['Ngayreview']);?></span></span>
-                                                        </div>
+                                                    <div class="fb-share-button" data-href="https://www.youtube.com/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.youtube.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
                                                         <div class="text">"<?php echo htmlentities($rvw['Review']);?>"
                                                         </div>
                                                         <div class="text"><b>Quality :</b>
@@ -525,8 +526,6 @@ if(isset($_POST['submit']))
 
                                                     <div class="review-form">
                                                         <div class="form-container">
-
-
                                                             <div class="row">
                                                                 <div class="col-sm-6">
                                                                     <div class="form-group">
@@ -590,7 +589,7 @@ if(isset($_POST['submit']))
                                 <div class="image">
                                     <a href="product-details.php?pid=<?php echo htmlentities($rw['Id']);?>"><img
                                             src="assets/images/blank.gif"
-                                            data-echo="admin/productimages/<?php echo htmlentities($rw['Id']);?>/<?php echo htmlentities($rw['Hinhanh1']);?>"
+                                            data-echo="../admin/productimages/<?php echo htmlentities($rw['Id']);?>/<?php echo htmlentities($rw['Hinhanh1']);?>"
                                             width="150" height="240" alt=""></a>
                                 </div>
                             </div>
@@ -603,9 +602,9 @@ if(isset($_POST['submit']))
 
                                 <div class="product-price">
                                     <span class="price">
-                                        VNĐ<?php echo htmlentities($rw['Giasanpham']);?> </span>
-                                    <span class="price-before-discount">VNĐ
-                                        <?php echo htmlentities($rw['Giasanphamtruockhigiam']);?></span>
+                                        <?php echo htmlentities($rw['Giasanpham']);?> VNĐ </span>
+                                    <span class="price-before-discount">
+                                        <?php echo htmlentities($rw['Giasanphamtruockhigiam']);?> VNĐ</span>
                                 </div>
                             </div>
                             <div class="cart clearfix animate-effect">

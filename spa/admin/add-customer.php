@@ -78,7 +78,8 @@
                                 </label></p>
                             </div>
 							 	<div class="form-group"> <label for="exampleInputEmail1">Chi tiết</label> <textarea type="text" class="form-control" id="details" name="details" placeholder="Chi tiết" required="true" rows="12" cols="4"></textarea> </div>
-							  	<button type="submit" name="submit" class="btn btn-default">Thêm</button> </form> 
+							  	<button type="submit" name="submit" class="btn btn-default">Thêm</button>  <a href="customer-list.php" class="btn btn-default">Trở lại</a> </form> 
+								  
 						</div>
 					</div>
 			</div>

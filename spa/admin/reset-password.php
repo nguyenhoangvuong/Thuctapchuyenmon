@@ -59,13 +59,12 @@ session_destroy();
     </script>
 </head>
 
-<body class="cbp-spmenu-push">
-    <div class="main-content">
-        <div id="page-wrapper">
+<body>
+        <div id="page-wrapper" style="background-image:url(images/spa.png);background-repeat: no-repeat;background-size: cover;">
             <div class="main-page login-page ">
-                <h3 class="title1">Reset Page</h3>
-                <div class="widget-shadow">
+                <div class="widget-shadow"  style="border-radius:10px;box-shadow:1px 3px 4px #333333">
                     <div class="login-top">
+                        <h3 class="title1">Làm mới mật khẩu</h3>
                         <h4>Welcome back to Sk3nwOC SPA ! </h4>
                     </div>
                     <div class="login-body">
@@ -81,19 +80,17 @@ session_destroy();
                                 required="true">
                             <input type="password" name="confirmpassword" class="lock" placeholder="Confirm Password"
                                 required="true">
-                            <input type="submit" name="submit" value="Reset">
+                            <input type="submit" name="submit" value="Xác nhận">
                             <div class="forgot-grid">
 
                                 <div class="forgot">
-                                    <a href="index.php">Already have an account</a>
+                                    <a href="index.php">Bạn đã có tài khoản</a>
                                 </div>
                                 <div class="clearfix"> </div>
                             </div>
                         </form>
                     </div>
                 </div>
-
-            </div>
         </div>
     </div>
     <script src="js/classie.js"></script>

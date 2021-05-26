@@ -2,7 +2,7 @@
     session_start();
     include("../includes/dbconnection.php");
     $_SESSION['login']=="";
-    date_default_timezone_set('Asia/Kolkata');
+    date_default_timezone_set("Asia/Bangkok");
     $ldate=date( 'd-m-Y h:i:s A', time () );
     mysqli_query($con,"UPDATE tblnhatkynguoidung  SET Thoigianlogout = '$ldate' WHERE Emailnguoidung = '".$_SESSION['login']."' ORDER BY Id DESC LIMIT 1");
     session_unset();

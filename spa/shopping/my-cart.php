@@ -91,9 +91,9 @@
                     <li><a href="#">Home</a></li>
                     <li class='active'>Giỏ hàng</li>
                 </ul>
-            </div><!-- /.breadcrumb-inner -->
-        </div><!-- /.container -->
-    </div><!-- /.breadcrumb -->
+            </div>
+        </div>
+    </div>
 
     <div class="body-content outer-top-xs">
         <div class="container">

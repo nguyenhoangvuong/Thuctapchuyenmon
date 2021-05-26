@@ -8,7 +8,7 @@ header('location:login.php');
 }
 else{
 	if (isset($_GET['id'])) {
-		mysqli_query($con,"delete from tblorders  where UserId='".$_SESSION['id']."' and Phuongthucthanhtoan is null and Id='".$_GET['id']."' ");
+		mysqli_query($con,"delete from tblorders  where UserId='".$_SESSION['id']."' and Tinhtrangorder is null and Id='".$_GET['id']."' ");
 	}
 ?>
 
@@ -67,6 +67,7 @@ else{
             <div class="row inner-bottom-sm">
                 <div class="shopping-cart">
                     <div class="col-md-12 col-sm-12 shopping-cart-table ">
+                    <h2 align="center" style="margin-top:-20px">Đơn hàng</h2>
                         <div class="table-responsive">
                             <form name="cart" method="post">
 
@@ -88,7 +89,7 @@ else{
                                     </thead>
 
 									<tbody>
-                                        <?php $query=mysqli_query($con,"select tblsanpham.Hinhanh1 as pimg1,tblsanpham.Tensanpham as pname,tblsanpham.Id as proid,tblorders.SanphamId as opid,tblorders.Soluong as qty,tblsanpham.Giasanpham as pprice,tblsanpham.Phivanchuyen as shippingcharge,tblorders.Phuongthucthanhtoan as paym,tblorders.Ngayorder as odate,tblorders.Id as orderid from tblorders join tblsanpham on tblorders.SanphamId=tblsanpham.Id where tblorders.UserId='".$_SESSION['id']."' and tblorders.Phuongthucthanhtoan is null");
+                                        <?php $query=mysqli_query($con,"select tblsanpham.Hinhanh1 as pimg1,tblsanpham.Tensanpham as pname,tblsanpham.Id as proid,tblorders.SanphamId as opid,tblorders.Soluong as qty,tblsanpham.Giasanpham as pprice,tblsanpham.Phivanchuyen as shippingcharge,tblorders.Phuongthucthanhtoan as paym,tblorders.Ngayorder as odate,tblorders.Id as orderid from tblorders join tblsanpham on tblorders.SanphamId=tblsanpham.Id where tblorders.UserId='".$_SESSION['id']."' and tblorders.Tinhtrangorder is null");
 											$cnt=1;
 											$num=mysqli_num_rows($query);
 											if($num>0)
@@ -123,21 +124,10 @@ else{
                                             <td class="cart-product-sub-total"><?php echo $row['paym']; ?> </td>
                                             <td class="cart-product-sub-total"><?php echo $row['odate']; ?> </td>
 
-                                            <td><a href="pending-orders.php?id=<?php echo $row['opid']?>&del=delete" onClick="return confirm('Are you sure you want to delete?')">Delete</td>
+                                            <td><a href="pending-orders.php?id=<?php echo $row['orderid']?>&del=delete" onClick="return confirm('Are you sure you want to delete?')">Delete</td>
   
 											</tr>
                                         <?php $cnt=$cnt+1;} ?>
-                                        <tr>
-                                            <td colspan="9">
-                                                <div class="cart-checkout-btn pull-right">
-                                                    <button type="submit" name="ordersubmit" class="btn btn-primary"><a
-                                                            href="payment-method.php">Chọn phương thức thanh
-                                                            toán</a></button>
-
-                                                </div>
-                                            </td>
-
-                                        </tr>
                                         <?php } else {?>
                                         <tr>
                                             <td colspan="10" align="center">
@@ -155,7 +145,7 @@ else{
                 </div>
             </div>
             </form>
-            <?php echo include('includes/brands-slider.php');?>
+            <?php include('includes/brands-slider.php');?>
         </div>
     </div>
     <?php include('includes/footer.php');?>

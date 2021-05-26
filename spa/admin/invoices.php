@@ -70,8 +70,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                     <td><?php  echo $row['BillId'];?></td>
                                     <td><?php  echo $row['Ten'];?></td>
                                     <td><?php  echo $row['NgayDang'];?></td>
-                                    <td><a href="view-invoice.php?invoiceid=<?php  echo $row['BillId'];?>">Xem chi
-                                            tiết</a></td>
+                                    <td><a href="view-invoice.php?invoiceid=<?php  echo $row['BillId'];?>">Xem chi tiết</a></td>
                                 </tr> <?php 
 						$cnt=$cnt+1;
 						}?>

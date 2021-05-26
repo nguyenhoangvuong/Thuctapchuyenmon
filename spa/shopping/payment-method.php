@@ -12,7 +12,6 @@ else{
 		mysqli_query($con,"update tblorders set Phuongthucthanhtoan='".$_POST['paymethod']."' where UserId='".$_SESSION['id']."' and Phuongthucthanhtoan is null ");
 		unset($_SESSION['cart']);
 		header('location:order-history.php');
-        echo "<script>alert('Giỏ hàng của bạn đã được cập nhật');</script>";
 	}
 ?>
 <!DOCTYPE html>

@@ -5,28 +5,15 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
   } else{
-
-if(isset($_POST['submit']))
-  {
-    $sername=$_POST['sername'];
-    $cost=$_POST['cost'];
-    $query=mysqli_query($con, "insert into  tbldichvu(Tendichvu,Chiphi) value('$sername','$cost')");
-    if ($query) {
-    	echo "<script>alert('Dịch vụ đã được thêm .');</script>"; 
-    	echo "<script>window.location.href = 'add-services.php'</script>";   
-    $msg="";
-  }
-  else
-    {
-    echo "<script>alert('Đã xảy ra lỗi. Vui lòng thử lại !');</script>";  	
-    }
-}
+      if(isset($_GET['del'])){
+        $query=mysqli_query($con,"delete from tblnhatkynguoidung where Id = '".$_GET['id']."'");
+      }
   ?>
 <!DOCTYPE HTML>
 <html lang="en">
 
 <head>
-    <title>SPA | Thêm dịch vụ</title>
+    <title>SPA || Danh sách người dùng</title>
     <script type="application/x-javascript">
     addEventListener("load", function() {
         setTimeout(hideURLbar, 0);
@@ -59,27 +46,41 @@ if(isset($_POST['submit']))
         <?php include_once('includes/header.php');?>
         <div id="page-wrapper">
             <div class="main-page">
-                <div class="forms">
-                    <h3 class="title1">Thêm dịch vụ</h3>
-                    <div class="form-grids row widget-shadow" data-example-id="basic-forms">
-                        <div class="form-title">
-                            <h4>Dịch phụ phòng khách:</h4>
-                        </div>
-                        <div class="form-body">
-                            <form method="post">
-                                <p style="font-size:16px; color:red" align="center">
-                                    <?php if($msg){
-									echo $msg;
-								}  ?> </p>
-                                <div class="form-group"> <label for="exampleInputEmail1">Tên dịch vụ</label> <input
-                                        type="text" class="form-control" id="sername" name="sername"
-                                        placeholder="Tên dịch vụ" value="" required="true"> </div>
-                                <div class="form-group"> <label for="exampleInputPassword1">Chi phí</label> <input
-                                        type="text" id="cost" name="cost" class="form-control" placeholder="Chi phí"
-                                        value="" required="true"> </div>
-                                <button type="submit" name="submit" class="btn btn-default">Thêm</button>
-                            </form>
-                        </div>
+                <div class="tables">
+                    <h3 class="title1">Nhật ký người dùng</h3>
+                    <div class="table-responsive bs-example widget-shadow">
+                        <h4>Nhật ký người dùng:</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Email</th>
+                                    <th>IP người dùng</th>
+                                    <th>Thời gian login</th>
+                                    <th>Thời gian logout</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+								$ret=mysqli_query($con,"select *from  tblnhatkynguoidung");
+								$cnt=1;
+								while ($row=mysqli_fetch_array($ret)) {
+							?>
+                                <tr>
+                                    <th scope="row"><?php echo $cnt;?></th>
+                                    <td><?php  echo $row['Emailnguoidung'];?></td>
+                                    <td><?php  echo $row['Ipnguoidung'];?></td>
+                                    <td><?php  echo $row['Thoigianlogin'];?></td>
+                                    <td><?php  echo $row['Thoigianlogout'];?></td>
+                                    <td><?php  echo $row['Trangthai'];?></td>
+                                    <td><a href="user-log.php?id=<?php echo $row['Id'];?>&del=delete" onClick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a></td>
+                                </tr> <?php 
+						$cnt=$cnt+1;
+						}?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -111,4 +112,4 @@ if(isset($_POST['submit']))
 </body>
 
 </html>
-<?php } ?>
+<?php }  ?>
