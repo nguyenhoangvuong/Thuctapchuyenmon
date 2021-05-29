@@ -69,7 +69,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                     <td><?php  echo $row['Sodienthoai'];?></td>
                                     <td><?php  echo $row['Ngaytao'];?></td>
                                     <td><a href="edit-customer-detailed.php?editid=<?php echo $row['ID'];?>">Sửa</a> ||
-                                        <a href="add-customer-services.php?addid=<?php echo $row['ID'];?>">Dịch vụ</a></td>
+                                        <a href="add-customer-services.php?addid=<?php echo $row['ID'];?>">Dịch vụ</a> || <a href="add-customer-product.php?addid=<?php echo $row['ID'];?>">Sản phẩm</a></td>
                                 </tr> <?php 
 						$cnt=$cnt+1;
 						}?>

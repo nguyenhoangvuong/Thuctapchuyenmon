@@ -48,10 +48,9 @@
 		<div id="page-wrapper">
 			<div class="main-page">
 				<div class="forms">
-					<h3 class="title1">Thêm khách hàng</h3>
 					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
 						<div class="form-title">
-							<h4>Khách hàng:</h4>
+							<h4>Thêm Khách hàng:</h4>
 						</div>
 						<div class="form-body">
 							<form method="post">

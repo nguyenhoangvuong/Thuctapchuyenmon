@@ -143,9 +143,16 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 							join tbldichvu  on tbldichvu.ID=tblhoadon.DichvuId where date(NgayDang)=CURDATE();");
 							while($row=mysqli_fetch_array($query6))
 							{
-							$todays_sale=$row['Chiphi'];
-							$todysale+=$todays_sale;
-
+							    $todays_sale=$row['Chiphi'];
+							    $todysale+=$todays_sale;
+							}
+                            $query7=mysqli_query($con,"select tblhoadon.SanphamId as SanphamId, tblsanpham.Giasanpham
+							from tblhoadon 
+							join tblsanpham  on tblsanpham.Id=tblhoadon.SanphamId where date(tblhoadon.NgayDang)=CURDATE();");
+							while($row=mysqli_fetch_array($query7))
+							{
+							    $todays_sale1=$row['Giasanpham'];
+							    $todysale+=$todays_sale1;
 							}
 							?>
                             <div class="stats-left">
@@ -195,7 +202,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 								//Last Sevendays Sale
 								$query8=mysqli_query($con,"select tblhoadon.DichvuId as DichvuId, tbldichvu.Chiphi
 								from tblhoadon 
-								join tbldichvu  on tbldichvu.ID=tblhoadon.DichvuId where date(NgayDang)>=(DATE(NOW()) - INTERVAL 5 DAY);");
+								join tbldichvu  on tbldichvu.ID=tblhoadon.DichvuId where date(NgayDang)>=(DATE(NOW()) - INTERVAL 7 DAY);");
 								while($row8=mysqli_fetch_array($query8))
 								{
 								$sevendays_sale=$row8['Chiphi'];

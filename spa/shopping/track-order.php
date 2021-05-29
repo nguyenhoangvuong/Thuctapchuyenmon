@@ -22,6 +22,8 @@ function f3() {
     <title>Theo dõi chi tiết đơn hàng</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
     <link href="anuj.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/style1.css">
+    <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
 </head>
 
 <body>

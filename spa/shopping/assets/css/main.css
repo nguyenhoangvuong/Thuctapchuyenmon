@@ -130,10 +130,10 @@ img[src="assets/images/blank.gif"] {
   -ms-transition: all linear 0.2s;
   -o-transition: all linear 0.2s;
   transition: all linear 0.2s;
-  background: #a8a8a8;
+  background: #f00;
   color: #fff;
   border: none;
-  font-size: 13px;
+  font-size: 1.4rem;
   line-height: 22px;
 }
 .btn-black {
@@ -3297,6 +3297,7 @@ a {
 }
 .search-result-container .category-product .product {
   margin-bottom: 30px;
+  width: 260px;
 }
 .search-result-container .category-product .product .product-image .tag {
   width: 60px;
@@ -3312,7 +3313,7 @@ a {
   margin: 8px 0px !important;
 }
 .search-result-container .category-product .product .cart .lnk a {
-  background: #a8a8a8;
+  background: #f00;
   padding: 8px 11px !important;
   margin-left: 10px;
   color: #fff !important;
@@ -3878,7 +3879,7 @@ a {
   font-size: 15px;
   line-height: 30px;
   font-family: 'FjallaOneRegular';
-  background: #cbc9c9;
+  background: #ef3d3d;
   text-transform: uppercase;
   border: none;
   color: #fff;

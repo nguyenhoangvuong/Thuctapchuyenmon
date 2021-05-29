@@ -72,6 +72,8 @@ header('location:my-wishlist.php');
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/style1.css">
+    <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
 </head>
 
 <body class="cnt-home">
@@ -93,13 +95,9 @@ header('location:my-wishlist.php');
         <div class='container'>
             <div class='row outer-bottom-sm'>
                 <div class='col-md-3 sidebar'>
-                    <!-- ================================== TOP NAVIGATION ================================== -->
-                    <!-- /.side-menu -->
-                    <!-- ================================== TOP NAVIGATION : END ================================== -->
                     <div class="sidebar-module-container">
                         <h3 class="section-title">shop by</h3>
                         <div class="sidebar-filter">
-                            <!-- ============================================== SIDEBAR CATEGORY ============================================== -->
                             <div class="sidebar-widget wow fadeInUp outer-bottom-xs ">
                                 <div class="widget-header m-t-20">
                                     <h4 class="widget-title">Category</h4>

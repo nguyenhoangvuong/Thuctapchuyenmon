@@ -14,6 +14,8 @@
         $(".scrollbar1").getNiceScroll().hide();
     }
 
+    
+
 })(jQuery);
 
                      

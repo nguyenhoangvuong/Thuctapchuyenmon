@@ -12,7 +12,8 @@ else{
 		$baddress=$_POST['billingaddress'];
 		$bstate=$_POST['bilingstate'];
 		$bcity=$_POST['billingcity'];
-		$bpincode=$_POST['billingpincode'];
+		// $bpincode=$_POST['billingpincode'];
+        $bpincode=mt_rand(1000, 9999);
 		$query=mysqli_query($con,"update tblusers set Diachithanhtoan='$baddress',Trangthaithanhtoan='$bstate',Thanhphothanhtoan='$bcity',Mapinthanhtoan='$bpincode' where Id='".$_SESSION['id']."'");
 		if($query)
 		{
@@ -67,6 +68,8 @@ echo "<script>alert('Shipping Address has been updated');</script>";
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/style1.css">
+    <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
 
 </head>
 
@@ -145,9 +148,8 @@ echo "<script>alert('Shipping Address has been updated');</script>";
                                                                 <span>*</span></label>
                                                             <input type="text"
                                                                 class="form-control unicase-form-control text-input"
-                                                                id="billingpincode" name="billingpincode"
-                                                                required="required"
-                                                                value="<?php echo $row['Mapinvanchuyen'];?>">
+                                                                id="billingpincode" name="billingpincode" readonly
+                                                                value="<?php echo $bpincode;?>">
                                                         </div>
 
 
@@ -208,8 +210,8 @@ while($row=mysqli_fetch_array($query))
                                                 <label class="info-title" for="Billing Pincode">Mã pin
                                                     <span>*</span></label>
                                                 <input type="text" class="form-control unicase-form-control text-input"
-                                                    id="shippingpincode" name="shippingpincode" required="required"
-                                                    value="<?php echo $row['Mapinvanchuyen'];?>">
+                                                    id="shippingpincode" name="shippingpincode" readonly
+                                                    value="<?php echo $bpincode;?>">
                                             </div>
 
 

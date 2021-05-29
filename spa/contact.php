@@ -24,6 +24,8 @@ include('includes/dbconnection.php');
 
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
+    <link rel="stylesheet" type="text/css" href="css/style1.css">
+    <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
 
     
     <link rel="stylesheet" href="css/flaticon.css">

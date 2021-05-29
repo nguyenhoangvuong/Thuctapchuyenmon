@@ -56,6 +56,8 @@ $_SESSION['aptno']=$result['Socuochen'];
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/style1.css">
+    <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
 	<style>
 		.shopping-now{
 			background-color:#006666;color:white;width:170px;outline:none;border:0px;box-shadow:1px 3px 4px #333333;height:50px;border-radius:4px;font-size:1.2rem;

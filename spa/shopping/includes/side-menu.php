@@ -1,5 +1,5 @@
 <div class="side-menu animate-dropdown outer-bottom-xs">
-    <div class="head"><i class="icon fa fa-align-justify fa-fw"></i> Thể loại</div>
+    <div class="head" style="font-family:times new roman"><i class="icon fa fa-align-justify fa-fw"></i> Thể loại</div>
     <nav class="yamm megamenu-horizontal" role="navigation">
 
         <ul class="nav">

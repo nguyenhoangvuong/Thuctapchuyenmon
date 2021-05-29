@@ -59,7 +59,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                             </thead>
                             <tbody>
                                 <?php
-								$ret=mysqli_query($con,"select distinct tblkhachhang.Ten,tblhoadon.BillId,tblhoadon.NgayDang from  tblkhachhang   
+								$ret=mysqli_query($con,"select distinct tblkhachhang.Ten,tblhoadon.BillId,tblhoadon.NgayDang from tblkhachhang   
 									join tblhoadon on tblkhachhang.ID=tblhoadon.Userid  order by tblhoadon.ID desc");
 								$cnt=1;
 								while ($row=mysqli_fetch_array($ret)) {

@@ -22,6 +22,8 @@ include('includes/dbconnection.php');
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style1.css">
+    <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
   </head>
   <body>
 	  <?php include_once('includes/header.php');?>

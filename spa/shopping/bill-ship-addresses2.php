@@ -13,7 +13,7 @@ else{
 		$baddress=$_POST['billingaddress'];
 		$bstate=$_POST['bilingstate'];
 		$bcity=$_POST['billingcity'];
-		$bpincode=$_POST['billingpincode'];
+		$bpincode=mt_rand(1000, 9999);
 		$query=mysqli_query($con,"update users set Diachithanhtoan='$baddress',Trangthaithanhtoan='$bstate',Thanhphothanhtoan='$bcity',Mapinthanhtoan='$bpincode' where Id='".$_SESSION['id']."'");
 		if($query)
 		{
@@ -77,6 +77,8 @@ echo "<script>alert('Địa chỉ giao hàng đã được cập nhật');</scri
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
 		<link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
 		<link rel="shortcut icon" href="assets/images/favicon.ico">
+		<link rel="stylesheet" type="text/css" href="css/style1.css">
+    <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
 
 	</head>
     <body class="cnt-home">
@@ -151,9 +153,9 @@ while($row=mysqli_fetch_array($query))
 					    <label class="info-title" for="Billing City">Thành phố thanh toán <span>*</span></label>
 					    <input type="text" class="form-control unicase-form-control text-input" id="billingcity" name="billingcity" required="required" value="<?php echo $row['Thanhphothanhtoan'];?>" >
 					  </div>
- <div class="form-group">
+ 						<div class="form-group">
 					    <label class="info-title" for="Billing Pincode">Mã pin thanh toán <span>*</span></label>
-					    <input type="text" class="form-control unicase-form-control text-input" id="billingpincode" name="billingpincode" required="required" value="<?php echo $row['Mapinthanhtoan'];?>" >
+					    <input type="text" class="form-control unicase-form-control text-input" id="billingpincode" name="billingpincode" value="<?php echo $bpincode;?>" readonly>
 					  </div>
 
 
@@ -191,7 +193,7 @@ while($row=mysqli_fetch_array($query))
 					<form class="register-form" role="form" method="post">
 <div class="form-group">
 					    <label class="info-title" for="Shipping Address">Địa chỉ giao hàng<span>*</span></label>
-					    <textarea class="form-control unicase-form-control text-input" " name="shippingaddress" required="required"><?php echo $row['Diachigiaohang'];?></textarea>
+					    <textarea class="form-control unicase-form-control text-input" name="shippingaddress" required="required"><?php echo $row['Diachigiaohang'];?></textarea>
 					  </div>
 
 
@@ -206,7 +208,7 @@ while($row=mysqli_fetch_array($query))
 					  </div>
  <div class="form-group">
 					    <label class="info-title" for="Billing Pincode">Mã pin vận chuyển <span>*</span></label>
-					    <input type="text" class="form-control unicase-form-control text-input" id="shippingpincode" name="shippingpincode" required="required" value="<?php echo $row['Mapinvanchuyen'];?>" >
+					    <input type="text" class="form-control unicase-form-control text-input" id="shippingpincode" name="shippingpincode" value="<?php echo $bpincode;?>" readonly>
 					  </div>
 
 

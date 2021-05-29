@@ -131,7 +131,7 @@ button#showLeftPush:hover {
 }
 .sidebar ul li a {
     color: #FFFFFF;
-    font-size: 1em;
+    font-size: 1.1em;
 }
 
 .nav > li > a:hover, .nav > li > a:focus {
@@ -829,29 +829,29 @@ ul.dropdown-menu.drp-mnu li {
 }
 .stats-left {
     float: left;
-    width: 70%;
-    background-color: #4F52BA;
+    width: 60%;
+    background-color: #2bd0e6;
 	text-align: center;
 	padding: 1em;
 }
 .states-mdl .stats-left {
-    background-color: #585858;
+    background-color: #f3cb75;
 }
 .states-mdl .stats-right {
-    background-color: rgba(88, 88, 88, 0.88);
+    background-color: rgba(189, 231, 255, 0.88);
 }
 .states-last .stats-left {
-    background-color: #e94e02;
+    background-color: #9ab82d;
 }
 .states-last .stats-right {
     background-color: rgba(233, 78, 2, 0.84);
 }
 .stats-right {
     float: right;
-    width: 30%;
+    width: 40%;
     text-align: center;
 	padding: 1.54em 1em;
-	background-color: rgba(79, 82, 186, 0.88);
+	background-color: rgba(202, 200, 83, 0.88);
 }
 .stats-left h5 {
     color: #fff;
@@ -3977,4 +3977,6 @@ h4.title3 {
     margin: 1em auto 0;
 }
 }
+
+
 /*--//responsive-design---*/

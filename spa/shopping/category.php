@@ -67,6 +67,7 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
 </head>
 
 <body class="cnt-home">
@@ -83,7 +84,7 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
                 <div class='col-md-3 sidebar'>
                     <div class="side-menu animate-dropdown outer-bottom-xs">
                         <div class="side-menu animate-dropdown outer-bottom-xs">
-                            <div class="head"><i class="icon fa fa-align-justify fa-fw"></i>Thể loại phụ</div>
+                            <div class="head" style="font-family:times new roman"><i class="icon fa fa-align-justify fa-fw"></i>Thể loại phụ</div>
                             <nav class="yamm megamenu-horizontal" role="navigation">
 
                                 <ul class="nav">
@@ -103,7 +104,7 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
                         </div>
                     </div>
                     <div class="sidebar-module-container">
-                        <h3 class="section-title">shop by</h3>
+                        <h3 class="section-title" style="font-family:times new roman">shop by</h3>
                         <div class="sidebar-filter">
                             <div class="sidebar-widget wow fadeInUp outer-bottom-xs ">
                                 <div class="widget-header m-t-20">
@@ -134,8 +135,8 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
                     <div id="category" class="category-carousel hidden-xs">
                         <div class="item">
                             <div class="image">
-                                
-								<div class="full-width-slider">
+
+                                <div class="full-width-slider">
                                     <div class="item" style="background-image: url(assets/images/sliders/slider1.png);">
                                     </div>
                                 </div>
@@ -150,7 +151,7 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
 										while($row=mysqli_fetch_array($sql))
 										{
 									?>
-                                    
+
                                     <?php } ?>
 
                                 </div>
@@ -183,7 +184,7 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
                                                         </div>
                                                     </div>
                                                     <div class="product-info text-left">
-                                                        <h3 class="name"><a
+                                                        <h3 class="name" style="font-family:times new roman"><a
                                                                 href="product-details.php?pid=<?php echo htmlentities($row['Id']);?>"><?php echo htmlentities($row['Tensanpham']);?></a>
                                                         </h3>
                                                         <div class="rating rateit-small"></div>
@@ -207,9 +208,10 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
                                                                         <i class="fa fa-shopping-cart"></i>
                                                                     </button>
                                                                     <a
-																		href="category.php?page=product&action=add&id=<?php echo $row['Id']; ?>">
-																		<button class="btn btn-primary" type="button">Thêm vào giỏ hàng</button>
-																	</a>
+                                                                        href="category.php?page=product&action=add&id=<?php echo $row['Id']; ?>">
+                                                                        <button class="btn btn-primary"
+                                                                            type="button" style="font-family:times new roman">Thêm vào giỏ hàng</button>
+                                                                    </a>
                                                                 </li>
                                                                 <li class="lnk wishlist">
                                                                     <a class="add-to-cart"
@@ -226,7 +228,7 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
                                         </div>
                                         <?php } } else {?>
                                         <div class="col-sm-6 col-md-4 wow fadeInUp">
-                                            <h3>Không tìm thấy sản phẩm nào</h3>
+                                            <h3 style="font-family:times new roman">Không tìm thấy sản phẩm nào</h3>
                                         </div>
 
                                         <?php } ?>
@@ -241,46 +243,35 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
 
         </div>
     </div>
-    <?php include('includes/footer.php');?>
-    <script src="assets/js/jquery-1.11.1.min.js"></script>
-
-    <script src="assets/js/bootstrap.min.js"></script>
-
-    <script src="assets/js/bootstrap-hover-dropdown.min.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-
-    <script src="assets/js/echo.min.js"></script>
-    <script src="assets/js/jquery.easing-1.3.min.js"></script>
-    <script src="assets/js/bootstrap-slider.min.js"></script>
-    <script src="assets/js/jquery.rateit.min.js"></script>
-    <script type="text/javascript" src="assets/js/lightbox.min.js"></script>
-    <script src="assets/js/bootstrap-select.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/scripts.js"></script>
-
-    <!-- For demo purposes – can be removed on production -->
-
-    <script src="switchstylesheet/switchstylesheet.js"></script>
-
-    <script>
-    $(document).ready(function() {
-        $(".changecolor").switchstylesheet({
-            seperator: "color"
+        <?php include('includes/foooter1.php');?>
+        <script src="assets/js/jquery-1.11.1.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/bootstrap-hover-dropdown.min.js"></script>
+        <script src="assets/js/owl.carousel.min.js"></script>
+        <script src="assets/js/echo.min.js"></script>
+        <script src="assets/js/jquery.easing-1.3.min.js"></script>
+        <script src="assets/js/bootstrap-slider.min.js"></script>
+        <script src="assets/js/jquery.rateit.min.js"></script>
+        <script type="text/javascript" src="assets/js/lightbox.min.js"></script>
+        <script src="assets/js/bootstrap-select.min.js"></script>
+        <script src="assets/js/wow.min.js"></script>
+        <script src="assets/js/scripts.js"></script>
+        <script src="switchstylesheet/switchstylesheet.js"></script>
+        <script>
+        $(document).ready(function() {
+            $(".changecolor").switchstylesheet({
+                seperator: "color"
+            });
+            $('.show-theme-options').click(function() {
+                $(this).parent().toggleClass('open');
+                return false;
+            });
         });
-        $('.show-theme-options').click(function() {
-            $(this).parent().toggleClass('open');
-            return false;
+
+        $(window).bind("load", function() {
+            $('.show-theme-options').delay(2000).trigger('click');
         });
-    });
-
-    $(window).bind("load", function() {
-        $('.show-theme-options').delay(2000).trigger('click');
-    });
-    </script>
-    <!-- For demo purposes – can be removed on production : End -->
-
-
-
+        </script>
 </body>
 
 </html>

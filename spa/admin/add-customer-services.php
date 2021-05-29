@@ -56,9 +56,8 @@
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="tables">
-                    <h3 class="title1">Chỉ định dịch vụ</h3>
                     <div class="table-responsive bs-example widget-shadow">
-                        <h4>Chỉ định dịch vụ:</h4>
+                        <h4>Dịch vụ:</h4>
                         <form method="post">
                             <table class="table table-bordered">
                                 <thead>

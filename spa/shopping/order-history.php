@@ -41,6 +41,8 @@ else{
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="assets/images/favicon.ico">
     <script language="javascript" type="text/javascript">
+    <link rel="stylesheet" type="text/css" href="css/style1.css">
+    <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
     var popUpWin = 0;
 
     function popUpWindow(URLStr, left, top, width, height) {

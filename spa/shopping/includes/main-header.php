@@ -88,7 +88,7 @@ if(!empty($_SESSION['cart'])){
                                     <div class="col-xs-4">
                                         <div class="image">
                                             <a href="detail.html"><img
-                                                    src="admin/productimages/<?php echo $row['Id'];?>/<?php echo $row['Hinhanh1'];?>"
+                                                    src="../admin/productimages/<?php echo $row['Id'];?>/<?php echo $row['Hinhanh1'];?>"
                                                     width="35" height="50" alt=""></a>
                                         </div>
                                     </div>

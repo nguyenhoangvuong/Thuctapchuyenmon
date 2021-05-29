@@ -6,6 +6,7 @@
     $ldate=date( 'd-m-Y h:i:s A', time () );
     mysqli_query($con,"UPDATE tblnhatkynguoidung  SET Thoigianlogout = '$ldate' WHERE Emailnguoidung = '".$_SESSION['login']."' ORDER BY Id DESC LIMIT 1");
     session_unset();
+    session_destroy();
     $_SESSION['errmsg']="Đăng xuất thành công !";
 ?>
 <script language="javascript">

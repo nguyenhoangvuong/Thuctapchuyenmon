@@ -84,7 +84,10 @@ if(isset($_POST['login']))
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/style1.css">
+    <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
     <script type="text/javascript">
+    
     function valid() {
         if (document.register.password.value != document.register.confirmpassword.value) {
             alert("Mật khẩu và trường xác nhận mật khẩu không khớp !!");

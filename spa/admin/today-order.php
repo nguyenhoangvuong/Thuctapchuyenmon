@@ -5,6 +5,15 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
   } else{
+    $oid = $_GET['oid'];
+    if(isset($_POST['submit2'])){
+        $status = $_POST['status'];
+        $remark = $_POST['remark'];
+        $query = mysqli_query($con,"insert into tbltheodoilichsu(OrderId,Trangthai,Nhanxet) values('$oid','$status',$remark)");
+        $sql = mysqli_query($con,"update tblorders set Tinhtrangorder = '$status' where Id = '$oid'");
+        echo "<script>alert('Đơn đã được cập nhật !');</script>";
+    }
+
   ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -35,16 +44,8 @@ if (strlen($_SESSION['bpmsaid']==0)) {
     <script src="js/metisMenu.min.js"></script>
     <script src="js/custom.js"></script>
     <link href="css/custom.css" rel="stylesheet">
-    <style>
-    .dialog{
-        position: fixed;
-        width:500px;height:400px;
-        background-color: #555554;;
-        border: 1px solid black;
-        left:35%;
-        top:30%;
-    }
-    </style>
+    <link href="css/modal.css" rel="stylesheet">
+
 </head>
 
 <body class="cbp-spmenu-push">
@@ -57,22 +58,23 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                     <h3 class="title1">Đặt hàng trong ngày</h3>
                     <div class="table-responsive bs-example widget-shadow">
                         <h4>Danh sách đơn:</h4>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Tên</th>
-                                    <th>Email / SĐT</th>
-                                    <th>Địa chỉ giao hàng</th>
-                                    <th>Sản phẩm</th>
-                                    <th>Số lượng</th>
-                                    <th>Tổng tiền</th>
-                                    <th>Ngày đặt</th>
-                                    <th>Thao tác</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
+                        <form action="" method="post">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Tên</th>
+                                        <th>Email / SĐT</th>
+                                        <th>Địa chỉ giao hàng</th>
+                                        <th>Sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Tổng tiền</th>
+                                        <th>Ngày đặt</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
                                 $f1 = "00:00:00";
                                 $from = date('Y-m-d')." ".$f1;
                                 $t1 ="23:59:59";
@@ -81,31 +83,118 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 								$cnt=1;
 								while ($row=mysqli_fetch_array($ret)) {
 							?>
-                                <tr>
-                                    <th scope="row"><?php echo $cnt;?></th>
-                                    <td><?php  echo $row['username'];?></td>
-                                    <td><?php  echo $row['useremail']." | ".$row['usercontact'];?></td>
-                                    <td><?php  echo $row['shippingaddress'].", ".$row['shippingcity'].", ".$row['shippingstate'].", ".$row['shippingpincode'];?></td>
-                                    <td><?php  echo $row['productname'];?></td>
-                                    <td><?php  echo $row['quantity'];?></td>
-                                    <td><?php  echo $row['productprice']*$row['quantity']+$row['shippingcharge'];?></td>
-                                    <td><?php  echo $row['orderdate'];?></td>
-                                    <td><a href="edit-customer-detailed.php?editid=<?php echo $row['Id'];?>">Xem</a></td>
-                                </tr> <?php 
-						$cnt=$cnt+1;
-						}?>
-                            </tbody>
-                        </table>
-                        <div class="dialog">
-                            abc
-                        </div>
+                                    <tr>
+                                        <th scope="row"><?php echo $cnt;?></th>
+                                        <td><?php  echo $row['username'];?></td>
+                                        <td><?php  echo $row['useremail']." | ".$row['usercontact'];?></td>
+                                        <td><?php  echo $row['shippingaddress'].", ".$row['shippingcity'].", ".$row['shippingstate'].", ".$row['shippingpincode'];?>
+                                        </td>
+                                        <td><?php  echo $row['productname'];?></td>
+                                        <td><?php  echo $row['quantity'];?></td>
+                                        <td><?php  echo $row['productprice']*$row['quantity']+$row['shippingcharge'];?>
+                                        </td>
+                                        <td><?php  echo $row['orderdate'];?></td>
+                                        <td><a class="btn btn-primary" href='today-order.php?oid=<?php echo $row['id']; ?>' id="myBtn"
+                                                class="user">Xem</a>
+                                            <?php $a =$row['id']; ?>
+                                        </td>
+                                    </tr>
+
+
                     </div>
+                    <?php 
+						$cnt=$cnt+1;
+                    }
+                       ?>
+
+                    </tbody>
+                    </table>
+                    </form>
+                    <?php
+                    if($oid){
+                    ?>
+                    <form method='post' class="form">
+                        <div class="old"><a id='hide' style='color:white' href='today-order.php?oid='>X X</a></div>
+
+                        <div id='noidung'>
+                            <h3 class="tittle">Đơn hàng</h3>
+                            <p style="font-weight: bold;text-align:center;margin-bottom:5px;font-size:1.2rem">ID : <span><?php echo $oid;?></span></p>
+                            <?php
+                            $re = mysqli_query($con,"select * from tbltheodoilichsu where OrderId = '$oid'");
+                            while($rws = mysqli_fetch_array($re)){
+                        ?>
+                            <p class="infoma">Ngày : <?php echo $rws['NgayDang']; ?></p>
+                            <p class="infoma">Trạng thái : <?php echo $rws['Trangthai']; ?></p>
+                            <p class="infoma">Nhận xét : <?php echo $rws['Nhanxet']; ?></p>
+                            <p class="infoma"></p>
+                            <p class="infoma">----------------------------------------------------------------------</p>
+                            <?php
+                            }
+                        ?>
+                            <?php
+                        $st='Delivered';
+                        $rt = mysqli_query($con,"select * from tblorders where Id='$oid'");
+                        while($num=mysqli_fetch_array($rt)){
+                            $currrentSt=$num['Tinhtrangorder'];
+                        }
+                        if($st==$currrentSt){
+                        ?><p class="infoma" id="delivered">Sản phẩm đã được giao</p><?php
+                        }
+                        else{
+                            ?>
+                            <table  class="infoma">
+                                <tr>
+                                    <td>
+                                        Tình trạng :
+                                    </td>
+                                    <td><span>
+                                            <select name="status" class="fontkink" required="required">
+                                                <option value="">Chọn tình trạng</option>
+                                                <option value="In Process">Đang xử lý</option>
+                                                <option value="Delivered">Đã giao</option>
+                                            </select>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>Nhận xét :</p> 
+                                    </td>
+                                    <td>
+                                            <span>
+                                                <textarea name="remark" cols="26" rows="3" required="required"></textarea>
+                                            </span>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="upd"><input id="upd" class="btn btn-primary" type="submit" name="submit2"
+                                    value="Cập nhật" size="40" style="cursor: pointer;"></div>
+                            <?php
+                            }
+                        ?>
+                        </div>
+                    </form>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>
-        <?php include_once('includes/footer.php');?>
+    </div>
+    <?php include_once('includes/footer.php');?>
     </div>
     <script src="js/classie.js"></script>
+    <script language="javascript">
+    document.getElementById("hide").onclick = function() {
+        document.getElementById("noidung").style.display = 'none';
+        document.getElementById("hide").style.display = 'none';
+    };
+
+    document.getElementById("myBtn").onclick = function() {
+        document.getElementById("noidung").style.display = 'block';
+        document.getElementById("hide").style.display = 'block';
+    };
+    </script>
     <script>
     var menuLeft = document.getElementById('cbp-spmenu-s1'),
         showLeftPush = document.getElementById('showLeftPush'),

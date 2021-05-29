@@ -66,53 +66,32 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
     <link href="assets/css/red.css" rel="alternate stylesheet" title="Red color">
     <link href="assets/css/orange.css" rel="alternate stylesheet" title="Orange color">
     <link href="assets/css/dark-green.css" rel="alternate stylesheet" title="Darkgreen color">
-    <!-- Demo Purpose Only. Should be removed in production : END -->
-
-
-    <!-- Icons/Glyphs -->
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-
-    <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
-
-    <!-- Favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
-
-    <!-- HTML5 elements and media queries Support for IE8 : HTML5 shim and Respond.js -->
-    <!--[if lt IE 9]>
-			<script src="assets/js/html5shiv.js"></script>
-			<script src="assets/js/respond.min.js"></script>
-		<![endif]-->
-
+    
 </head>
 
 <body class="cnt-home">
 
     <header class="header-style-1">
 
-        <!-- ============================================== TOP MENU ============================================== -->
         <?php include('includes/top-header.php');?>
-        <!-- ============================================== TOP MENU : END ============================================== -->
         <?php include('includes/main-header.php');?>
-        <!-- ============================================== NAVBAR ============================================== -->
         <?php include('includes/menu-bar.php');?>
-        <!-- ============================================== NAVBAR : END ============================================== -->
 
     </header>
-    <!-- ============================================== HEADER : END ============================================== -->
-    </div><!-- /.breadcrumb -->
+    </div>
     <div class="body-content outer-top-xs">
         <div class='container'>
             <div class='row outer-bottom-sm'>
                 <div class='col-md-3 sidebar'>
-                    <!-- ================================== TOP NAVIGATION ================================== -->
-                    <!-- ================================== TOP NAVIGATION : END ================================== -->
                     <div class="sidebar-module-container">
-                        <h3 class="section-title">shop by</h3>
+                        <h3 class="section-title" style="font-family:times new roman">shop by</h3>
                         <div class="sidebar-filter">
                             <div class="sidebar-widget wow fadeInUp outer-bottom-xs ">
                                 <div class="widget-header m-t-20">
-                                    <h4 class="widget-title">Thể loại</h4>
+                                    <h4 class="widget-title" style="font-family:times new roman">Thể loại</h4>
                                 </div>
                                 <div class="sidebar-widget-body m-t-10">
                                     <?php $sql=mysqli_query($con,"select Id,Tentheloai  from tbltheloai");
@@ -130,23 +109,15 @@ while($row=mysqli_fetch_array($sql))
                                         </div>
                                     </div>
                                     <?php } ?>
-                                </div><!-- /.sidebar-widget-body -->
-                            </div><!-- /.sidebar-widget -->
-
-
-
-
-                            <!-- ============================================== COLOR: END ============================================== -->
-
-                        </div><!-- /.sidebar-filter -->
-                    </div><!-- /.sidebar-module-container -->
-                </div><!-- /.sidebar -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class='col-md-9'>
-                    <!-- ========================================== SECTION – HERO ========================================= -->
-
                     <div id="category" class="category-carousel hidden-xs">
                         <div class="item">
-						<div class="image">
+						    <div class="image">
                                 
 								<div class="full-width-slider">
                                     <div class="item" style="background-image: url(assets/images/sliders/slider1.png);">
@@ -163,14 +134,13 @@ while($row=mysqli_fetch_array($sql))
 while($row=mysqli_fetch_array($sql))
 {
     ?>
-
                                     <div class="excerpt hidden-sm hidden-md">
                                         <?php echo htmlentities($row['theloaiphu']);?>
                                     </div>
                                     <?php } ?>
 
-                                </div><!-- /.caption -->
-                            </div><!-- /.container-fluid -->
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -201,7 +171,7 @@ while($row=mysqli_fetch_array($sql))
 
 
                                                     <div class="product-info text-left">
-                                                        <h3 class="name"><a
+                                                        <h3 class="name" style="font-family:times new roman"><a
                                                                 href="product-details.php?pid=<?php echo htmlentities($row['Id']);?>"><?php echo htmlentities($row['Tensanpham']);?></a>
                                                         </h3>
                                                         <div class="rating rateit-small"></div>
@@ -209,10 +179,10 @@ while($row=mysqli_fetch_array($sql))
 
                                                         <div class="product-price">
                                                             <span class="price">
-                                                                Rs. <?php echo htmlentities($row['Giasanpham']);?>
+                                                                <?php echo htmlentities($row['Giasanpham']);?> VNĐ
                                                             </span>
-                                                            <span class="price-before-discount">Rs.
-                                                                <?php echo htmlentities($row['Giasanphamtruockhigiam']);?></span>
+                                                            <span class="price-before-discount">
+                                                                <?php echo htmlentities($row['Giasanphamtruockhigiam']);?> VNĐ</span>
 
                                                         </div>
                                                     </div>
@@ -228,7 +198,7 @@ while($row=mysqli_fetch_array($sql))
                                                                     <a
                                                                         href="category.php?page=product&action=add&id=<?php echo $row['Id']; ?>">
                                                                         <button class="btn btn-primary"
-                                                                            type="button">Thêm vào giỏ hàng</button></a>
+                                                                            type="button" style="font-family:times new roman;font-size:1.4rem;">Thêm vào giỏ hàng</button></a>
                                                                     <?php } else {?>
                                                                     <div class="action" style="color:red">Hết hàng</div>
                                                                     <?php } ?>
@@ -253,20 +223,10 @@ while($row=mysqli_fetch_array($sql))
                                         <?php } } else {?>
 
                                         <div class="col-sm-6 col-md-4 wow fadeInUp">
-                                            <h3>Không tìm thấy sản phẩm nào</h3>
+                                            <h3 style="font-family:times new roman">Không tìm thấy sản phẩm nào</h3>
                                         </div>
 
                                         <?php } ?>
-
-
-
-
-
-
-
-
-
-
                                     </div><!-- /.row -->
                                 </div><!-- /.category-product -->
 
@@ -283,7 +243,7 @@ while($row=mysqli_fetch_array($sql))
 
         </div>
     </div>
-    <?php include('includes/footer.php');?>
+    <?php include('includes/footer1.php');?>
     <script src="assets/js/jquery-1.11.1.min.js"></script>
 
     <script src="assets/js/bootstrap.min.js"></script>

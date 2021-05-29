@@ -65,6 +65,8 @@ header('location:login.php');
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/style1.css">
+    <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
 </head>
 <body class="cnt-home">
     <header class="header-style-1">
@@ -164,7 +166,7 @@ header('location:login.php');
                                                             <a
                                                                 href="product-details.php?pid=<?php echo htmlentities($row['Id']);?>"><img
                                                                     src="assets/images/blank.gif"
-                                                                    data-echo="admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
+                                                                    data-echo="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
                                                                     alt="" width="200" height="300"></a>
                                                         </div>
                                                     </div>
@@ -197,7 +199,7 @@ header('location:login.php');
                                                                     <a
                                                                         href="category.php?page=product&action=add&id=<?php echo $row['Id']; ?>">
                                                                         <button class="btn btn-primary"
-                                                                            type="button">thêm vào giỏ hàng</button></a>
+                                                                            type="button">Thêm vào giỏ hàng</button></a>
 
                                                                 </li>
 

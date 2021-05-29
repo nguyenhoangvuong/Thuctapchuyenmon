@@ -66,7 +66,6 @@
     <link rel="stylesheet" href="assets/css/rateit.css">
     <link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="assets/css/config.css">
-
     <link href="assets/css/green.css" rel="alternate stylesheet" title="Green color">
     <link href="assets/css/blue.css" rel="alternate stylesheet" title="Blue color">
     <link href="assets/css/red.css" rel="alternate stylesheet" title="Red color">
@@ -76,6 +75,9 @@
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="assets/images/favicon.ico">
+    
+
+
 </head>
 
 <body class="cnt-home">
@@ -127,7 +129,7 @@ if(!empty($_SESSION['cart'])){
                                                             class="btn btn-upper btn-primary outer-left-xs">Tiếp tục mua
                                                             sắm
                                                         </a>
-                                                        <input type="submit" name="submit" value="Update shopping cart"
+                                                        <input type="submit" name="submit" value="Cập nhật giỏ hàng"
                                                             class="btn btn-upper btn-primary pull-right outer-right-xs">
                                                     </span>
                                                 </div>
@@ -137,7 +139,7 @@ if(!empty($_SESSION['cart'])){
                                     <tbody>
                                         <?php
  $pdtid=array();
-    $sql = "SELECT * FROM tblsanpham WHERE Id IN(";
+    $sql = "select * from tblsanpham where Id IN(";
 			foreach($_SESSION['cart'] as $id => $value){
 			$sql .=$id. ",";
 			}
@@ -153,7 +155,6 @@ if(!empty($_SESSION['cart'])){
 				$_SESSION['qnty']=$totalqunty+=$quantity;
 
 				array_push($pdtid,$row['Id']);
-//print_r($_SESSION['pid'])=$pdtid;exit;
 	?>
 
                                         <tr>
@@ -161,7 +162,7 @@ if(!empty($_SESSION['cart'])){
                                                     value="<?php echo htmlentities($row['Id']);?>" /></td>
                                             <td class="cart-image">
                                                 <a class="entry-thumbnail" href="detail.html">
-                                                    <img src="admin/productimages/<?php echo $row['Id'];?>/<?php echo $row['Hinhanh1'];?>"
+                                                    <img src="../admin/productimages/<?php echo $row['Id'];?>/<?php echo $row['Hinhanh1'];?>"
                                                         alt="" width="114" height="146">
                                                 </a>
                                             </td>
@@ -203,14 +204,14 @@ $num=mysqli_num_rows($rt);
                                                 </div>
                                             </td>
                                             <td class="cart-product-sub-total"><span
-                                                    class="cart-sub-total-price"><?php echo "Rs"." ".$row['Giasanpham']; ?>.00</span>
+                                                    class="cart-sub-total-price"><?php echo $row['Giasanpham'];?> VNĐ</span>
                                             </td>
                                             <td class="cart-product-sub-total"><span
-                                                    class="cart-sub-total-price"><?php echo "Rs"." ".$row['Phivanchuyen']; ?>.00</span>
+                                                    class="cart-sub-total-price"><?php echo $row['Phivanchuyen']; ?> VNĐ</span>
                                             </td>
 
                                             <td class="cart-product-grand-total"><span
-                                                    class="cart-grand-total-price"><?php echo ($_SESSION['cart'][$row['Id']]['quantity']*$row['Giasanpham']+$row['Phivanchuyen']); ?>.00</span>
+                                                    class="cart-grand-total-price"><?php echo ($_SESSION['cart'][$row['Id']]['quantity']*$row['Giasanpham']+$row['Phivanchuyen']); ?> VNĐ</span>
                                             </td>
                                         </tr>
 
@@ -292,7 +293,7 @@ while ($rt=mysqli_fetch_array($qry)) {
 
                                         <div class="cart-grand-total">
                                             Tổng tiền<span
-                                                class="inner-left-md"><?php echo $_SESSION['tp']="$totalprice". ".00"; ?></span>
+                                                class="inner-left-md"><?php echo $_SESSION['tp']="$totalprice". " VNĐ"; ?></span>
                                         </div>
                                     </th>
                                 </tr>
@@ -316,10 +317,9 @@ while ($rt=mysqli_fetch_array($qry)) {
                 </div>
             </div>
             </form>
-            <?php include('includes/brands-slider.php');?>
         </div>
     </div>
-    <?php include('includes/footer.php');?>
+    <?php include('includes/footer1.php');?>
     <script src="assets/js/jquery-1.11.1.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/bootstrap-hover-dropdown.min.js"></script>

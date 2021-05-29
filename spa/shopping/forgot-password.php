@@ -83,7 +83,8 @@ if(isset($_POST['change']))
     <link href="assets/css/orange.css" rel="alternate stylesheet" title="Orange color">
     <link href="assets/css/dark-green.css" rel="alternate stylesheet" title="Darkgreen color">
     <!-- Demo Purpose Only. Should be removed in production : END -->
-
+    <link rel="stylesheet" type="text/css" href="css/style1.css">
+    <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
 
     <!-- Icons/Glyphs -->
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">

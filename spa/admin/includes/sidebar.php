@@ -19,7 +19,7 @@
                               <a href="manage-subcategory.php">Quản lý thể loại phụ</a>
                           </li>
                           <li>
-                              <a href="manage-product.php">Quản lý sản phẩm</a>
+                              <a href="manage-product.php?trang=1">Quản lý sản phẩm</a>
                           </li>
                       </ul>
                   </li>
@@ -53,25 +53,55 @@
                   </li>
 
                   <li>
-                  <a href="invoices.php" class="chart-nav"><i class="fa fa-file-text-o nav_icon"></i>Hóa đơn</a></i>Hóa đơn và Đơn hàng<span class="fa arrow"></span></a>
+                  <a href="invoices.php"><i class="fa fa-file-text-o nav_icon"></i>Hóa dơn và đơn hàng<span class="fa arrow"></span></a>
                       <ul class="nav nav-second-level collapse">
                           <li>
                               <a href="invoices.php">Danh sách hóa đơn</a>
                           </li>
                           <li>
-                              <a href="today-order.php">Đơn trong ngày</a>
+                              <a href="today-order.php?oid=">Đơn trong ngày
+                              <?php
+                                $f1="00:00:00";
+                                $from=date('Y-m-d')." ".$f1;
+                                $t1="23:59:59";
+                                $to=date('Y-m-d')." ".$t1;
+                                $result = mysqli_query($con,"select * from tblorders where Ngayorder Between '$from' and '$to'");
+                                $num_rows1 = mysqli_num_rows($result);
+                                {
+                                ?>
+                             <b class="label orange pull-right" style="background-color:#ffff00;color:black;font-size:1rem;"><?php echo $num_rows1; ?></b>
+                            <?php } ?>
+                        </a>
                           </li>
                           <li>
-                              <a href="accepted-appointment.php">Đơn hàng đang chờ</a>
+                              <a href="pendding-order.php">Đơn hàng đang chờ
+                                <?php	
+                                    $status='Delivered';									 
+                                    $ret = mysqli_query($con,"select * from tblorders where Tinhtrangorder!='$status' || Tinhtrangorder is null ");
+                                    $num = mysqli_num_rows($ret);
+                                    {?><b class="label orange pull-right" style="background-color:#33FFFF;color:black;font-size:1rem;"><?php echo $num; ?></b>
+                                    <?php 
+                                    } 
+                                ?>
+                               </a>
                           </li>
                           <li>
-                              <a href="rejected-appointment.php">Đơn hàng đã giao</a>
+                              <a href="delivered-order.php">Đơn hàng đã giao
+                              <?php	
+                                    $status='Delivered';									 
+                                    $ret = mysqli_query($con,"select * from tblorders where Tinhtrangorder ='$status'");
+                                    $num = mysqli_num_rows($ret);
+                                    {?><b class="label orange pull-right" style="background-color:#00FF00;color:black;font-size:1rem;"><?php echo $num; ?></b>
+                                    <?php 
+                                    } 
+                                ?>
+                              </a>
                           </li>
                       </ul>
                   </li>
 
                   <li>
-                  <a href="all-customer-list.php"><i class="fa fa-user nav_icon"></i>Khách hàng<span
+                  <a href="customer-list.php"><i class="fa fa-user nav_icon"></i>Khách hàng<span
                               class="fa arrow"></span></a>
                       <ul class="nav nav-second-level collapse">
                           <li>
@@ -93,9 +123,7 @@
                           <li><a href="sales-reports.php">Báo cáo bán hàng</a></li>
                       </ul>
                   </li>
-                  <li>
-                      <a href="invoices.php" class="chart-nav"><i class="fa fa-file-text-o nav_icon"></i>Hóa đơn</a>
-                  </li>
+                  
                   <li>
                       <a href="search-appointment.php"><i class="fa fa-search nav_icon"></i>Tìm kiếm<span
                               class="fa arrow"></span></a>

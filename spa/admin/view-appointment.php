@@ -7,9 +7,27 @@ include('includes/dbconnection.php');
   } else{
 if(isset($_POST['submit']))
   {
+     
       $cid=$_GET['viewid'];
+      $ret1=mysqli_query($con,"select * from tblcuochen where ID='$cid'");
+      $row1=mysqli_fetch_array($ret1);
+      $maill="5951071124@st.utc2.edu.vn";
       $remark=$_POST['remark'];
       $status=$_POST['status'];
+      $subject="From submission";
+
+      $headers ="MIME-Version: 1.0"."\r\n";
+      $headers .= "Content-type:text/html;charset=UTF-8"."\r\n";
+
+      $headers .= "From: <hoangvuong1225@gmail.com>"."\r\n";
+
+      if(mail($maill,$subject,$status,$headers)){
+          echo "Send mail successfull";
+      }
+      else{
+          echo "fail";
+      }
+   
       $query=mysqli_query($con, "update  tblcuochen set Nhanxet='$remark',Trangthai='$status' where ID='$cid'");
       if ($query) {
         $msg="Tất cả nhận xét đã được cập nhật.";
@@ -58,7 +76,6 @@ if(isset($_POST['submit']))
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="tables">
-                    <h3 class="title1">Chi tiết cuộc hẹn</h3>
                     <div class="table-responsive bs-example widget-shadow">
                         <p style="font-size:16px; color:red" align="center">
                             <?php if($msg){
@@ -66,7 +83,7 @@ if(isset($_POST['submit']))
                 }  
               ?>
                         </p>
-                        <h4>Chi tiết cuộc hẹn:</h4>
+                        <h3 class="title1">Chi tiết cuộc hẹn</h3>
                         <?php
               $cid=$_GET['viewid'];
               $ret=mysqli_query($con,"select * from tblcuochen where ID='$cid'");
@@ -133,7 +150,7 @@ if(isset($_POST['submit']))
                                             class="form-control wd-450" required="true"></textarea></td>
                                 </tr>
                                 <tr>
-                                    <th>Trang thái1 :</th>
+                                    <th>Trang thái :</th>
                                     <td>
                                         <select name="status" class="form-control wd-450" required="true">
                                             <option value="1" selected="true">Chấp nhận</option>
