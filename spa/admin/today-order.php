@@ -13,6 +13,13 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         $sql = mysqli_query($con,"update tblorders set Tinhtrangorder = '$status' where Id = '$oid'");
         echo "<script>alert('Đơn đã được cập nhật !');</script>";
     }
+    if (!function_exists('currency_format')) {
+        function currency_format($number, $suffix = 'đ') {
+            if (!empty($number)) {
+                return number_format($number, 0, ',', '.') . "{$suffix}";
+            }
+        }
+    }
 
   ?>
 <!DOCTYPE HTML>
@@ -55,7 +62,6 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="tables">
-                    <h3 class="title1">Đặt hàng trong ngày</h3>
                     <div class="table-responsive bs-example widget-shadow">
                         <h4>Danh sách đơn:</h4>
                         <form action="" method="post">
@@ -91,7 +97,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                         </td>
                                         <td><?php  echo $row['productname'];?></td>
                                         <td><?php  echo $row['quantity'];?></td>
-                                        <td><?php  echo $row['productprice']*$row['quantity']+$row['shippingcharge'];?>
+                                        <td><?php  echo currency_format($row['productprice']*$row['quantity']+$row['shippingcharge']);?>
                                         </td>
                                         <td><?php  echo $row['orderdate'];?></td>
                                         <td><a class="btn btn-primary" href='today-order.php?oid=<?php echo $row['id']; ?>' id="myBtn"

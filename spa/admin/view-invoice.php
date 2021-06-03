@@ -5,6 +5,13 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
   } else{
+    if (!function_exists('currency_format')) {
+        function currency_format($number, $suffix = 'đ') {
+            if (!empty($number)) {
+                return number_format($number, 0, ',', '.') . "{$suffix}";
+            }
+        }
+    }
   ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -44,7 +51,6 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="tables" id="exampl">
-                    <h3 class="title1">Chi tiết hóa đơn</h3>
                     <?php
 						$invid=intval($_GET['invoiceid']);
 						$ret=mysqli_query($con,"select DISTINCT  tblhoadon.NgayDang,tblkhachhang.Ten,tblkhachhang.Email,tblkhachhang.Sodienthoai,tblkhachhang.Gioitinh
@@ -97,7 +103,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                             <tr>
                                 <th><?php echo $cnt;?></th>
                                 <td><?php echo $row['Tendichvu']?></td>
-                                <td><?php echo $subtotal=$row['Chiphi']?></td>
+                                <td><?php echo currency_format($subtotal=$row['Chiphi'])?></td>
                             </tr>
                             <?php 
 								$cnt=$cnt+1;
@@ -105,7 +111,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 							} ?>
                             <tr>
                                 <th colspan="2" style="text-align:center">Tổng cộng</th>
-                                <th><?php echo $gtotal?></th>
+                                <th><?php echo currency_format($gtotal)?></th>
 
                             </tr>
                         </table>
@@ -146,11 +152,30 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         var prtContent = document.getElementById("exampl");
         var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
         WinPrint.document.write(prtContent.innerHTML);
-        WinPrint.document.close();
         WinPrint.focus();
         WinPrint.print();
-        WinPrint.close();
+        WinPrint.document.close();
     }
+
+    function printDiv(divID) {
+        //Get the HTML of div
+        var divElements = document.getElementById(divID).innerHTML;
+        //Get the HTML of whole page
+        var oldPage = document.body.inne
+        rHTML;
+
+        //Reset the page's HTML with div's HTML only
+        document.body.innerHTML =
+            "<html><head><title></title></head><body>" +
+            divElements + "</body>";
+
+        //Print Page
+        window.print();
+
+        //Restore orignal HTML
+        document.body.innerHTML = oldPage;
+    }
+    </script>
     </script>
 </body>
 

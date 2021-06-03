@@ -4,8 +4,15 @@ error_reporting(0);
 include('includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
-  } 
-     ?>
+  } else{
+    if (!function_exists('currency_format')) {
+        function currency_format($number, $suffix = 'đ') {
+            if (!empty($number)) {
+                return number_format($number, 0, ',', '.') . "{$suffix}";
+            }
+        }
+    }
+    ?>
 <!DOCTYPE HTML>
 <html lang="en">
 
@@ -29,233 +36,179 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         rel='stylesheet' type='text/css'>
     <link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
     <script src="js/wow.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script>
     new WOW().init();
     </script>
     <script src="js/Chart.js"></script>
     <link rel="stylesheet" href="css/clndr.css" type="text/css" />
-    <script src="js/underscore-min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    < script src = "js/underscore-min.js"
+    type = "text/javascript" >
+    </script>
     <script src="js/moment-2.2.1.js" type="text/javascript"></script>
     <script src="js/clndr.js" type="text/javascript"></script>
     <script src="js/site.js" type="text/javascript"></script>
     <script src="js/metisMenu.min.js"></script>
     <script src="js/custom.js"></script>
     <link href="css/custom.css" rel="stylesheet">
+    <link href="css/custommodal.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets1/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="assets1/css/main.css">
+    <link rel="shortcut icon" href="assets1/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="assets1/icon/themify-icons/themify-icons.css">
+    <script src="librerias/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+ <style>
+    #parent {
+        height: 90%;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    #child {
+        width: 100%;
+        height: 90%;
+        overflow-y: scroll;
+        padding-right: 17px;
+        box-sizing: content-box;
+    }
+    </style>
+
 </head>
 
-<body class="cbp-spmenu-push">
+<body class="cbp-spmenu-push" style="position:fixed">
     <div class="main-content">
         <?php include_once('includes/sidebar.php');?>
         <?php include_once('includes/header.php');?>
-        <div id="page-wrapper" class="row calender widget-shadow">
+        <div id="page-wrapper">
             <div class="main-page">
-
-
-                <div class="row calender widget-shadow">
-                    <div class="row-one">
-                        <div class="col-md-4 widget">
-                            <?php $query1=mysqli_query($con,"Select * from tblkhachhang");
-								$totalcust=mysqli_num_rows($query1);
+                <div class="row dashboard-header">
+                    <div class="col-lg-3 col-md-6" style="font-family:'Ubuntu', sans-serif;">
+                        <div class="card dashboard-product">
+                            <?php $query7=mysqli_query($con,"select tblhoadon.SanphamId as SanphamId, tblsanpham.Giasanpham
+                        from tblhoadon 
+                        join tblsanpham  on tblsanpham.Id=tblhoadon.SanphamId");
+                        while($row1=mysqli_fetch_array($query7))
+                        {
+                           $todays_sale1=$row1['Giasanpham'];
+                           $todysale1+=$todays_sale1;
+                        }
+                        $query8=mysqli_query($con,"select tblsanpham.Id,tblorders.SanphamId,tblorders.Soluong,tblsanpham.Giasanpham from tblsanpham join tblorders on tblsanpham.Id = tblorders.SanphamId where tblorders.Tinhtrangorder = 'Delivered'");
+								while($row7=mysqli_fetch_array($query8))
+								{
+								$saleOnline=$row7['Giasanpham']*$row7['Soluong'];
+								$todysale2+=$saleOnline;
+								}
 							?>
-                            <div class="stats-left ">
-                                <h5>Tổng</h5>
-                                <h4>Customer</h4>
+                            <span>Sales Product</span>
+                            <h2 class="dashboard-total-products">
+                                <?php echo currency_format($tong = $todysale1 + $todysale2) ?></h2>
+                            <span class="label label-warning">View</span>Arriving Today
+                            <div class="side-box">
+                                <i class="ti-signal text-warning-color"></i>
                             </div>
-                            <div class="stats-right">
-                                <label>
-                                    <?php echo $totalcust;?>
-                                </label>
-                            </div>
-                            <div class="clearfix"> </div>
                         </div>
-                        <div class="col-md-4 widget states-mdl">
+                    </div>
+                    <div class="col-lg-3 col-md-6" style="font-family:'Ubuntu', sans-serif;">
+                        <div class="card dashboard-product">
+                            <?php $query1=mysqli_query($con,"Select * from tblcuochen");
+                        $totalservice=mysqli_num_rows($query1);
+
+                        $query5=mysqli_query($con,"select tblhoadon.DichvuId as DichvuId, tbldichvu.Chiphi
+                        from tblhoadon 
+                        join tbldichvu  on tbldichvu.ID=tblhoadon.DichvuId");
+                        while($row=mysqli_fetch_array($query5))
+                        {
+                           $todays_sale=$row['Chiphi'];
+                           $todysale+=$todays_sale;
+                        }
+                     ?>
+                            <span>Services / Totals</span>
+                            <h2 class="dashboard-total-products">
+                                <?php echo $totalservice.' / '.currency_format($todysale) ?></h2>
+                            <span class="label label-primary">Views/Sales</span>View Today
+                            <div class="side-box ">
+                                <i class="ti-gift text-primary-color"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6" style="font-family:'Ubuntu', sans-serif;">
+                        <div class="card dashboard-product">
                             <?php $query2=mysqli_query($con,"Select * from tblcuochen");
 								$totalappointment=mysqli_num_rows($query2);
-							?>
-                            <div class="stats-left">
-                                <h5>Tổng</h5>
-                                <h4>Appointment</h4>
+								$query3=mysqli_query($con,"select  *from  tblcuochen where Trangthai='1'");
+                        $accept = mysqli_num_rows($query3);
+								$query4=mysqli_query($con,"select * from  tblcuochen where Trangthai='2'");
+                        $reject = mysqli_num_rows($query4);
+                     ?>
+                            <span>Appointment/Rejected/Accepted</span>
+                            <h2 class="dashboard-total-products">
+                                <span><?php echo $totalappointment.'/'.$accept.'/'.$reject ?></span>
+                            </h2>
+                            <span class="label label-success">View</span>Reviews
+                            <div class="side-box">
+                                <i class="ti-direction-alt text-success-color"></i>
                             </div>
-                            <div class="stats-right">
-                                <label>
-                                    <?php echo $totalappointment;?>
-                                </label>
-                            </div>
-                            <div class="clearfix"> </div>
                         </div>
-                        <div class="col-md-4 widget states-last">
-                            <?php $query3=mysqli_query($con,"Select * from tblcuochen where Trangthai='1'");
-								$totalaccapt=mysqli_num_rows($query3);
-							?>
-                            <div class="stats-left">
-                                <h5>Tổng</h5>
-                                <h4>Accepted Apt</h4>
-                            </div>
-                            <div class="stats-right">
-                                <label>
-                                    <?php echo $totalaccapt;?>
-                                </label>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="clearfix"> </div>
                     </div>
-
-                </div>
-
-                <div class="row calender widget-shadow">
-                    <div class="row-one">
-                        <div class="col-md-4 widget">
-                            <?php $query4=mysqli_query($con,"Select * from tblcuochen where Trangthai='2'");
-								$totalrejapt=mysqli_num_rows($query4);
-							?>
-                            <div class="stats-left ">
-                                <h5>Tổng</h5>
-                                <h4>Rejected Apt</h4>
+                    <div class="col-lg-3 col-md-6" style="font-family:'Ubuntu', sans-serif;">
+                        <div class="card dashboard-product">
+                            <span>Totals</span>
+                            <h2 class="dashboard-total-products">
+                                <span><?php echo currency_format($s = ($tong + $todysale))?></span>
+                            </h2>
+                            <span class="label label-danger">Sales</span>Reviews
+                            <div class="side-box">
+                                <i class="ti-rocket text-danger-color"></i>
                             </div>
-                            <div class="stats-right">
-                                <label>
-                                    <?php echo $totalrejapt;?>
-                                </label>
-                            </div>
-                            <div class="clearfix"> </div>
                         </div>
-                        <div class="col-md-4 widget states-mdl">
-                            <?php $query5=mysqli_query($con,"Select * from  tbldichvu");
-								$totalser=mysqli_num_rows($query5);
-							?>
-                            <div class="stats-left">
-                                <h5>Tổng</h5>
-                                <h4>Services</h4>
-                            </div>
-                            <div class="stats-right">
-                                <label>
-                                    <?php echo $totalser;?>
-                                </label>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="col-md-4 widget states-last">
-                            <?php
-							//todays sale
-							$query6=mysqli_query($con,"select tblhoadon.DichvuId as DichvuId, tbldichvu.Chiphi
-							from tblhoadon 
-							join tbldichvu  on tbldichvu.ID=tblhoadon.DichvuId where date(NgayDang)=CURDATE();");
-							while($row=mysqli_fetch_array($query6))
-							{
-							    $todays_sale=$row['Chiphi'];
-							    $todysale+=$todays_sale;
-							}
-                            $query7=mysqli_query($con,"select tblhoadon.SanphamId as SanphamId, tblsanpham.Giasanpham
-							from tblhoadon 
-							join tblsanpham  on tblsanpham.Id=tblhoadon.SanphamId where date(tblhoadon.NgayDang)=CURDATE();");
-							while($row=mysqli_fetch_array($query7))
-							{
-							    $todays_sale1=$row['Giasanpham'];
-							    $todysale+=$todays_sale1;
-							}
-							?>
-                            <div class="stats-left">
-                                <h5>Hôm nay</h5>
-                                <h4>Sales</h4>
-                            </div>
-                            <div class="stats-right">
-                                <label>
-                                    <?php echo $todysale;?>
-                                </label>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="clearfix"> </div>
                     </div>
-
-                </div>
-
-                <div class="row calender widget-shadow">
-                    <div class="row-one">
-                        <div class="col-md-4 widget">
-                            <?php
-								//Yesterday's sale
-								$query7=mysqli_query($con,"select tblhoadon.DichvuId as DichvuId, tbldichvu.Chiphi
-								from tblhoadon 
-								join tbldichvu  on tbldichvu.ID=tblhoadon.DichvuId where date(NgayDang)=CURDATE()-1;");
-								while($row7=mysqli_fetch_array($query7))
-								{
-								$yesterdays_sale=$row7['Chiphi'];
-								$yesterdaysale+=$yesterdays_sale;
-
-								}
-							?>
-                            <div class="stats-left ">
-                                <h5>Hôm qua</h5>
-                                <h4>Sales</h4>
-                            </div>
-                            <div class="stats-right">
-                                <label>
-                                    <?php echo $yesterdaysale;?>
-                                </label>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="col-md-4 widget states-mdl">
-                            <?php
-								//Last Sevendays Sale
-								$query8=mysqli_query($con,"select tblhoadon.DichvuId as DichvuId, tbldichvu.Chiphi
-								from tblhoadon 
-								join tbldichvu  on tbldichvu.ID=tblhoadon.DichvuId where date(NgayDang)>=(DATE(NOW()) - INTERVAL 7 DAY);");
-								while($row8=mysqli_fetch_array($query8))
-								{
-								$sevendays_sale=$row8['Chiphi'];
-								$tseven+=$sevendays_sale;
-
-								}
-								?>
-                            <div class="stats-left">
-                                <h5>7 Ngày</h5>
-                                <h4>Sale</h4>
-                            </div>
-                            <div class="stats-right">
-                                <label>
-                                    <?php echo $tseven;?>
-                                </label>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="col-md-4 widget states-last">
-                            <?php
-							//Total Sale
-							$query9=mysqli_query($con,"select tblhoadon.DichvuId as DichvuId, tbldichvu.Chiphi
-							from tblhoadon 
-							join tbldichvu  on tbldichvu.ID=tblhoadon.DichvuId");
-							while($row9=mysqli_fetch_array($query9))
-							{
-							$total_sale=$row9['Chiphi'];
-							$totalsale+=$total_sale;
-
-							}
-							?>
-                            <div class="stats-left">
-                                <h5>Tổng</h5>
-                                <h4>Sales</h4>
-                            </div>
-                            <div class="stats-right">
-                                <label>
-                                    <?php echo $totalsale;?>
-                                </label>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </div>
-
                 </div>
             </div>
-            <div class="clearfix"> </div>
+
+            <div class="row" style="margin-top:-60px;">
+                <div class="col-sm-7">
+                    <div class="panel panel-body" style="height:470px">
+                        Thống Kê Tổng Doanh Thu
+                        <div class="col-sm-12">
+                            <div id="cargaLineal"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="panel panel-body">
+                        <div class="col-sm-12">
+                            <span id="myChart"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5" style="font-family:'Ubuntu', sans-serif;">
+                    <div class="panel panel-body" style="width:auto;height:215px">
+                        <h4>Lịch sử truy cập người dùng</h4><br>
+                        <div id="parent">
+                            <div id="child">
+                                <?php
+                            $nhatky = mysqli_query($con,"select * from tblnhatkynguoidung order by Thoigianlogin desc");
+                            while($row=mysqli_fetch_array($nhatky)){
+                            ?>
+                                <label for=""><?php echo $row['Emailnguoidung'].' - '.$row['Thoigianlogin'];?></label>
+                                <?php
+                            }
+                        ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-    </div>
+
+
     <script src="js/classie.js"></script>
-    <?php include_once('includes/footer.php');?>
+
+
     <script>
     var menuLeft = document.getElementById('cbp-spmenu-s1'),
         showLeftPush = document.getElementById('showLeftPush'),
@@ -268,16 +221,46 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         disableOther('showLeftPush');
     };
 
-
     function disableOther(button) {
         if (button !== 'showLeftPush') {
             classie.toggle(showLeftPush, 'disabled');
         }
     }
     </script>
+
     <script src="js/jquery.nicescroll.js"></script>
     <script src="js/scripts.js"></script>
     <script src="js/bootstrap.js"> </script>
+
+    <script>
+    google.charts.load('current', {
+        'packages': ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Contry', 'Mhl'],
+            ['Dịch vụ', <?php  echo round($todysale/$s*100,2);?>],
+            ['Sản phẩm offline', <?php  echo round($todysale1/$s*100);?>],
+            ['Sản phẩm online', <?php  echo 100-round($todysale/$s*100,2);-round($todysale1/$s*100);?>],
+        ]);
+
+        var options = {
+            title: 'Thống kê doanh thu theo từng loại hình',
+            is3D: true
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('myChart'));
+        chart.draw(data, options);
+    }
+    </script>
 </body>
 
 </html>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#cargaLineal').load('lineal.php');
+});
+</script>
+<?php }  ?>

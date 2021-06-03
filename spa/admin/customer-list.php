@@ -5,6 +5,7 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
   } else{
+
   ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -44,37 +45,17 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="tables">
-                    <h3 class="title1">Danh sách khách hàng</h3>
                     <div class="table-responsive bs-example widget-shadow">
-                        <h4>Danh sách khách hàng: <a href="add-customer.php"><button>Thêm khách hàng</button></a> </h4>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Tên</th>
-                                    <th>Số điện thoại</th>
-                                    <th>Ngày tạo</th>
-                                    <th>Thao tác</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-								$ret=mysqli_query($con,"select *from  tblkhachhang");
-								$cnt=1;
-								while ($row=mysqli_fetch_array($ret)) {
-							?>
-                                <tr>
-                                    <th scope="row"><?php echo $cnt;?></th>
-                                    <td><?php  echo $row['Ten'];?></td>
-                                    <td><?php  echo $row['Sodienthoai'];?></td>
-                                    <td><?php  echo $row['Ngaytao'];?></td>
-                                    <td><a href="edit-customer-detailed.php?editid=<?php echo $row['ID'];?>">Sửa</a> ||
-                                        <a href="add-customer-services.php?addid=<?php echo $row['ID'];?>">Dịch vụ</a> || <a href="add-customer-product.php?addid=<?php echo $row['ID'];?>">Sản phẩm</a></td>
-                                </tr> <?php 
-						$cnt=$cnt+1;
-						}?>
-                            </tbody>
-                        </table>
+                        <h4>Danh sách khách hàng: <a href="add-customer.php"><button class="btn btn-primary">Thêm khách hàng</button></a> </h4>
+                        
+                        <div class="input-group" style="position:fixed;top:100px;width:270px;right:30px">
+                                    <div class="input-group-addon" style="background-color:#337ab7;color:white">
+                                        Search
+                                    </div>
+                                    <input type="text" name="search_text" id="search_text" Placeholder="Search customer..." class="form-control">
+                                </div>
+                            <br>
+                        <div id="result1"></div>
                     </div>
                 </div>
             </div>
@@ -82,6 +63,46 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         <?php include_once('includes/footer.php');?>
     </div>
     <script src="js/classie.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url:"fetch3.php",
+                method:"post",
+                data:{search:""},
+                dataType:"text",
+                success:function(data){
+                    $('#result1').html(data);
+                }
+            });
+            
+            $('#search_text').keyup(function(){
+                var txt = $(this).val();
+                if(txt !=''){
+                    $.ajax({
+                        url:"fetch3.php",
+                        method:"post",
+                        data:{search:txt},
+                        dataType:"text",
+                        success:function(data){
+                            $('#result1').html(data);
+                        }
+                    });
+                }else{
+                    $('#result1').html('');
+                    $.ajax({
+                        url:"fetch3.php",
+                        method:"post",
+                        data:{search:txt},
+                        dataType:"text",
+                        success:function(data){
+                            $('#result1').html(data);
+                        }
+                    });
+                }
+            });
+            
+        });
+    </script>
     <script>
     var menuLeft = document.getElementById('cbp-spmenu-s1'),
         showLeftPush = document.getElementById('showLeftPush'),

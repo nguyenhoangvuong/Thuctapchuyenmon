@@ -5,6 +5,13 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
   } else{
+    if (!function_exists('currency_format')) {
+        function currency_format($number, $suffix = 'đ') {
+            if (!empty($number)) {
+                return number_format($number, 0, ',', '.') . "{$suffix}";
+            }
+        }
+    }
   ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -44,7 +51,6 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="tables">
-                    <h3 class="title1">Báo cáo bán hàng</h3>
                     <div class="table-responsive bs-example widget-shadow">
                         <?php
 						$fdate=$_POST['fromdate'];
@@ -59,8 +65,8 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 						$y1=date("Y",$month1);
 						$y2=date("Y",$month2);
 					?>
-                        <h4 class="header-title m-t-0 m-b-30">Bóa cáo bán hàng theo tháng</h4>
-                        <h4 align="center" style="color:blue">Báo cáo bán hàng từ ngày <?php echo $m1."-".$y1;?> to
+                        <h4 class="header-title m-t-0 m-b-30">Báo cáo doanh thu offline theo tháng</h4>
+                        <h4 align="center" style="color:blue">Báo cáo doanh thu từ ngày <?php echo $m1."-".$y1;?> đến
                             <?php echo $m2."-".$y2;?></h4>
                         <hr />
                         <table class="table table-bordered">
@@ -71,23 +77,26 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                     <th>Bán hàng</th>
                                 </tr>
                             </thead>
+                            
                             <?php
-							$ret=mysqli_query($con,"select month(NgayDang) as lmonth,year(NgayDang) as lyear,sum(Chiphi) as totalprice from  tblhoadon join tbldichvu on tbldichvu.ID= tblhoadon.DichvuId where date(tblhoadon.NgayDang) between '$fdate' and '$tdate' group by lmonth,lyear");
+                            $ret=mysqli_query($con,"select month(tblhoadon.NgayDang) as lmonth,year(tblhoadon.NgayDang) as lyear,sum(Chiphi) as totalprice,sum(Giasanpham) as totalprice1 from  tblhoadon join tbldichvu on tbldichvu.ID= tblhoadon.DichvuId join tblsanpham on tblsanpham.Id = tblhoadon.SanphamId where date(tblhoadon.NgayDang) between '$fdate' and '$tdate' group by lmonth,lyear");
 							$cnt=1;
 							while ($row=mysqli_fetch_array($ret)) {
 						?>
                             <tr>
                                 <td><?php echo $cnt;?></td>
                                 <td><?php  echo $row['lmonth']."/".$row['lyear'];?></td>
-                                <td><?php  echo $total=$row['totalprice'];?></td>
+                                <td><?php echo currency_format($total=$row['totalprice']+$row['totalprice1']);?>
+                                </td>
                             </tr>
                             <?php
-						$ftotal+=$total;
-						$cnt++;
-						}?>
+                            $ftotal+=$total;
+                            $cnt++;
+                            }?>
+
                             <tr>
                                 <td colspan="2" align="center">Tổng cộng </td>
-                                <td><?php  echo $ftotal;?></td>
+                                <td><?php  echo currency_format($ftotal);?></td>
                             </tr>
                         </table>
                         <?php } else {
@@ -96,7 +105,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 					$y1=date("Y",$year1);
 					$y2=date("Y",$year2);
 				?>
-                        <h4 class="header-title m-t-0 m-b-30">Báo cáo bán hàng theo năm</h4>
+                        <h4 class="header-title m-t-0 m-b-30">Báo cáo  doanh thu offline theo năm</h4>
                         <h4 align="center" style="color:blue">Báo cáo bán hàng từ <?php echo $y1;?> to <?php echo $y2;?>
                         </h4>
                         <hr />
@@ -109,7 +118,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                 </tr>
                             </thead>
                             <?php
-						$ret=mysqli_query($con,"select year(NgayDang) as lyear,sum(Chiphi) as totalprice from  tblhoadon join tbldichvu on tbldichvu.ID= tblhoadon.DichvuId where date(tblhoadon.NgayDang) between '$fdate' and '$tdate' group by lyear");
+						$ret=mysqli_query($con,"select year(tblhoadon.NgayDang) as lyear,(sum(Chiphi)+tblsanpham.Giasanpham) as totalprice from  tblhoadon join tbldichvu on tbldichvu.ID= tblhoadon.DichvuId join tblsanpham on tblsanpham.Id = tblhoadon.SanphamId where date(tblhoadon.NgayDang) between '$fdate' and '$tdate' group by lyear");
 						$cnt=1;
 						while ($row=mysqli_fetch_array($ret)) {
 					?>
@@ -132,8 +141,8 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                 </div>
             </div>
         </div>
-        <?php include_once('includes/footer.php');?>
     </div>
+    <?php include_once('includes/footer.php');?>
     <script src="js/classie.js"></script>
     <script>
     var menuLeft = document.getElementById('cbp-spmenu-s1'),

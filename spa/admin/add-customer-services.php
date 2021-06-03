@@ -17,6 +17,13 @@
 			echo "<script>window.location.href ='invoices.php'</script>";
 		}
 	}
+    if (!function_exists('currency_format')) {
+        function currency_format($number, $suffix = 'đ') {
+            if (!empty($number)) {
+                return number_format($number, 0, ',', '.') . "{$suffix}";
+            }
+        }
+    }
   ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -77,7 +84,7 @@
                                     <tr>
                                         <th scope="row"><?php echo $cnt;?></th>
                                         <td><?php  echo $row['Tendichvu'];?></td>
-                                        <td><?php  echo $row['Chiphi'];?></td>
+                                        <td><?php  echo currency_format($row['Chiphi']);?></td>
                                         <td><input type="checkbox" name="sids[]" value="<?php  echo $row['ID'];?>"></td>
                                     </tr>
                                     <?php 
@@ -85,7 +92,7 @@
 									}?>
                                     <tr>
                                         <td colspan="4" align="center">
-                                            <button type="submit" name="submit" class="btn btn-default">Xác
+                                            <button type="submit" name="submit" class="btn btn-primary">Xác
                                                 nhận</button>
                                         </td>
                                     </tr>

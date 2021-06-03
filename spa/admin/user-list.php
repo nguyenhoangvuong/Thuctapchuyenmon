@@ -44,7 +44,6 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="tables">
-                    <h3 class="title1">Danh sách người dùng</h3>
                     <div class="table-responsive bs-example widget-shadow">
                         <h4>Danh sách người dùng:</h4>
                         <table class="table table-bordered">

@@ -5,6 +5,8 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
   } else{
+
+  
   ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -46,37 +48,15 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                 <div class="tables">
                     <div class="table-responsive bs-example widget-shadow">
                         <h4>Tất cả cuộc hẹn:</h4>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Số cuộc hẹn</th>
-                                    <th>Tên</th>
-                                    <th>Sô điện thoại</th>
-                                    <th>Ngày hẹn</th>
-                                    <th>Thời gian hẹn</th>
-                                    <th>Thao tác</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-							$ret=mysqli_query($con,"select *from  tblcuochen");
-							$cnt=1;
-							while ($row=mysqli_fetch_array($ret)) {
-						?>
-                                <tr>
-                                    <th scope="row"><?php echo $cnt;?></th>
-                                    <td><?php  echo $row['Socuochen'];?></td>
-                                    <td><?php  echo $row['Ten'];?></td>
-                                    <td><?php  echo $row['Sodienthoai'];?></td>
-                                    <td><?php  echo $row['Ngayhen'];?></td>
-                                    <td><?php  echo $row['Giohen'];?></td>
-                                    <td><a href="view-appointment.php?viewid=<?php echo $row['ID'];?>">Xem</a></td>
-                                </tr> <?php 
-						$cnt=$cnt+1;
-						}?>
-                            </tbody>
-                        </table>
+                        
+                        <div class="input-group" style="position:fixed;top:100px;width:270px;right:30px">
+                                    <div class="input-group-addon" style="background-color:#337ab7;color:white">
+                                        Search
+                                    </div>
+                                    <input type="text" name="search_text" id="search_text" Placeholder="Search appointment..." class="form-control">
+                                </div>
+                            <br>
+                        <div id="result1"></div>
                     </div>
                 </div>
             </div>
@@ -84,6 +64,46 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         <?php include_once('includes/footer.php');?>
     </div>
     <script src="js/classie.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url:"fetch1.php",
+                method:"post",
+                data:{search:""},
+                dataType:"text",
+                success:function(data){
+                    $('#result1').html(data);
+                }
+            });
+            
+            $('#search_text').keyup(function(){
+                var txt = $(this).val();
+                if(txt !=''){
+                    $.ajax({
+                        url:"fetch1.php",
+                        method:"post",
+                        data:{search:txt},
+                        dataType:"text",
+                        success:function(data){
+                            $('#result1').html(data);
+                        }
+                    });
+                }else{
+                    $('#result1').html('');
+                    $.ajax({
+                        url:"fetch1.php",
+                        method:"post",
+                        data:{search:txt},
+                        dataType:"text",
+                        success:function(data){
+                            $('#result1').html(data);
+                        }
+                    });
+                }
+            });
+            
+        });
+    </script>
     <script>
     var menuLeft = document.getElementById('cbp-spmenu-s1'),
         showLeftPush = document.getElementById('showLeftPush'),

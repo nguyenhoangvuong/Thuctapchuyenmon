@@ -42,7 +42,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
     <script src="js/metisMenu.min.js"></script>
     <script src="js/custom.js"></script>
     <link href="css/custom.css" rel="stylesheet">
-    <style>
+<style>
     .alert-success {
         background: #eaf4e2;
         border-color: #c1dea9;
@@ -102,11 +102,8 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="tables">
-                    <h3 class="title1">Quản lý sản phẩm /<a href="insert-product.php"><button
-                                style="font-size:24px;margin-left:10px;margin-top:-10px;background-color:#FF7235;color:white;border:0px;padding:6px 6px 0px 6px;border-radius:2px;box-shadow:1px 2px 3px #333333;font-family:times new roman">Thêm
-                                sản phẩm</button></a></h3>
                     <div class="table-responsive bs-example widget-shadow">
-                        <h4>Danh sách:</h4>
+                        <h4>Danh sách: <a href="insert-product.php" class="btn btn-primary"> Thêm mới</a></h4>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>

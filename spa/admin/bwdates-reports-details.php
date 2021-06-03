@@ -44,7 +44,6 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="tables">
-                    <h3 class="title1">Thống kê giữa các ngày</h3>
                     <div class="table-responsive bs-example widget-shadow">
                         <h4>Thống kê giữa các ngày:</h4>
                         <?php
@@ -86,8 +85,8 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                 </div>
             </div>
         </div>
-        <?php include_once('includes/footer.php');?>
     </div>
+    <?php include_once('includes/footer.php');?>
     <script src="js/classie.js"></script>
     <script>
     var menuLeft = document.getElementById('cbp-spmenu-s1'),

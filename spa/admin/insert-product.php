@@ -96,7 +96,6 @@ else{
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="forms">
-                    <h3 class="title1">Thêm sản phẩm</h3>
                     <div class="form-grids row widget-shadow" data-example-id="basic-forms">
                         <div class="form-title">
                             <h4>Thông tin:</h4>
@@ -182,17 +181,17 @@ else{
                                 <div class="form-group">
                                     <label class="control-label" for="basicinput">Hình ảnh 1</label>
                                     <input type="file" name="productimage1" id="productimage1" value=""
-                                        class="form-control" required>
+                                        required>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="control-label" for="basicinput">hình ảnh 2</label>
-                                    <input type="file" name="productimage2" class="form-control" required>
+                                    <input type="file" name="productimage2"  required>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="control-label" for="basicinput">Hình ảnh 3</label>
-                                    <input type="file" name="productimage3" class="form-control" required>
+                                    <input type="file" name="productimage3" required>
                                 </div>
 
                                 <div class="form-group">

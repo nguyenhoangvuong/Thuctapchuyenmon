@@ -13,7 +13,13 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         $sql = mysqli_query($con,"update tblorders set Tinhtrangorder = '$status' where Id = '$oid'");
         echo "<script>alert('Đơn đã được cập nhật !');</script>";
     }
-
+    if (!function_exists('currency_format')) {
+        function currency_format($number, $suffix = 'đ') {
+            if (!empty($number)) {
+                return number_format($number, 0, ',', '.') . "{$suffix}";
+            }
+        }
+    }
   ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -54,8 +60,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         <?php include_once('includes/header.php');?>
         <div id="page-wrapper">
             <div class="main-page">
-                <div class="tables">
-                    <h3 class="title1">Đơn hàng đã gửi</h3>
+                <div class="tables" id="exampl">
                     <div class="table-responsive bs-example widget-shadow">
                         <h4>Danh sách đơn:</h4>
                         <form action="" method="post">
@@ -88,7 +93,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                         </td>
                                         <td><?php  echo $row['productname'];?></td>
                                         <td><?php  echo $row['quantity'];?></td>
-                                        <td><?php  echo $row['productprice']*$row['quantity']+$row['shippingcharge'];?>
+                                        <td><?php  echo currency_format($row['productprice']*$row['quantity']+$row['shippingcharge']);?>
                                         </td>
                                         <td><?php  echo $row['orderdate'];?></td>
                                         <td><a class="btn btn-primary" href='Delivered-order.php?oid=<?php echo $row['id']; ?>' id="myBtn"
@@ -106,6 +111,9 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 
                     </tbody>
                     </table>
+                    <p style="margin-top:1%" align="center">
+                            <i class="fa fa-print fa-2x" style="cursor: pointer;" OnClick="CallPrint(this.value)"></i>
+                        </p>
                     </form>
                     <?php
                     if($oid){
@@ -181,6 +189,17 @@ if (strlen($_SESSION['bpmsaid']==0)) {
     <?php include_once('includes/footer.php');?>
     </div>
     <script src="js/classie.js"></script>
+    <script>
+        function CallPrint(strid) {
+        var prtContent = document.getElementById("exampl");
+        var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent.innerHTML);
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.document.close();  
+    }
+    
+    </script>
     <script language="javascript">
     document.getElementById("hide").onclick = function() {
         document.getElementById("noidung").style.display = 'none';

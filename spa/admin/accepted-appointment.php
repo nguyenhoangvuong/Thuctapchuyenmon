@@ -5,6 +5,17 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
   } else{
+
+    $connect = new PDO("mysql:host=localhost;dbname=spa", "root", "");
+
+    $query = "select * from tblcuochen where Trangthai='1'";
+
+    $statement = $connect->prepare($query);
+
+    $statement->execute();
+
+    $result = $statement->fetchAll();
+
   ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -44,41 +55,45 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="tables">
-                    <h3 class="title1">Cuộc hẹn được chấp nhận</h3>
                     <div class="table-responsive bs-example widget-shadow">
                         <h4>Cuộc hẹn được chấp nhận:</h4>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th> Số cuộc hẹn</th>
-                                    <th>Tên khách</th>
-                                    <th>Số điện thoại</th>
-                                    <th>Ngày hẹn</th>
-                                    <th>Thời gian</th>
-                                    <th>Thao tác</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-								$ret=mysqli_query($con,"select *from  tblcuochen where Trangthai='1'");
+                        <form method="POST" id="convert_form" action="export.php">
+                            <table class="table table-bordered table-striped" id="table_content">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Số cuộc hẹn</th>
+                                        <th>Tên khách</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Ngày hẹn</th>
+                                        <th>Thời gian</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+								$ret=mysqli_query($con,"select * from  tblcuochen where Trangthai='1'");
 								$cnt=1;
 								while ($row=mysqli_fetch_array($ret)) {
 							?>
-                                <tr>
-                                    <th scope="row"><?php echo $cnt;?></th>
-                                    <td><?php  echo $row['Socuochen'];?></td>
-                                    <td><?php  echo $row['Ten'];?></td>
-                                    <td><?php  echo $row['Sodienthoai'];?></td>
-                                    <td><?php  echo $row['Ngayhen'];?></td>
-                                    <td><?php  echo $row['Giohen'];?></td>
-                                    <td><a href="view-appointment.php?viewid=<?php echo $row['ID'];?>">Xem chi tiết</a>
-                                    </td>
-                                </tr> <?php 
+                                    <tr>
+                                        <th scope="row"><?php echo $cnt;?></th>
+                                        <td><?php  echo $row['Socuochen'];?></td>
+                                        <td><?php  echo $row['Ten'];?></td>
+                                        <td><?php  echo $row['Sodienthoai'];?></td>
+                                        <td><?php  echo $row['Ngayhen'];?></td>
+                                        <td><?php  echo $row['Giohen'];?></td>
+                                        <td><a href="view-appointment.php?viewid=<?php echo $row['ID'];?>">Xem chi
+                                                tiết</a>
+                                        </td>
+                                    </tr> <?php 
 						$cnt=$cnt+1;
 						}?>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                            <input type="hidden" name="file_content" id="file_content" />
+                            <button type="button" name="convert" id="convert" class="btn btn-primary">Convert</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -104,9 +119,21 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         }
     }
     </script>
+    <script>
+    $(document).ready(function() {
+        $('#convert').click(function() {
+            var table_content = '<table>';
+            table_content += $('#table_content').html();
+            table_content += '</table>';
+            $('#file_content').val(table_content);
+            $('#convert_form').submit();
+        });
+    });
+    </script>
     <script src="js/jquery.nicescroll.js"></script>
     <script src="js/scripts.js"></script>
     <script src="js/bootstrap.js"> </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 </body>
 
 </html>

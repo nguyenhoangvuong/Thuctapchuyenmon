@@ -67,10 +67,9 @@ $timing=$_POST['timing'];
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="forms">
-                    <h3 class="title1">Update Contact Us</h3>
                     <div class="form-grids row widget-shadow" data-example-id="basic-forms">
                         <div class="form-title">
-                            <h4>Update Contact Us:</h4>
+                            <h4>Cập nhật liên hệ:</h4>
                         </div>
                         <div class="form-body">
                             <form method="post">

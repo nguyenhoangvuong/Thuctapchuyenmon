@@ -82,8 +82,10 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="forms">
-                    <h3 class="title1">Sửa sản phẩm</h3></h3>
                     <div class="form-grids row widget-shadow" data-example-id="basic-forms">
+                    <div class="form-title">
+                            <h4>Sửa sản phẩm</h4>
+                        </div>
                         <div class="form-body">
                         <form class="form-horizontal row-fluid" name="insertproduct" method="post"
                                 enctype="multipart/form-data">

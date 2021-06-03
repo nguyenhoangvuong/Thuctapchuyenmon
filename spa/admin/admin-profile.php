@@ -59,7 +59,6 @@ else{
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="forms">
-                    <h3 class="title1">Hồ sơ Admin</h3>
                     <div class="form-grids row widget-shadow" data-example-id="basic-forms">
                         <div class="form-title">
                             <h4>Cập nhật hồ sơ :</h4>
@@ -100,8 +99,8 @@ else{
                     </div>
                 </div>
             </div>
-            <?php include_once('includes/footer.php');?>
         </div>
+        <?php include_once('includes/footer.php');?>
         <script src="js/classie.js"></script>
         <script>
         var menuLeft = document.getElementById('cbp-spmenu-s1'),

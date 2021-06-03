@@ -3,7 +3,9 @@ session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
 error_reporting(0);
-
+if (strlen($_SESSION['bpmsaid']==0)) {
+    header('location:logout.php');
+    }
 if(isset($_POST['submit']))
   {
     $contactno=$_SESSION['contactno'];
@@ -12,8 +14,9 @@ if(isset($_POST['submit']))
         $query=mysqli_query($con,"update tbladmin set Matkhau='$password'  where  Email='$email' && Sodienthoai='$contactno' ");
    if($query)
    {
-echo "<script>alert('Thay đổi mật khẩu thành công');</script>";
-session_destroy();
+        header('location:dashboard.php');
+        echo "<script>alert('Thay đổi mật khẩu thành công');</script>";
+        session_destroy();
    }
   }
   ?>
@@ -21,33 +24,25 @@ session_destroy();
 <html lang="en">
 
 <head>
-    <title>SPA | Làm mới mật khẩu </title>
-
-    <script type="application/x-javascript">
-    addEventListener("load", function() {
-        setTimeout(hideURLbar, 0);
-    }, false);
-
-    function hideURLbar() {
-        window.scrollTo(0, 1);
-    }
-    </script>
-    <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-    <link href="css/style.css" rel='stylesheet' type='text/css' />
-    <link href="css/font-awesome.css" rel="stylesheet">
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/modernizr.custom.js"></script>
-    <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic'
-        rel='stylesheet' type='text/css'>
-    <link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
-    <script src="js/wow.min.js"></script>
+    <title>Thay đổi mật khẩu</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="codedthemes">
+    <meta name="keywords"
+        content=", Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+    <meta name="author" content="codedthemes">
+    <link rel="shortcut icon" href="assets1/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="assets1/images/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet">
+    <link href="assets1/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="assets1/icon/icofont/css/icofont.css">
+    <link rel="stylesheet" type="text/css" href="assets1/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets1/plugins/Waves/waves.min.css">
+    <link rel="stylesheet" type="text/css" href="assets1/css/main.css">
+    <link rel="stylesheet" type="text/css" href="assets1/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="assets1/css/color/color-1.min.css" id="color" />
     <script>
-    new WOW().init();
-    </script>
-    <script src="js/metisMenu.min.js"></script>
-    <script src="js/custom.js"></script>
-    <link href="css/custom.css" rel="stylesheet">
-    <script type="text/javascript">
     function checkpass() {
         if (document.changepassword.newpassword.value != document.changepassword.confirmpassword.value) {
             alert('Mật khẩu Mới và Xác nhận Mật khẩu không khớp');
@@ -60,61 +55,65 @@ session_destroy();
 </head>
 
 <body>
-        <div id="page-wrapper" style="background-image:url(images/spa.png);background-repeat: no-repeat;background-size: cover;">
-            <div class="main-page login-page ">
-                <div class="widget-shadow"  style="border-radius:10px;box-shadow:1px 3px 4px #333333">
-                    <div class="login-top">
-                        <h3 class="title1">Làm mới mật khẩu</h3>
-                        <h4>Welcome back to Sk3nwOC SPA ! </h4>
-                    </div>
-                    <div class="login-body">
-                        <form role="form" method="post" action="" name="changepassword" onsubmit="return checkpass();">
+    <section class="login p-fixed d-flex text-center bg-primary common-img-bg">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="login-card card-block">
+
+
+                        <form class="md-float-material" method="post" action="" name="changepassword"
+                            onsubmit="return checkpass();">
+                            <div class="text-center">
+                                <img src="assets1/images/favicon.png" alt="logo">
+                            </div>
+                            <h3 class="text-center txt-primary" STYLE="font-family:times new roman">
+                                MẬT KHẨU MỚI
+                            </h3>
                             <p style="font-size:16px; color:red" align="center">
                                 <?php 
 									if($msg){
 										echo $msg;
-									} 
+									}  
 								?>
                             </p>
-                            <input type="password" name="newpassword" class="lock" placeholder="New Password"
-                                required="true">
-                            <input type="password" name="confirmpassword" class="lock" placeholder="Confirm Password"
-                                required="true">
-                            <input type="submit" name="submit" value="Xác nhận">
-                            <div class="forgot-grid">
-
-                                <div class="forgot">
-                                    <a href="index.php">Bạn đã có tài khoản</a>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="md-input-wrapper">
+                                        <input type="password" class="md-form-control" name="newpassword"
+                                            required="required">
+                                        <label>Mật khẩu mới</label>
+                                    </div>
                                 </div>
-                                <div class="clearfix"> </div>
+                                <div class="col-md-12">
+                                    <div class="md-input-wrapper">
+                                        <input type="password" name="confirmpassword" class="md-form-control"
+                                            required="required">
+                                        <label>Xác nhận mật khẩu</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-10 offset-xs-1">
+                                    <button name="submit" type="submit"
+                                        class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">XÁC NHẬN</button>
+                                </div>
                             </div>
                         </form>
+                        <a href="index.php" STYLE="font-family:times new roman">Trở lại</a>
+                        <div class="clearfix"> </div>
                     </div>
+                    </form>
                 </div>
+            </div>
         </div>
-    </div>
-    <script src="js/classie.js"></script>
-    <script>
-    var menuLeft = document.getElementById('cbp-spmenu-s1'),
-        showLeftPush = document.getElementById('showLeftPush'),
-        body = document.body;
+        </div>
+    </section>
 
-    showLeftPush.onclick = function() {
-        classie.toggle(this, 'active');
-        classie.toggle(body, 'cbp-spmenu-push-toright');
-        classie.toggle(menuLeft, 'cbp-spmenu-open');
-        disableOther('showLeftPush');
-    };
-
-    function disableOther(button) {
-        if (button !== 'showLeftPush') {
-            classie.toggle(showLeftPush, 'disabled');
-        }
-    }
-    </script>
-    <script src="js/jquery.nicescroll.js"></script>
-    <script src="js/scripts.js"></script>
-    <script src="js/bootstrap.js"> </script>
 </body>
 
 </html>

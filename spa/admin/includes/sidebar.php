@@ -38,25 +38,67 @@
                       <a href="all-appointment.php"><i class="fa fa-check-square-o nav_icon"></i>Cuộc hẹn<span class="fa arrow"></span></a>
                       <ul class="nav nav-second-level collapse">
                           <li>
-                              <a href="all-appointment.php">Tất cả cuộc hẹn</a>
+                              <a href="all-appointment.php">Tất cả cuộc hẹn
+                              <?php
+                                $result = mysqli_query($con,"select * from tblcuochen");
+                                $num_rows1 = mysqli_num_rows($result);
+                                {
+                                ?>
+                             <b class="label orange pull-right" style="background-color:#ffff00;color:black;font-size:1rem;"><?php echo $num_rows1; ?></b>
+                            <?php } ?>
+                              </a>
                           </li>
                           <li>
-                              <a href="new-appointment.php">Cuộc hẹn mới</a>
+                              <a href="new-appointment.php">Cuộc hẹn mới
+                              <?php
+                                $result = mysqli_query($con,"select *from  tblcuochen where Trangthai=''");
+                                $num_rows1 = mysqli_num_rows($result);
+                                {
+                                ?>
+                             <b class="label orange pull-right" style="background-color:#ffffff;color:black;font-size:1rem;"><?php echo $num_rows1; ?></b>
+                            <?php } ?>
+                              </a>
                           </li>
                           <li>
-                              <a href="accepted-appointment.php">Cuộc hẹn được chấp nhận</a>
+                              <a href="accepted-appointment.php">Cuộc hẹn được chấp nhận
+                              <?php
+                                $result = mysqli_query($con,"select *from  tblcuochen where Trangthai='1'");
+                                $num_rows1 = mysqli_num_rows($result);
+                                {
+                                ?>
+                             <b class="label orange pull-right" style="background-color:#4CAF50;color:black;font-size:1rem;"><?php echo $num_rows1; ?></b>
+                            <?php } ?>
+                              </a>
                           </li>
                           <li>
-                              <a href="rejected-appointment.php">Cuộc hẹn đã từ chối</a>
+                              <a href="rejected-appointment.php">Cuộc hẹn đã từ chối
+                              <?php
+                                $result = mysqli_query($con,"select *from  tblcuochen where Trangthai='2'");
+                                $num_rows1 = mysqli_num_rows($result);
+                                {
+                                ?>
+                             <b class="label orange pull-right" style="background-color:#ff5252;color:black;font-size:1rem;"><?php echo $num_rows1; ?></b>
+                            <?php } ?>
+                              </a>
                           </li>
                       </ul>
                   </li>
-
+                  
                   <li>
                   <a href="invoices.php"><i class="fa fa-file-text-o nav_icon"></i>Hóa dơn và đơn hàng<span class="fa arrow"></span></a>
                       <ul class="nav nav-second-level collapse">
                           <li>
-                              <a href="invoices.php">Danh sách hóa đơn</a>
+                              <a href="invoices.php">Danh sách hóa đơn
+                              <?php
+         
+                                $result = mysqli_query($con,"select distinct tblkhachhang.Ten,tblhoadon.BillId,tblhoadon.NgayDang from tblkhachhang   
+                                join tblhoadon on tblkhachhang.ID=tblhoadon.Userid");
+                                $num_rows1 = mysqli_num_rows($result);
+                                {
+                                ?>
+                             <b class="label orange pull-right" style="background-color:#DD6777;color:black;font-size:1rem;"><?php echo $num_rows1; ?></b>
+                            <?php } ?>
+                              </a>
                           </li>
                           <li>
                               <a href="today-order.php?oid=">Đơn trong ngày
@@ -99,13 +141,22 @@
                           </li>
                       </ul>
                   </li>
-
+                  
                   <li>
                   <a href="customer-list.php"><i class="fa fa-user nav_icon"></i>Khách hàng<span
                               class="fa arrow"></span></a>
                       <ul class="nav nav-second-level collapse">
                           <li>
-                              <a href="customer-list.php">Danh sách khách hàng</a>
+                              <a href="customer-list.php">Danh sách khách hàng
+                              <?php	
+                                    $status='Delivered';									 
+                                    $ret = mysqli_query($con,"select *from  tblkhachhang ");
+                                    $num = mysqli_num_rows($ret);
+                                    {?><b class="label orange pull-right" style="background-color:#00FF00;color:black;font-size:1rem;"><?php echo $num; ?></b>
+                                    <?php 
+                                    } 
+                                ?>
+                              </a>
                           </li>
                           <li>
                               <a href="user-list.php">Danh sách người dùng</a>
@@ -116,11 +167,11 @@
                       </ul>
                   </li>
                   <li>
-                      <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Báo cáo<span class="fa arrow"></span></a>
+                      <a href="bwdates-reports-ds.php"><i class="fa fa-check-square-o nav_icon"></i>Báo cáo<span class="fa arrow"></span></a>
                       <ul class="nav nav-second-level collapse">
                           <li><a href="bwdates-reports-ds.php"> Báo cáo giữa các ngày</a></li>
-
-                          <li><a href="sales-reports.php">Báo cáo bán hàng</a></li>
+                          <li><a href="sales-reports.php">Báo cáo offline</a></li>
+                          <li><a href="sales-reports-1.php">Báo cáo bán hàng online</a></li>
                       </ul>
                   </li>
                   

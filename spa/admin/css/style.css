@@ -205,7 +205,7 @@ ul.dropdown-menu{
 /*--//side-menu--*/
 /* ----Logo----*/
 .logo {
-    background: #6164C1;
+    background: #337ab7;
     text-align: center;
     float: left;
 }
@@ -830,28 +830,28 @@ ul.dropdown-menu.drp-mnu li {
 .stats-left {
     float: left;
     width: 60%;
-    background-color: #2bd0e6;
+    background-color: #ED4D4A;
 	text-align: center;
 	padding: 1em;
 }
 .states-mdl .stats-left {
-    background-color: #f3cb75;
+    background-color: #FD868D;
 }
 .states-mdl .stats-right {
-    background-color: rgba(189, 231, 255, 0.88);
+    background-color: #337AB7;
 }
 .states-last .stats-left {
-    background-color: #9ab82d;
+    background-color: #FEA321;
 }
 .states-last .stats-right {
-    background-color: rgba(233, 78, 2, 0.84);
+    background-color: #337AB7;
 }
 .stats-right {
     float: right;
     width: 40%;
     text-align: center;
 	padding: 1.54em 1em;
-	background-color: rgba(202, 200, 83, 0.88);
+	background-color:#337AB7;
 }
 .stats-left h5 {
     color: #fff;
@@ -1295,7 +1295,7 @@ section#tables  p {
     color: #777777;
 }
 .tables .panel-body ,.tables .bs-example{
-    padding: 2em 2em 0.5em;
+    padding: 1em 1em 0.5em;
 }
 .tables .table > thead > tr > th, .tables .table > tbody > tr > th, .tables .table > tfoot > tr > th, .tables .table > thead > tr > td, .tables .table > tbody > tr > td, .tables .table > tfoot > tr > td {
     padding: 13px;
@@ -1348,7 +1348,7 @@ section#tables  p {
     margin-top: 2em;
 }
 .form-two {
-    margin-top: 2em;
+    margin-top: 1em;
 }
 .form-three{
     margin-top:2em;

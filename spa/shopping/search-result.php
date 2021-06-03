@@ -37,6 +37,7 @@ header('location:login.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -68,6 +69,7 @@ header('location:login.php');
     <link rel="stylesheet" type="text/css" href="css/style1.css">
     <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
 </head>
+
 <body class="cnt-home">
     <header class="header-style-1">
         <?php include('includes/top-header.php');?>
@@ -81,7 +83,7 @@ header('location:login.php');
                 <div class='col-md-3 sidebar'>
                     <div class="side-menu animate-dropdown outer-bottom-xs">
                         <div class="side-menu animate-dropdown outer-bottom-xs">
-                            <div class="head"><i class="icon fa fa-align-justify fa-fw"></i>Thể loại phụ</div>
+                            <div class="head" style="font-family:times new roman"><i class="icon fa fa-align-justify fa-fw"></i>Thể loại phụ</div>
                             <nav class="yamm megamenu-horizontal" role="navigation">
                                 <ul class="nav">
                                     <li class="dropdown menu-item">
@@ -100,12 +102,12 @@ header('location:login.php');
                         </div>
                     </div>
                     <div class="sidebar-module-container">
-                        <h3 class="section-title">shop by</h3>
+                        <h3 class="section-title" style="font-family:times new roman">shop by</h3>
                         <div class="sidebar-filter">
                             <!-- ============================================== SIDEBAR CATEGORY ============================================== -->
                             <div class="sidebar-widget wow fadeInUp outer-bottom-xs ">
                                 <div class="widget-header m-t-20">
-                                    <h4 class="widget-title">Thể loại</h4>
+                                    <h4 class="widget-title" style="font-family:times new roman">Thể loại</h4>
                                 </div>
                                 <div class="sidebar-widget-body m-t-10">
                                     <?php $sql=mysqli_query($con,"select Id,Tentheloai  from tbltheloai");
@@ -132,7 +134,7 @@ header('location:login.php');
                     <div id="category" class="category-carousel hidden-xs">
                         <div class="item">
                             <div class="image">
-                                <div class="full-width-slider">
+                                <div class="full-width-slider" style="width:830px">
                                     <div class="item" style="background-image: url(assets/images/sliders/slider1.png);">
                                     </div>
                                 </div>
@@ -172,7 +174,7 @@ header('location:login.php');
                                                     </div>
 
                                                     <div class="product-info text-left">
-                                                        <h3 class="name"><a
+                                                        <h3 class="name" style="font-family:times new roman"><a
                                                                 href="product-details.php?pid=<?php echo htmlentities($row['Id']);?>"><?php echo htmlentities($row['Tensanpham']);?></a>
                                                         </h3>
                                                         <div class="rating rateit-small"></div>
@@ -199,7 +201,7 @@ header('location:login.php');
                                                                     <a
                                                                         href="category.php?page=product&action=add&id=<?php echo $row['Id']; ?>">
                                                                         <button class="btn btn-primary"
-                                                                            type="button">Thêm vào giỏ hàng</button></a>
+                                                                            type="button" style="font-family:times new roman;font-size:1.5rem">Thêm vào giỏ hàng</button></a>
 
                                                                 </li>
 

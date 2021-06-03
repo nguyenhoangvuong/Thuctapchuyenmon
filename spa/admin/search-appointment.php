@@ -44,9 +44,8 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="tables">
-                    <h3 class="title1">Tìm kiếm cuộc hẹn</h3>
                     <div class="table-responsive bs-example widget-shadow">
-                        <h4>Tìm kiếm cuộc hẹn / Tên / Số điện thoái:</h4>
+                        <h4>Tìm kiếm cuộc hẹn / Tên / Số điện thoại</h4>
                         <div class="form-body">
                             <form method="post" name="search" action="">
                                 <p style="font-size:16px; color:red" align="center"> <?php if($msg){
@@ -64,7 +63,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 							{ 
 								$sdata=$_POST['searchdata'];
 								?>
-                        <h4 align="center">Không có : "<?php echo $sdata;?>"</h4>
+                        <h4 align="center">Kết quả tìm kiếm với : "<?php echo $sdata;?>"</h4>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -112,8 +111,8 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                 </div>
             </div>
         </div>
-        <?php include_once('includes/footer.php');?>
     </div>
+    <?php include_once('includes/footer.php');?>
     <script src="js/classie.js"></script>
     <script>
     var menuLeft = document.getElementById('cbp-spmenu-s1'),

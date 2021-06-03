@@ -17,6 +17,13 @@
 			echo "<script>window.location.href ='invoices.php'</script>";
 		}
 	}
+    if (!function_exists('currency_format')) {
+        function currency_format($number, $suffix = 'đ') {
+            if (!empty($number)) {
+                return number_format($number, 0, ',', '.') . "{$suffix}";
+            }
+        }
+    }
   ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -57,7 +64,7 @@
             <div class="main-page">
                 <div class="tables">
                     <div class="table-responsive bs-example widget-shadow">
-                        <h3 class="title1">Sản phẩm</h3>
+                        <h3 class="title1"></h3>
                         <form method="post">
                             <table class="table table-bordered">
                                 <thead>
@@ -78,7 +85,7 @@
                                     <tr>
                                         <th scope="row"><?php echo $cnt;?></th>
                                         <td><?php  echo $row['Tensanpham'];?></td>
-                                        <td><?php  echo $row['Giasanpham'];?></td>
+                                        <td><?php  echo currency_format($row['Giasanpham']);?></td>
                                         <td><img src="../admin/productimages/<?php echo $row['Id'];?>/<?php echo $row['Hinhanh1'];?>" alt="" width="100" height="80"></td>
                                         <td><input type="checkbox" name="sids1[]" value="<?php  echo $row['Id'];?>"></td>
                                     </tr>
@@ -87,7 +94,7 @@
 									}?>
                                     <tr>
                                         <td colspan="4" align="center">
-                                            <button type="submit" name="submit" class="btn btn-default">Xác
+                                            <button type="submit" name="submit" class="btn btn-primary">Xác
                                                 nhận</button>
                                         </td>
                                     </tr>
@@ -98,8 +105,8 @@
                 </div>
             </div>
         </div>
-        <?php include_once('includes/footer.php');?>
     </div>
+    <?php include_once('includes/footer.php');?>
     <script src="js/classie.js"></script>
     <script>
     var menuLeft = document.getElementById('cbp-spmenu-s1'),

@@ -44,44 +44,62 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="tables">
-                    <h3 class="title1">Danh sách hóa đơn</h3>
                     <div class="table-responsive bs-example widget-shadow">
                         <h4>Danh sách hóa đơn:</h4>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>ID hóa đơn</th>
-                                    <th>Tên khách hàng</th>
-                                    <th>Ngày hóa đơn</th>
-                                    <th>Thao tác</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-								$ret=mysqli_query($con,"select distinct tblkhachhang.Ten,tblhoadon.BillId,tblhoadon.NgayDang from tblkhachhang   
-									join tblhoadon on tblkhachhang.ID=tblhoadon.Userid  order by tblhoadon.ID desc");
-								$cnt=1;
-								while ($row=mysqli_fetch_array($ret)) {
-							?>
-
-                                <tr>
-                                    <th scope="row"><?php echo $cnt;?></th>
-                                    <td><?php  echo $row['BillId'];?></td>
-                                    <td><?php  echo $row['Ten'];?></td>
-                                    <td><?php  echo $row['NgayDang'];?></td>
-                                    <td><a href="view-invoice.php?invoiceid=<?php  echo $row['BillId'];?>">Xem chi tiết</a></td>
-                                </tr> <?php 
-						$cnt=$cnt+1;
-						}?>
-                            </tbody>
-                        </table>
+                        <div class="input-group" style="position:fixed;top:100px;width:270px;right:30px">
+                                    <div class="input-group-addon" style="background-color:#337ab7;color:white">
+                                        Search
+                                    </div>
+                                    <input type="text" name="search_text" id="search_text" Placeholder="Search invoices..." class="form-control">
+                                </div>
+                            <br>
+                        <div id="result1"></div>
                     </div>
                 </div>
             </div>
         </div>
         <?php include_once('includes/footer.php');?>
     </div>
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url:"fetch2.php",
+                method:"post",
+                data:{search:""},
+                dataType:"text",
+                success:function(data){
+                    $('#result1').html(data);
+                }
+            });
+            
+            $('#search_text').keyup(function(){
+                var txt = $(this).val();
+                if(txt !=''){
+                    $.ajax({
+                        url:"fetch2.php",
+                        method:"post",
+                        data:{search:txt},
+                        dataType:"text",
+                        success:function(data){
+                            $('#result1').html(data);
+                        }
+                    });
+                }else{
+                    $('#result1').html('');
+                    $.ajax({
+                        url:"fetch2.php",
+                        method:"post",
+                        data:{search:txt},
+                        dataType:"text",
+                        success:function(data){
+                            $('#result1').html(data);
+                        }
+                    });
+                }
+            });
+            
+        });
+    </script>
     <script src="js/classie.js"></script>
     <script>
     var menuLeft = document.getElementById('cbp-spmenu-s1'),

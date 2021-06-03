@@ -108,7 +108,7 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
                         <div class="sidebar-filter">
                             <div class="sidebar-widget wow fadeInUp outer-bottom-xs ">
                                 <div class="widget-header m-t-20">
-                                    <h4 class="widget-title">Thể loại</h4>
+                                    <h4 class="widget-title" style="font-family:times new roman">Thể loại</h4>
                                 </div>
                                 <div class="sidebar-widget-body m-t-10">
                                     <?php $sql=mysqli_query($con,"select Id,Tentheloai  from tbltheloai");

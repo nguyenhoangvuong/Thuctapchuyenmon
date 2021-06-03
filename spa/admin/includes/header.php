@@ -2,7 +2,7 @@
       <div class="header-left">
         <button id="showLeftPush"><i class="fa fa-bars"></i></button>
         <div class="logo">
-          <a href="index.html">
+          <a href="dashboard.php">
             <h1>SPA</h1>
             <span>SONGOKU</span>
           </a>
