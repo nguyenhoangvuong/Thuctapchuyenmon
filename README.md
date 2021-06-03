@@ -15,7 +15,7 @@ Giảng viên: Thầy Nguyễn Lê Minh. 
 1. Xây dựng được cơ sở dữ liệu.
 2. Đăng nhập, đăng xuất, đổi mật khẩu, dùng gmail và số điện thoại đã cung cấp để đổi lại mật khẩu.
 3. Đặt lịch, duyệt lịch.
-4. Thêm sửa xóa một số mục.
+4. Thêm sửa xóa.
 5. Thống kê doanh thu,khách,...
 6. Thêm sản phẩm vào giỏ hàng.
 7. Thanh toán COD.
@@ -24,19 +24,16 @@ Giảng viên: Thầy Nguyễn Lê Minh. 
 10. Tạo được danh sách yêu thích.
 11. Lịch sử đơn hàng
 12. Theo dõi đơn hàng
+14. Xuất hóa đơn.
+15. Duyệt đơn hàng.
+16. Nhận xét và đánh giá sản phẩm
 
 
 ## Phần 3: Các chức năng chưa hoàn thành:
 1. Thanh toán online.
 2. Trò chuyện với admin.
-3. Thêm sản phẩm vào giỏ hàng.
+3. Đăng nhập facebook,gmail.
 4. Gửi Gmail thông báo về lịch đặt.
-5. Một số mục chưa có thêm, sửa, xóa.
-6. Nhận xét và đánh giá sản phẩm
-7. Lấy mật khẩu thông qua gửi gmail.
-8. Duyệt đơn hàng.
-9. Xuất hóa đơn.
-
 
 ## Hướng dẫn sử dụng:
 1. Tải xuống tệp zip.
