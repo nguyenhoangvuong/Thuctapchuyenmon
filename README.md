@@ -27,13 +27,12 @@ Giảng viên: Thầy Nguyễn Lê Minh. 
 14. Xuất hóa đơn.
 15. Duyệt đơn hàng.
 16. Nhận xét và đánh giá sản phẩm
-
+17. Gửi Gmail thông báo về lịch đặt.
 
 ## Phần 3: Các chức năng chưa hoàn thành:
 1. Thanh toán online.
 2. Trò chuyện với admin.
 3. Đăng nhập facebook,gmail.
-4. Gửi Gmail thông báo về lịch đặt.
 
 ## Hướng dẫn sử dụng:
 1. Tải xuống tệp zip.
