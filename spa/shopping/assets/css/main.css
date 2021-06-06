@@ -56,7 +56,7 @@ body {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
 }
 ul {
   margin: 0;
@@ -1072,7 +1072,8 @@ a {
   -moz-border-radius: 5px 0 0 5px;
   border-radius: 5px 0 0 5px;
   padding: 13px;
-  width: 67%;
+  width: 88%;
+  outline: none;
 }
 .main-header .top-search-holder .search-area .categories-filter {
   border-right: 1px solid #E0E0E0;
@@ -1121,10 +1122,10 @@ a {
   display: inline-block;
   float: right;
   margin: 0px;
-  padding: 12px 19px 13px;
+  padding: 12px 19px 14px;
   text-align: center;
   background: #f6f6f6;
-  border-left: 1px solid #E0E0E0;
+  border: 0px;
 }
 .main-header .top-search-holder .search-area .search-button:after {
   color: #b2b2b2;

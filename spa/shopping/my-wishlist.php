@@ -13,7 +13,13 @@ if(isset($_GET['del']))
 $query=mysqli_query($con,"delete from tblyeuthich where Id='$wid'");
 }
 
-
+if (!function_exists('currency_format')) {
+    function currency_format($number, $suffix = 'đ') {
+        if (!empty($number)) {
+            return number_format($number, 0, ',', '.') . "{$suffix}";
+        }
+    }
+}
 if(isset($_GET['action']) && $_GET['action']=="add"){
 	$id=intval($_GET['id']);
 	$query=mysqli_query($con,"delete from tblyeuthich where SanphamId='$id'");
@@ -93,15 +99,15 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                 <div class="row">
                     <div class="col-md-12 my-wishlist">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table" style="margin-top:-50px">
                                 <thead>
                                     <tr>
-                                        <th colspan="4">sản phẩm yêu thích</th>
+                                        <th colspan="4" style="font-family:times new roman;">sản phẩm yêu thích</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-										$ret=mysqli_query($con,"select tblsanpham.Tensanpham as pname,tblsanpham.Hinhanh1 as pimage,tblsanpham.Giasanpham as pprice,tblyeuthich.SanphamId as pid,tblyeuthich.Id as wid from tblyeuthich join tblsanpham on tblsanpham.Id=tblyeuthich.SanphamId where tblyeuthich.UserId='".$_SESSION['id']."'");
+										$ret=mysqli_query($con,"select tblsanpham.Tensanpham as pname,tblsanpham.Giasanphamtruockhigiam as pprice1,tblsanpham.Hinhanh1 as pimage,tblsanpham.Giasanpham as pprice,tblyeuthich.SanphamId as pid,tblyeuthich.Id as wid from tblyeuthich join tblsanpham on tblsanpham.Id=tblyeuthich.SanphamId where tblyeuthich.UserId='".$_SESSION['id']."'");
 										$num=mysqli_num_rows($ret);
 											if($num>0)
 											{
@@ -131,8 +137,8 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                             </div>
                                             <?php } ?>
                                             <div class="price">
-                                                <?php echo htmlentities($row['pprice']);?> VNĐ
-                                                <span>$900.00</span>
+                                                <?php echo currency_format(htmlentities($row['pprice']));?>
+                                                <span><?php echo currency_format(htmlentities($row['pprice1']));?></span>
                                             </div>
                                         </td>
                                         <td class="col-md-2">

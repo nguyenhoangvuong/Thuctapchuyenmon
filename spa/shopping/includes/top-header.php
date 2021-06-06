@@ -12,7 +12,7 @@ include('../includes/syle.css');
                     <?php if(strlen($_SESSION['login']))
 						{   ?>
                     <li><a href="https://www.facebook.com/vuongml0123/" style="color:white"><i class="icon fa fa-key"></i>Xin chào :
-                             <?php echo htmlentities($_SESSION['login']);?></a></li>
+                             <?php echo htmlentities($_SESSION['username']);?></a></li>
                     <?php } ?>
 
                     <li><a href="my-account.php" style="color:white"><i class="icon fa fa-user"></i>Tài khoản của tôi</a></li>

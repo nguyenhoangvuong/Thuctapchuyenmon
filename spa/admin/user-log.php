@@ -1,6 +1,8 @@
 <?php
 session_start();
 error_reporting(0);
+$sotin1trang = 10;
+$trang = $_GET['trang'];
 include('includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
@@ -63,7 +65,8 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                             </thead>
                             <tbody>
                                 <?php
-								$ret=mysqli_query($con,"select *from  tblnhatkynguoidung");
+                                $fr = ($trang - 1) * $sotin1trang;
+								$ret=mysqli_query($con,"select *from  tblnhatkynguoidung limit $fr,$sotin1trang");
 								$cnt=1;
 								while ($row=mysqli_fetch_array($ret)) {
 							?>
@@ -80,6 +83,16 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 						}?>
                             </tbody>
                         </table>
+                        <div id="phantrang">
+                            <?php
+                                $ret1=mysqli_query($con,"select *from  tblnhatkynguoidung");
+                                $tonsotin = mysqli_num_rows($ret1);
+                                $sotrang = ceil($tonsotin / $sotin1trang);
+                                for($t = $sotrang; $t >= 1;$t--){
+                                    echo "<div style='width:100%;'><a style='color:red;margin-right:2%;float:right' href='user-log.php?trang=$t'>Trang $t  </a></div>";
+                                }
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>

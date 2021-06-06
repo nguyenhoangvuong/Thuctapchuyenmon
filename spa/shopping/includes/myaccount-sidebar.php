@@ -3,7 +3,7 @@
 	        <div class="panel-group">
 	            <div class="panel panel-default">
 	                <div class="panel-heading">
-	                    <h4 class="unicase-checkout-title">Tiến hành thanh toán của bạn</h4>
+	                    <h4 class="unicase-checkout-title"  style="font-family: times new roman;font-size:1.7rem">Tiến hành thanh toán của bạn</h4>
 	                </div>
 	                <div class="panel-body">
 	                    <ul class="nav nav-checkout-progress list-unstyled">

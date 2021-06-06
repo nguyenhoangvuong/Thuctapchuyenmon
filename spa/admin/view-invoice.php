@@ -61,7 +61,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 						while ($row=mysqli_fetch_array($ret)) {
 					?>
                     <div class="table-responsive bs-example widget-shadow">
-                        <h4>Invoice #<?php echo $invid;?></h4>
+                        <div><h4 style="float:left">Invoice #<?php echo $invid;?></h4><H4 style="color:red;position:absolute;right:30px">HỆ THỐNG SPA</H4></div>
                         <table class="table table-bordered" width="100%" border="1">
                             <tr>
                                 <th colspan="6">Chi tiết khách hàng</th>
@@ -82,6 +82,14 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                             </tr>
                             <?php }?>
                         </table>
+                        <?php
+                        $ret11=mysqli_query($con,"select tbldichvu.Tendichvu,tbldichvu.Chiphi  
+                        from  tblhoadon 
+                        join tbldichvu on tbldichvu.ID=tblhoadon.DichvuId 
+                        where tblhoadon.BillId='$invid'");
+                        $num11 = mysqli_num_rows($ret11);
+                        if($num11 > 0){
+                        ?>
                         <table class="table table-bordered" width="100%" border="1">
                             <tr>
                                 <th colspan="3">Chi tiết dịch vụ</th>
@@ -115,10 +123,57 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 
                             </tr>
                         </table>
+                        <?php
+                        }
+                        ?>
+                        <?php
+                        $ret11=mysqli_query($con,"select tblsanpham.Tensanpham,tblsanpham.Giasanpham  
+                        from  tblhoadon 
+                        join tblsanpham on tblsanpham.ID=tblhoadon.SanphamId 
+                        where tblhoadon.BillId='$invid'");
+                        $num11 = mysqli_num_rows($ret11);
+                        if($num11 > 0){
+                        ?>
+                        <table class="table table-bordered" width="100%" border="1">
+                            <tr>
+                                <th colspan="3">Chi tiết sản phẩm</th>
+                            </tr>
+                            <tr>
+                                <th>#</th>
+                                <th>Sản phẩm</th>
+                                <th>Giá sản phẩm</th>
+                            </tr>
+                            <?php
+							$ret=mysqli_query($con,"select tblsanpham.Tensanpham,tblsanpham.Giasanpham  
+								from  tblhoadon 
+								join tblsanpham on tblsanpham.ID=tblhoadon.SanphamIdđê 
+								where tblhoadon.BillId='$invid'");
+							$cnt=1;
+							while ($row=mysqli_fetch_array($ret)) {
+								?>
+
+                            <tr>
+                                <th><?php echo $cnt;?></th>
+                                <td><?php echo $row['Tensanpham']?></td>
+                                <td><?php echo currency_format($subtotal=$row['Giasanpham'])?></td>
+                            </tr>
+                            <?php 
+								$cnt=$cnt+1;
+								$gtotal+=$subtotal;
+							} ?>
+                            <tr>
+                                <th colspan="2" style="text-align:center">Tổng cộng</th>
+                                <th><?php echo currency_format($gtotal)?></th>
+
+                            </tr>
+                        </table>
+                        <?php
+                        }
+                        ?>
+                        
                         <p style="margin-top:1%" align="center">
                             <i class="fa fa-print fa-2x" style="cursor: pointer;" OnClick="CallPrint(this.value)"></i>
                         </p>
-
                     </div>
                 </div>
             </div>
@@ -156,26 +211,6 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         WinPrint.print();
         WinPrint.document.close();
     }
-
-    function printDiv(divID) {
-        //Get the HTML of div
-        var divElements = document.getElementById(divID).innerHTML;
-        //Get the HTML of whole page
-        var oldPage = document.body.inne
-        rHTML;
-
-        //Reset the page's HTML with div's HTML only
-        document.body.innerHTML =
-            "<html><head><title></title></head><body>" +
-            divElements + "</body>";
-
-        //Print Page
-        window.print();
-
-        //Restore orignal HTML
-        document.body.innerHTML = oldPage;
-    }
-    </script>
     </script>
 </body>
 

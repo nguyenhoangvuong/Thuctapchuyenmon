@@ -88,7 +88,7 @@
                   <a href="invoices.php"><i class="fa fa-file-text-o nav_icon"></i>Hóa dơn và đơn hàng<span class="fa arrow"></span></a>
                       <ul class="nav nav-second-level collapse">
                           <li>
-                              <a href="invoices.php">Danh sách hóa đơn
+                              <a href="invoices.php?trang=1">Danh sách hóa đơn
                               <?php
          
                                 $result = mysqli_query($con,"select distinct tblkhachhang.Ten,tblhoadon.BillId,tblhoadon.NgayDang from tblkhachhang   
@@ -162,7 +162,7 @@
                               <a href="user-list.php">Danh sách người dùng</a>
                           </li>
                           <li>
-                              <a href="user-log.php">Nhật ký người dùng</a>
+                              <a href="user-log.php?trang=1">Nhật ký người dùng</a>
                           </li>
                       </ul>
                   </li>

@@ -2,6 +2,13 @@
 session_start();
 error_reporting(0);
 include('../includes/dbconnection.php');
+if (!function_exists('currency_format')) {
+    function currency_format($number, $suffix = 'đ') {
+        if (!empty($number)) {
+            return number_format($number, 0, ',', '.') . "{$suffix}";
+        }
+    }
+}
 if(isset($_GET['action']) && $_GET['action']=="add"){
 	$id=intval($_GET['id']);
 	if(isset($_SESSION['cart'][$id])){
@@ -60,7 +67,6 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
         <?php include('includes/main-header.php');?>
         <?php include('includes/menu-bar.php');?>
     </header>
-
     <div class="body-content outer-top-xs" id="top-banner-and-menu">
         <div class="container">
             <div class="furniture-container homepage-container">
@@ -143,9 +149,8 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
 
                                                     <div class="product-price">
                                                         <span class="price">
-                                                            VNĐ. <?php echo htmlentities($row['Giasanpham']);?> </span>
-                                                        <span
-                                                            class="price-before-discount">VNĐ.<?php echo htmlentities($row['productPriceBeforeDiscount']);?></span>
+                                                            <?php echo currency_format(htmlentities($row['Giasanpham']));?></span>
+                                                        <span class="price-before-discount"><?php echo currency_format(htmlentities($row['Giasanphamtruockhigiam']));?></span>
 
                                                     </div>
 
@@ -189,9 +194,9 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
 
                                                 <div class="product-price">
                                                     <span class="price">
-                                                        VNĐ. <?php echo htmlentities($row['Giasanpham']);?> </span>
+                                                        <?php echo currency_format(htmlentities($row['Giasanpham']));?></span>
                                                     <span
-                                                        class="price-before-discount">VNĐ.<?php echo htmlentities($row['productPriceBeforeDiscount']);?></span>
+                                                        class="price-before-discount"><?php echo currency_format(htmlentities($row['Giasanphamtruockhigiam']));?></span>
 
                                                 </div>
 
@@ -235,9 +240,9 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
 
                                                 <div class="product-price">
                                                     <span class="price">
-                                                        VNĐ. <?php echo htmlentities($row['Giasanpham']);?> </span>
+                                                        <?php echo currency_format(htmlentities($row['Giasanpham']));?> </span>
                                                     <span
-                                                        class="price-before-discount">VNĐ.<?php echo htmlentities($row['productPriceBeforeDiscount']);?></span>
+                                                        class="price-before-discount"><?php echo currency_format(htmlentities($row['Giasanphamtruockhigiam']));?></span>
 
                                                 </div>
 
@@ -258,7 +263,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                 <div class="row">
                     <div class="col-md-6">
                         <section class="section">
-                            <h3 class="section-title" style="font-family:times new roman;">Smart Phones</h3>
+                            <h3 class="section-title" style="font-family:times new roman;">Sản phẩm trị mụn</h3>
                             <div class="owl-carousel homepage-owl-carousel custom-carousel outer-top-xs owl-theme"
                                 data-item="2">
 
@@ -288,9 +293,9 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
 
                                                 <div class="product-price">
                                                     <span class="price">
-                                                        <?php echo htmlentities($row['Giasanpham']);?> VNĐ </span>
+                                                        <?php echo currency_format(htmlentities($row['Giasanpham']));?></span>
                                                     <span
-                                                        class="price-before-discount"><?php echo htmlentities($row['Giasanphamtruockhigiam']);?>VNĐ</span>
+                                                        class="price-before-discount"><?php echo currency_format(htmlentities($row['Giasanphamtruockhigiam']));?></span>
 
                                                 </div>
 
@@ -307,7 +312,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                     </div>
                     <div class="col-md-6">
                         <section class="section">
-                            <h3 class="section-title" style="font-family:times new roman;">Laptops</h3>
+                            <h3 class="section-title" style="font-family:times new roman;">Dưỡng da</h3>
                             <div class="owl-carousel homepage-owl-carousel custom-carousel outer-top-xs owl-theme"
                                 data-item="2">
                                 <?php
@@ -338,9 +343,9 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
 
                                                 <div class="product-price">
                                                     <span class="price">
-                                                        <?php echo htmlentities($row['Giasanpham']);?>VNĐ</span>
+                                                        <?php echo currency_format(htmlentities($row['Giasanpham']));?></span>
                                                     <span
-                                                        class="price-before-discount"><?php echo htmlentities($row['Giasanphamtruockhigiam']);?>VNĐ</span>
+                                                        class="price-before-discount"><?php echo currency_format(htmlentities($row['Giasanphamtruockhigiam']));?></span>
 
                                                 </div>
 
@@ -396,7 +401,10 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                                 <div class="rating rateit-small"></div>
                                                 <div class="product-price">
                                                     <span class="price">
-                                                        <?php echo htmlentities($row['Giasanpham']);?> VNĐ
+                                                        <?php echo currency_format(htmlentities($row['Giasanpham']));?>
+                                                    </span>
+                                                    <span class="price-before-discount">
+                                                        <?php echo currency_format(htmlentities($row['Giasanphamtruockhigiam']));?>
                                                     </span>
                                                 </div>
                                                 <div class="action"><a
@@ -419,7 +427,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                 </div>
                 <div class="product-container">
                     <?php
-            $sql = mysqli_query($con,"SELECT * FROM tblsanpham where date(NgayDang)>=(DATE(NOW()) - INTERVAL 7 DAY)
+            $sql = mysqli_query($con,"SELECT * FROM tblsanpham where date(NgayDang)>=(DATE(NOW()) - INTERVAL 14 DAY)
             ORDER BY RAND()
             LIMIT 3;");
             while($row11 = mysqli_fetch_array($sql)){
@@ -438,7 +446,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                         <div class="product-details">
                             <a href="product-details.php?pid=<?php echo htmlentities($row11['Id']);?>"
                                 class="p-name"><?php echo $row11['Tensanpham']; ?></a>
-                            <span class="p-price"><?php echo $row11['Giasanpham']; ?> VNĐ</span>
+                            <span class="p-price"><?php echo currency_format($row11['Giasanpham']); ?></span>
                         </div>
                     </div>
                     <?php

@@ -99,7 +99,7 @@ echo "<script>alert('Shipping Address has been updated');</script>";
                             <div class="panel panel-default checkout-step-01">
                                 <div class="panel-heading">
                                     <h4 class="unicase-checkout-title">
-                                        <a data-toggle="collapse" class="" data-parent="#accordion" href="#collapseOne">
+                                        <a data-toggle="collapse" class="" data-parent="#accordion" href="#collapseOne" style="font-family:times new roman">
                                             <span>1</span>Địa chỉ thanh toán
                                         </a>
                                     </h4>
@@ -164,11 +164,11 @@ echo "<script>alert('Shipping Address has been updated');</script>";
 
                                 </div>
                             </div>
-                            <div class="panel panel-default checkout-step-02">
+                            <div class="panel panel-default checkout-step-02" style="font-family:times new roman;font-size:1.5rem">
                                 <div class="panel-heading">
                                     <h4 class="unicase-checkout-title">
                                         <a data-toggle="collapse" class="collapsed" data-parent="#accordion"
-                                            href="#collapseTwo">
+                                            href="#collapseTwo" style="font-family:times new roman">
                                             <span>2</span>Địa chỉ giao hàng
                                         </a>
                                     </h4>

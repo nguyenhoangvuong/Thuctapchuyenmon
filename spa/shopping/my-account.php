@@ -105,7 +105,7 @@ else
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
                     <li><a href="#">Home</a></li>
-                    <li class='active'>Thủ tục thanh toán</li>
+                    <li class='active' style="font-family:times new roman;font-size:1.4rem">Thủ tục thanh toán</li>
                 </ul>
             </div>
         </div>
@@ -119,7 +119,7 @@ else
                             <div class="panel panel-default checkout-step-01">
                                 <div class="panel-heading">
                                     <h4 class="unicase-checkout-title">
-                                        <a data-toggle="collapse" class="" data-parent="#accordion" href="#collapseOne">
+                                        <a data-toggle="collapse" class="" data-parent="#accordion" href="#collapseOne" style="font-family:times new roman">
                                             <span>1</span>Thông tin của tôi
                                         </a>
                                     </h4>
@@ -173,12 +173,12 @@ else
                                 <div class="panel-heading">
                                     <h4 class="unicase-checkout-title">
                                         <a data-toggle="collapse" class="collapsed" data-parent="#accordion"
-                                            href="#collapseTwo">
+                                            href="#collapseTwo" style="font-family:times new roman">
                                             <span>2</span>Đổi mật khẩu
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="collapseTwo" class="panel-collapse collapse">
+                                <div id="collapseTwo" class="panel-collapse collapse" style="font-family: times new roman;font-size:1.4rem">
                                     <div class="panel-body">
                                         <form class="register-form" role="form" method="post" name="chngpwd"
                                             onSubmit="return valid();">

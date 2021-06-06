@@ -442,8 +442,9 @@ nav{
     flex-grow: 0.5;
     align-items: center;
     margin: 20px;
-    border: 1px solid #fdfdfd;
+    border: 1px solid #dad2d2;
     border-radius: 10px;
+    background-color: #d1d1d1;
 }
 .product-img{
     width: 220px;
@@ -467,9 +468,9 @@ nav{
     border: 10px solid #f3f3f3;
 }
 .p-name{
-    color: #020202;
-    font-size: 1.9rem;
-    font-weight: 800;
+    color: #555;
+    font-size: 1.7rem;
+    font-weight: 600;
 }
 .p-price{
     color: #257a3f;

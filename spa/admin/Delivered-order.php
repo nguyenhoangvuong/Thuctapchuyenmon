@@ -49,6 +49,22 @@ if (strlen($_SESSION['bpmsaid']==0)) {
     </script>
     <script src="js/metisMenu.min.js"></script>
     <script src="js/custom.js"></script>
+    <script>
+         function printDiv(divID) {
+        var divElements = document.getElementById(divID).innerHTML;
+        var oldPage = document.body.innerHTML;
+        document.body.innerHTML =
+            "<html><head><title></title></head><body>" +
+            divElements + "</body>";
+        window.print();
+        document.body.innerHTML = oldPage;
+    }
+    </script>
+    <script type="text/javascript">
+	$(document).ready(function(){
+		$('#cargaBarras').load('barras.php');
+	});
+    </script>
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/modal.css" rel="stylesheet">
 
@@ -61,9 +77,10 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="tables" id="exampl">
-                    <div class="table-responsive bs-example widget-shadow">
+                    
+                    <div  class="table-responsive bs-example widget-shadow">
                         <h4>Danh sách đơn:</h4>
-                        <form action="" method="post">
+                        <form id="printablediv" action="" method="post" >
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -111,10 +128,12 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 
                     </tbody>
                     </table>
+              
+                    </form>
                     <p style="margin-top:1%" align="center">
                             <i class="fa fa-print fa-2x" style="cursor: pointer;" OnClick="CallPrint(this.value)"></i>
                         </p>
-                    </form>
+                        <div class='pull-right'>
                     <?php
                     if($oid){
                     ?>

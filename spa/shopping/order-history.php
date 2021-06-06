@@ -41,10 +41,7 @@ else{
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="assets/images/favicon.ico">
     <script language="javascript" type="text/javascript">
-    <link rel="stylesheet" type="text/css" href="css/style1.css">
-    <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
     var popUpWin = 0;
-
     function popUpWindow(URLStr, left, top, width, height) {
         if (popUpWin) {
             if (!popUpWin.closed) popUpWin.close();
@@ -73,7 +70,7 @@ else{
             </div>
         </div>
     </div>
-    <div class="body-content outer-top-xs">
+    <div class="body-content outer-top-xs" style="font-family:times new roman">
         <div class="container">
             <div class="row inner-bottom-sm">
                 <div class="shopping-cart">
@@ -81,21 +78,20 @@ else{
                     <h2 align="center" style="margin-top:-20px">Lịch sử đơn hàng</h2>
                         <div class="table-responsive">
                             <form name="cart" method="post">
-
-                                <table class="table table-bordered">
+                                <table class="table" style="border:1px solid #333">
                                     <thead>
-                                        <tr>
+                                        <tr style="background-color:#333;color:white">
                                             <th class="cart-romove item">#</th>
-                                            <th class="cart-description item">Hình ảnh</th>
-                                            <th class="cart-product-name item">Tên sản phẩm</th>
+                                            <th style="font-family:times new roman" class="cart-description item">Hình ảnh</th>
+                                            <th style="font-family:times new roman" class="cart-product-name item">Tên sản phẩm</th>
 
-                                            <th class="cart-qty item">Định lượng</th>
-                                            <th class="cart-sub-total item">Giá mỗi đơn vị</th>
-                                            <th class="cart-sub-total item">Phí vận chuyển</th>
-                                            <th class="cart-total item">Tổng cộng</th>
-                                            <th class="cart-total item">Phương thức thanh toán</th>
-                                            <th class="cart-description item">Ngày đặt hàng</th>
-                                            <th class="cart-total last-item">Thao tác</th>
+                                            <th style="font-family:times new roman" class="cart-qty item">Định lượng</th>
+                                            <th style="font-family:times new roman" class="cart-sub-total item">Giá mỗi đơn vị</th>
+                                            <th style="font-family:times new roman" class="cart-sub-total item">Phí vận chuyển</th>
+                                            <th style="font-family:times new roman" class="cart-total item">Tổng cộng</th>
+                                            <th style="font-family:times new roman" class="cart-total item">Phương thức thanh toán</th>
+                                            <th style="font-family:times new roman" class="cart-description item">Ngày đặt hàng</th>
+                                            <th style="font-family:times new roman" class="cart-total last-item">Thao tác</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -104,11 +100,11 @@ else{
 											while($row=mysqli_fetch_array($query))
 											{
 										?>
-                                        <tr>
+                                        <tr style="border:1px solid #333;font-size:1.7rem">
                                             <td><?php echo $cnt;?></td>
                                             <td class="cart-image">
                                                 <a class="entry-thumbnail" href="detail.html">
-                                                    <img src="admin/productimages/<?php echo $row['proid'];?>/<?php echo $row['pimg1'];?>"
+                                                    <img src="../admin/productimages/<?php echo $row['proid'];?>/<?php echo $row['pimg1'];?>"
                                                         alt="" width="84" height="146">
                                                 </a>
                                             </td>
@@ -127,7 +123,7 @@ else{
                                             <td class="cart-product-sub-total">
                                                 <?php echo $shippcharge=$row['shippingcharge']; ?> </td>
                                             <td class="cart-product-grand-total">
-                                                <?php echo (($qty*$price)+$shippcharge);?></td>
+                                                <?php echo ($qty*$price)+$shippcharge;?></td>
                                             <td class="cart-product-sub-total"><?php echo $row['paym']; ?> </td>
                                             <td class="cart-product-sub-total"><?php echo $row['odate']; ?> </td>
 
@@ -149,10 +145,9 @@ else{
                 </div>
             </div>
             </form>
-            <?php echo include('includes/brands-slider.php');?>
         </div>
     </div>
-    <?php include('includes/footer.php');?>
+    <?php include('includes/footer1.php');?>
 
     <script src="assets/js/jquery-1.11.1.min.js"></script>
 

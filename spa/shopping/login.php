@@ -16,6 +16,32 @@
 	else{
 		echo "<script>alert('Đăng ký đã gặp lỗi.Thử lại !');</script>";
 	}
+    if(isset($_POST['fbsubmit'])){
+        $name = $_SESSION['username']; 
+        $email = $_SESSION['login']; 
+        $query=mysqli_query($con,"SELECT * FROM tblusers WHERE Email='$email'");
+        $num=mysqli_fetch_array($query);
+        if($num > 0){
+            $uip=$_SERVER['REMOTE_ADDR'];
+            $status=1;
+            $log=mysqli_query($con,"insert into tblnhatkynguoidung(Emailnguoidung,Ipnguoidung,Trangthai) values('".$_SESSION['login']."','$uip','$status')");
+            $host=$_SERVER['HTTP_HOST'];
+            $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+            header("location:http://$host$uri/my-cart.php");
+            exit();
+        }
+        else{
+            $query=mysqli_query($con,"insert into tblusers(Ten,Email) values('$name','$email')");
+            if($query){
+                echo "<script>alert('Bạn đã đăng nhập thành công');</script>";
+            }
+            else{
+                echo "<script>alert('Đăng nhập đã gặp lỗi.Thử lại !');</script>";
+            }
+        }
+       
+
+    }
 }
 
 // Login
@@ -53,6 +79,59 @@ if(isset($_POST['login']))
 }
 ?>
 
+<?php
+	require_once 'configfb.php';
+
+	$permissions = ['email'];
+
+	if (isset($accessToken))
+	{
+		if (!isset($_SESSION['facebook_access_token'])) 
+		{
+			$_SESSION['facebook_access_token'] = (string) $accessToken;
+			$oAuth2Client = $fb->getOAuth2Client();
+			$longLivedAccessToken = $oAuth2Client->getLongLivedAccessToken($_SESSION['facebook_access_token']);
+			$_SESSION['facebook_access_token'] = (string) $longLivedAccessToken;
+			$fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
+		} 
+		else 
+		{
+			$fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
+		}
+		if (isset($_GET['code'])) 
+		{
+			header('Location: ./');
+		}
+		
+		try {
+			$fb_response = $fb->get('/me?fields=name,first_name,last_name,email');
+			$fb_response_picture = $fb->get('/me/picture?redirect=false&height=200');
+			
+			$fb_user = $fb_response->getGraphUser();
+			$picture = $fb_response_picture->getGraphUser();
+			
+			$_SESSION['id'] = $fb_user->getProperty('id');
+			$_SESSION['login'] = $fb_user->getProperty('name');
+			$_SESSION['username'] = $fb_user->getProperty('email');
+			$_SESSION['fb_user_pic'] = $picture['url'];
+			
+			
+		} catch(Facebook\Exceptions\FacebookResponseException $e) {
+			echo 'Facebook API Error: ' . $e->getMessage();
+			session_destroy();
+			header("Location: ./");
+			exit;
+		} catch(Facebook\Exceptions\FacebookSDKException $e) {
+			echo 'Facebook SDK Error: ' . $e->getMessage();
+			exit;
+		}
+	} 
+	else 
+	{	
+		$fb_login_url = $fb_helper->getLoginUrl('http://localhost:8080/Manage_Spa/spa/shopping/login.php', $permissions);
+	}
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -87,7 +166,6 @@ if(isset($_POST['login']))
     <link rel="stylesheet" type="text/css" href="css/style1.css">
     <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
     <script type="text/javascript">
-    
     function valid() {
         if (document.register.password.value != document.register.confirmpassword.value) {
             alert("Mật khẩu và trường xác nhận mật khẩu không khớp !!");
@@ -166,6 +244,21 @@ if(isset($_POST['login']))
                             </div>
                             <button type="submit" class="btn-upper btn btn-primary checkout-page-button"
                                 name="login">Đăng nhập</button>
+
+                            <?php if(isset($_SESSION['id'])): ?>
+
+                            <a class="nav-link" href="logout.php">Logout</a>
+                            <?php echo $_SESSION['id']; ?>
+                            <?php echo $_SESSION['login']; ?>
+                            <?php echo $_SESSION['username']; ?>
+                            <?php else: ?>
+                                <form action="" method="post">
+                                    <div class="text-center social-btn">
+                                        <a name="fbsubmit" href="<?php echo $fb_login_url;?>" class="btn btn-primary btn-block">Sign in
+                                            with <b>Facebook</b></a>
+                                    </div>
+                                </form>
+                                <?php endif ?>
                         </form>
                     </div>
 
@@ -202,7 +295,8 @@ if(isset($_POST['login']))
                             </div>
 
                             <div class="form-group">
-                                <label class="info-title" for="confirmpassword">Xác nhận mật khẩu. <span>*</span></label>
+                                <label class="info-title" for="confirmpassword">Xác nhận mật khẩu.
+                                    <span>*</span></label>
                                 <input type="password" class="form-control unicase-form-control text-input"
                                     id="confirmpassword" name="confirmpassword" required>
                             </div>
@@ -214,13 +308,13 @@ if(isset($_POST['login']))
                         <span class="checkout-subtitle outer-top-xs">Đăng ký ngay hôm nay bạn có thể : </span>
                         <div class="checkbox">
                             <label class="checkbox">
-								Tăng tốc theo cách của bạn thông qua thanh toán.
+                                Tăng tốc theo cách của bạn thông qua thanh toán.
                             </label>
                             <label class="checkbox">
-								Theo dõi đơn đặt hàng của bạn một cách dễ dàng.
+                                Theo dõi đơn đặt hàng của bạn một cách dễ dàng.
                             </label>
                             <label class="checkbox">
-								Giữ một bản ghi tất cả các giao dịch mua của bạn.
+                                Giữ một bản ghi tất cả các giao dịch mua của bạn.
                             </label>
                         </div>
                     </div>

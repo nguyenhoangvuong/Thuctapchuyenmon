@@ -7,7 +7,7 @@
 	                </div>
 	                <div class="panel-body">
 	                    <ul class="nav nav-checkout-progress list-unstyled">
-	                        <li><a href="payment-method.php">Tiến hành thanh toán</a></li>
+	                        <li><a href="payment-method.php"  style="font-family: times new roman;font-size:1.4rem">Tiến hành thanh toán</a></li>
 	                    </ul>
 	                </div>
 	            </div>

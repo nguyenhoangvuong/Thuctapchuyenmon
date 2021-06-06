@@ -5,6 +5,7 @@ include('includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
   } else{
+    $trang = $_GET['trang'];
   ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -45,7 +46,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
             <div class="main-page">
                 <div class="tables">
                     <div class="table-responsive bs-example widget-shadow">
-                        <h4>Danh sách hóa đơn:</h4>
+                        <h4>Danh sách hóa đơn</h4>
                         <div class="input-group" style="position:fixed;top:100px;width:270px;right:30px">
                                     <div class="input-group-addon" style="background-color:#337ab7;color:white">
                                         Search

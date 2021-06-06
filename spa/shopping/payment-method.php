@@ -8,10 +8,16 @@ header('location:login.php');
 }
 else{
 	if (isset($_POST['submit'])) {
-
-		mysqli_query($con,"update tblorders set Phuongthucthanhtoan='".$_POST['paymethod']."' where UserId='".$_SESSION['id']."' and Phuongthucthanhtoan is null ");
-		unset($_SESSION['cart']);
-		header('location:order-history.php');
+        if(strlen($_SESSION['login'])!=0 && strlen($_SESSION['fb_user_email'])==0){
+            mysqli_query($con,"update tblorders set Phuongthucthanhtoan='".$_POST['paymethod']."' where UserId='".$_SESSION['id']."' and Phuongthucthanhtoan is null ");
+            unset($_SESSION['cart']);
+            header('location:order-history.php');
+        }else{
+            mysqli_query($con,"update tblorders set Phuongthucthanhtoan='".$_POST['paymethod']."' where UserId='".$_SESSION['id']."' and Phuongthucthanhtoan is null ");
+            unset($_SESSION['cart']);
+            header('location:order-history.php');
+        }
+		
 	}
 ?>
 <!DOCTYPE html>

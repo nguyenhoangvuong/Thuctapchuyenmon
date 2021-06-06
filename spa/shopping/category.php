@@ -67,6 +67,7 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/style1.css">
     <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
 </head>
 
@@ -136,7 +137,7 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
                         <div class="item">
                             <div class="image">
 
-                                <div class="full-width-slider">
+                                <div class="full-width-slider" style="width:840px">
                                     <div class="item" style="background-image: url(assets/images/sliders/slider1.png);">
                                     </div>
                                 </div>
@@ -243,7 +244,7 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
 
         </div>
     </div>
-        <?php include('includes/foooter1.php');?>
+    <?php include('includes/footer.php');?>
         <script src="assets/js/jquery-1.11.1.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
         <script src="assets/js/bootstrap-hover-dropdown.min.js"></script>

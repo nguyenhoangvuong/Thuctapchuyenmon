@@ -1,6 +1,9 @@
 <?php
 session_start();
 error_reporting(0);
+
+
+
 include('includes/dbconnection.php');
     if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
@@ -11,31 +14,52 @@ if(isset($_POST['submit']))
       $cid=$_GET['viewid'];
       $ret1=mysqli_query($con,"select * from tblcuochen where ID='$cid'");
       $row1=mysqli_fetch_array($ret1);
-      $maill="5951071124@st.utc2.edu.vn";
+      $sb = 'Phản hồi thông tin đặc lịch';
+      $name = $row1['Ten'];
+      $email = $row1['Email'];
+
       $remark=$_POST['remark'];
       $status=$_POST['status'];
-      $subject="From submission";
-
-      $headers ="MIME-Version: 1.0"."\r\n";
-      $headers .= "Content-type:text/html;charset=UTF-8"."\r\n";
-
-      $headers .= "From: <hoangvuong1225@gmail.com>"."\r\n";
-
-      if(mail($maill,$subject,$status,$headers)){
-          echo "Send mail successfull";
+      if($status = 1){
+          $chapnhan = 'Chấp nhận.';
       }
       else{
-          echo "fail";
+        $chapnhan = 'Từ chối.';
       }
-   
+      $body =  $remark.'<br><b>Trạng thái cuộc hẹn : </b>'.$chapnhan;
+
+    $sb = 'Thong tin phan hoi dat lich Spa';
+    date_default_timezone_set('Etc/UTC');
+    require 'smtpmail/PHPMailerAutoload.php';
+    $mail = new PHPMailer();
+    $mail->isSMTP();
+    $mail->SMTPDebug = 2;
+    $mail->Debugoutput = 'html';
+    $mail->Host = 'smtp.gmail.com';
+    $mail->Port = 587;
+    $mail->SMTPSecure = 'tls';
+    $mail->SMTPAuth = true;
+    $mail->Username = "hoangvuong1225@gmail.com";
+    $mail->Password = "Hoangvuong1";
+    $mail->setFrom('hoangvuong1225@gmail.com', 'Hoang Vuong');
+    $mail->addReplyTo('hoangvuong1225@gmail.com', 'Hoang Vuong');
+    $mail->addAddress($email, $name);
+    $mail->Subject = $sb;
+    $mail->msgHTML($body);
+    if (!$mail->send()) {
+        echo "Mailer Error: " . $mail->ErrorInfo;
+    } else {
+        echo "<script>alert('Gui mail thanh cong !');</script>";
+    }
       $query=mysqli_query($con, "update  tblcuochen set Nhanxet='$remark',Trangthai='$status' where ID='$cid'");
       if ($query) {
-        $msg="Tất cả nhận xét đã được cập nhật.";
+        header('location:all-appointment.php');
+        $msg="Tất cả nhận xét đã được cập nhật và đã gửi mail cho khách hàng !";
       }
   else
     {
       $msg="Đã có lỗi xảy ra. Vui lòng kiểm tra lại !";
-    }
+   }
 }
   ?>
 <!DOCTYPE HTML>
