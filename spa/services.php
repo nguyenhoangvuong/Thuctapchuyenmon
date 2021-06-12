@@ -2,6 +2,13 @@
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
+if (!function_exists('currency_format')) {
+  function currency_format($number, $suffix = 'đ') {
+      if (!empty($number)) {
+          return number_format($number, 0, ',', '.') . "{$suffix}";
+      }
+  }
+}
   ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,7 +70,7 @@ include('includes/dbconnection.php');
                     <?php  echo $row['Tendichvu'];?>
                   </td> 
                   <td>
-                    <?php  echo $row['Chiphi'];?>
+                    <?php  echo currency_format($row['Chiphi']);?>
                   </td> 
                 </tr>   
                   <?php 

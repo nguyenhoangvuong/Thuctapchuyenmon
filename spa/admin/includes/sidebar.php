@@ -1,3 +1,8 @@
+  <style>
+      #ab{
+
+      }
+  </style>
   <div class=" sidebar" role="navigation">
       <div class="navbar-collapse">
           <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
@@ -19,7 +24,7 @@
                               <a href="manage-subcategory.php">Quản lý thể loại phụ</a>
                           </li>
                           <li>
-                              <a href="manage-product.php?trang=1">Quản lý sản phẩm</a>
+                              <a href="manage-product.php">Quản lý sản phẩm </a><a href="insert-product.php"><h4 style="position:fixed;left:190px;top:337px;" class="btn btn-primary">Thêm mới</h4></a>
                           </li>
                       </ul>
                   </li>
@@ -170,7 +175,7 @@
                       <a href="bwdates-reports-ds.php"><i class="fa fa-check-square-o nav_icon"></i>Báo cáo<span class="fa arrow"></span></a>
                       <ul class="nav nav-second-level collapse">
                           <li><a href="bwdates-reports-ds.php"> Báo cáo giữa các ngày</a></li>
-                          <li><a href="sales-reports.php">Báo cáo offline</a></li>
+                          <!-- <li><a href="sales-reports.php">Báo cáo offline</a></li> -->
                           <li><a href="sales-reports-1.php">Báo cáo bán hàng online</a></li>
                       </ul>
                   </li>

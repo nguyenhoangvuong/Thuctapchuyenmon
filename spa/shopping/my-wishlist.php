@@ -115,11 +115,11 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
 									?>
                                     <tr>
                                         <td class="col-md-2"><img
-                                                src="admin/productimages/<?php echo htmlentities($row['pid']);?>/<?php echo htmlentities($row['pimage']);?>"
+                                                src="../admin/productimages/<?php echo htmlentities($row['pid']);?>/<?php echo htmlentities($row['pimage']);?>"
                                                 alt="<?php echo htmlentities($row['pname']);?>" width="60" height="100">
                                         </td>
                                         <td class="col-md-6">
-                                            <div class="product-name"><a
+                                            <div class="product-name"><a style="font-family:times new roman"
                                                     href="product-details.php?pid=<?php echo htmlentities($pd=$row['pid']);?>"><?php echo htmlentities($row['pname']);?></a>
                                             </div>
                                             <?php $rt=mysqli_query($con,"select * from tlbdanhgiasanpham where SanphamId='$pd'");

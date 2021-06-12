@@ -53,8 +53,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                     <th>Tên</th>
                                     <th>Email</th>
                                     <th>Số điện thoại</th>
-                                    <th>Địa chỉ giao hàng/Thành phố/Trạng thái/Mã pin</th>
-                                    <th>Địa chỉ hóa đơn/Thành phố/Trạng thái/Mã pin</th>
+                                    <th>Địa chỉ giao hàng/Thành phố/Mã pin</th>
                                     <th>Thời gian</th>
                                 </tr>
                             </thead>
@@ -69,8 +68,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                     <td><?php  echo $row['Ten'];?></td>
                                     <td><?php  echo $row['Email'];?></td>
                                     <td><?php  echo $row['Lienhe'];?></td>
-                                    <td><?php  echo $row['Diachigiaohang'].", ".$row['Thanhphovanchuyen'].", ".$row['Trangthaivanchuyen'].", ".$row['Mapinvanchuyen'];?></td>
-                                    <td><?php  echo $row['Diachithanhtoan'].", ".$row['Thanhphogthanhtoan'].", ".$row['Trangthaithanhtoan'].", ".$row['Mapinthanhtoan'];?></td>
+                                    <td><?php  echo $row['Diachigiaohang'].", ".$row['Thanhphovanchuyen'].", ".$row['Mapinvanchuyen'];?></td>
                                     <td><?php  echo $row['Ngaydangky'];?></td>
                                 </tr> <?php 
 						$cnt=$cnt+1;

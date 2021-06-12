@@ -17,11 +17,19 @@ if (strlen($_SESSION['bpmsaid']==0)) {
     
     }
     
-    if(isset($_GET['del']))
-              {
-                      mysqli_query($con,"delete from tbltheloai where Id = '".$_GET['id']."'");
-                      $_SESSION['delmsg']="Xóa thành công !!";
-              }
+    if(isset($_GET["del"]))
+    {   
+        $a = $_GET['id'];
+        $b = mysqli_query($con,"delete from tbldichvu where Id = '$a'");
+        if($b){
+            header('Location:manage-services.php');
+            $_SESSION['msg'] = "Xóa thành công !";
+        }
+        else{
+            header('Location:manage-services.php');
+            $_SESSION['msg'] = "Xóa thất bại !";
+        }
+    }
 
               if (!function_exists('currency_format')) {
                 function currency_format($number, $suffix = 'đ') {
@@ -212,6 +220,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                 <span class="close">&times;</span>
                                 <h3 style="font-family:times new roman;width:100%;text-align:center">Thêm dịch vụ</h3>
                             </div>
+                            
                             <div class="modal-body">
                                     <div class="form-body">
                                         <form method="post">

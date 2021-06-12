@@ -189,7 +189,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                         <div id="parent">
                             <div id="child">
                                 <?php
-                            $nhatky = mysqli_query($con,"select * from tblnhatkynguoidung order by Thoigianlogin desc");
+                            $nhatky = mysqli_query($con,"select Emailnguoidung,Thoigianlogin from tblnhatkynguoidung order by Thoigianlogin desc");
                             while($row=mysqli_fetch_array($nhatky)){
                             ?>
                                 <label for=""><?php echo $row['Emailnguoidung'].' - '.$row['Thoigianlogin'];?></label>

@@ -1,5 +1,4 @@
 <div id="brands-carousel" class="logo-slider wow fadeInUp">
-    <h3 style="font-family:Times new roman">Công ty liên quan</h3>
     <div class="logo-slider-inner">
         <div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">
             <div class="item">

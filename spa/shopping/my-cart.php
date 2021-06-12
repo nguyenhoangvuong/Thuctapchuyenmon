@@ -42,6 +42,13 @@
                 }
             }
     }
+    if (!function_exists('currency_format')) {
+        function currency_format($number, $suffix = 'đ') {
+            if (!empty($number)) {
+                return number_format($number, 0, ',', '.') . "{$suffix}";
+            }
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +81,7 @@
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="assets/images/favicon.ico">
-    
+
 
 
 </head>
@@ -82,14 +89,12 @@
 <body class="cnt-home">
     <header class="header-style-1">
         <?php include('includes/top-header.php');?>
-        <?php include('includes/main-header.php');?>
-        <?php include('includes/menu-bar.php');?>
     </header>
     <div class="breadcrumb">
         <div class="container">
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="index.php">Home</a></li>
                     <li class='active'>Giỏ hàng</li>
                 </ul>
             </div>
@@ -106,17 +111,16 @@
                                 <?php
 if(!empty($_SESSION['cart'])){
 	?>
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th class="cart-romove item">Xóa</th>
-                                            <th class="cart-description item">Hình ảnh</th>
-                                            <th class="cart-product-name item">Tên sản phẩm</th>
-
-                                            <th class="cart-qty item">Số lượng</th>
-                                            <th class="cart-sub-total item">Giá mỗi sản phẩm</th>
-                                            <th class="cart-sub-total item">Phí vận chuyển</th>
-                                            <th class="cart-total last-item">Tổng</th>
+                                <table class="table table-bordered" style="border:0px">
+                                    <thead style="border:0px">
+                                        <tr style="background-color:#EEEEEE;color:black;">
+                                            <th class="cart-romove item"  style="font-family:times new roman;font-size:1.6rem;border:0px">Xóa</th>
+                                            <th class="cart-description item"  style="font-family:times new roman;font-size:1.6rem;border:0px">Hình ảnh</th>
+                                            <th class="cart-product-name item"  style="font-family:times new roman;font-size:1.6rem;border:0px">Tên sản phẩm</th>
+                                            <th class="cart-qty item"  style="font-family:times new roman;font-size:1.6rem;border:0px">Số lượng</th>
+                                            <th class="cart-sub-total item"  style="font-family:times new roman;font-size:1.6rem;border:0px">Giá/sản phẩm</th>
+                                            <th class="cart-sub-total item"  style="font-family:times new roman;font-size:1.6rem;border:0px">Phí giao</th>
+                                            <th class="cart-total last-item"  style="font-family:times new roman;font-size:1.6rem;border:0px">Tổng</th>
                                         </tr>
                                     </thead><!-- /thead -->
                                     <tfoot>
@@ -125,10 +129,10 @@ if(!empty($_SESSION['cart'])){
                                                 <div class="shopping-cart-btn">
                                                     <span class="">
                                                         <a href="index.php"
-                                                            class="btn btn-upper btn-primary outer-left-xs">Tiếp tục mua
+                                                            class="btn btn-upper btn-primary outer-left-xs" style="font-family:times new roman">Tiếp tục mua
                                                             sắm
                                                         </a>
-                                                        <input type="submit" name="submit" value="Cập nhật giỏ hàng"
+                                                        <input type="submit" name="submit" value="Cập nhật giỏ hàng"  style="font-family:times new roman"
                                                             class="btn btn-upper btn-primary pull-right outer-right-xs">
                                                     </span>
                                                 </div>
@@ -166,7 +170,7 @@ if(!empty($_SESSION['cart'])){
                                                 </a>
                                             </td>
                                             <td class="cart-product-name-info">
-                                                <h4 class='cart-product-description'><a
+                                                <h4 class='cart-product-description'><a style="font-family:times new roman"
                                                         href="product-details.php?pid=<?php echo htmlentities($pd=$row['Id']);?>"><?php echo $row['Tensanpham'];
 
 $_SESSION['sid']=$pd;
@@ -202,112 +206,93 @@ $num=mysqli_num_rows($rt);
 
                                                 </div>
                                             </td>
-                                            <td class="cart-product-sub-total"><span
-                                                    class="cart-sub-total-price"><?php echo $row['Giasanpham'];?> VNĐ</span>
+                                            <td class="cart-product-sub-total"><span style="font-family:times new roman"
+                                                    class="cart-sub-total-price"><?php echo currency_format($row['Giasanpham']);?></span>
                                             </td>
-                                            <td class="cart-product-sub-total"><span
-                                                    class="cart-sub-total-price"><?php echo $row['Phivanchuyen']; ?> VNĐ</span>
+                                            <td class="cart-product-sub-total"><span style="font-family:times new roman"
+                                                    class="cart-sub-total-price"><?php echo currency_format($row['Phivanchuyen']); ?></span>
                                             </td>
 
-                                            <td class="cart-product-grand-total"><span
-                                                    class="cart-grand-total-price"><?php echo ($_SESSION['cart'][$row['Id']]['quantity']*$row['Giasanpham']+$row['Phivanchuyen']); ?> VNĐ</span>
+                                            <td class="cart-product-grand-total"><span style="font-family:times new roman"
+                                                    class="cart-grand-total-price"><?php echo currency_format(($_SESSION['cart'][$row['Id']]['quantity']*$row['Giasanpham']+$row['Phivanchuyen'])); ?></span>
                                             </td>
                                         </tr>
 
                                         <?php } }
 $_SESSION['pid']=$pdtid;
 				?>
-
-                                    </tbody><!-- /tbody -->
-                                </table><!-- /table -->
-
+                                    </tbody>
+                                </table>
                         </div>
-                    </div><!-- /.shopping-cart-table -->
-                    <div class="col-md-4 col-sm-12 estimate-ship-tax">
+                    </div>
+                    <div class="col-md-4 col-sm-12 cart-shopping-total" style="float:right">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>
-                                        <span class="estimate-title">Địa chỉ giao hàng</span>
+                                        <div class="cart-grand-total" style="font-family:times new roman">
+                                            Tổng tiền : <?php echo currency_format($_SESSION['tp']="$totalprice"); ?>
+                                        </div>
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="form-group">
-                                            <?php $qry=mysqli_query($con,"select * from tblusers where Id='".$_SESSION['id']."'");
-while ($rt=mysqli_fetch_array($qry)) {
-	echo htmlentities($rt['Diachigiaohang'])."<br />";
-	echo htmlentities($rt['Thanhphovanchuyen'])."<br />";
-	echo htmlentities($rt['Trangthaivanchuyen'])."<br />";
-	echo htmlentities($rt['Mapinvanchuyen']);
-}
-
-						?>
-
-                                        </div>
-
-                                    </td>
-                                </tr>
-                            </tbody><!-- /tbody -->
-                        </table><!-- /table -->
-                    </div>
-
-                    <div class="col-md-4 col-sm-12 estimate-ship-tax">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <span class="estimate-title">Địa chỉ thanh toán</span>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="form-group">
-                                            <?php $qry=mysqli_query($con,"select * from tblusers where Id='".$_SESSION['id']."'");
-while ($rt=mysqli_fetch_array($qry)) {
-	echo htmlentities($rt['Diachithanhtoan'])."<br />";
-	echo htmlentities($rt['Thanhphothanhtoan'])."<br />";
-	echo htmlentities($rt['Trangthaithanhtoan'])."<br />";
-	echo htmlentities($rt['Mapinthanhtoan']);
-}
-
-						?>
-
-                                        </div>
-
-                                    </td>
-                                </tr>
-                            </tbody><!-- /tbody -->
-                        </table><!-- /table -->
-                    </div>
-                    <div class="col-md-4 col-sm-12 cart-shopping-total">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>
-
-                                        <div class="cart-grand-total">
-                                            Tổng tiền<span
-                                                class="inner-left-md"><?php echo $_SESSION['tp']="$totalprice". " VNĐ"; ?></span>
-                                        </div>
-                                    </th>
-                                </tr>
-                            </thead><!-- /thead -->
                             <tbody>
                                 <tr>
                                     <td>
                                         <div class="cart-checkout-btn pull-right">
-                                            <button type="submit" name="ordersubmit" class="btn btn-primary">Thanh
+                                            <button type="submit" name="ordersubmit" class="btn btn-primary"  style="font-family:times new roman;font-size:1.8rem">Thanh
                                                 toán</button>
-
                                         </div>
                                     </td>
                                 </tr>
-                            </tbody><!-- /tbody -->
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="col-md-4 col-sm-12 estimate-ship-tax" style="float:right">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span class="estimate-title" style="font-family:times new roman">Địa chỉ giao
+                                            hàng</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <?php $qry=mysqli_query($con,"select * from tblusers where Id='".$_SESSION['id']."'");
+                                                while ($rt=mysqli_fetch_array($qry)) {
+                                                    ?>
+                                            <div class="form-group">
+                                                <label class="info-title" for="Shipping Address">Địa chỉ giao
+                                                    hàng<span>*</span></label>
+                                                <textarea class="form-control unicase-form-control text-input"
+                                                    name="shippingaddress"
+                                                    readonly><?php echo $rt['Diachigiaohang'];?></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="info-title" for="Billing City">Thành phố
+                                                    <span>*</span></label>
+                                                <input type="text" class="form-control unicase-form-control text-input"
+                                                    id="shippingcity" name="shippingcity"
+                                                    value="<?php echo $rt['Thanhphovanchuyen'];?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="info-title" for="Billing Pincode">Pincode
+                                                    <span>*</span></label>
+                                                <input type="text" class="form-control unicase-form-control text-input"
+                                                    id="shippingpincode" name="shippingpincode"
+                                                    value="<?php echo $rt['Mapinvanchuyen'];?>" readonly>
+                                            </div>
+                                            <?php } ?>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                         <?php } else {
                         echo "Giỏ hàng trống !";

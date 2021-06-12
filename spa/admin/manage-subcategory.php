@@ -243,7 +243,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                     </div>
                     <br>
                     <div class="table-responsive bs-example widget-shadow">
-                        <h4>Cập nhật thể loại <button id="myBtn" class="btn btn-primary">Thêm thể loại</button></h4>
+                        <h4>Cập nhật thể loại <button id="myBtn" class="btn btn-primary">Thêm thể loại phụ</button></h4>
 
                         <?php if(isset($_POST['submit']))
 								{?>

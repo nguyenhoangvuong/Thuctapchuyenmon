@@ -7,31 +7,15 @@ if(strlen($_SESSION['login'])==0)
 header('location:index.php');
 }
 else{
-	if(isset($_POST['update']))
-	{
-		$baddress=$_POST['billingaddress'];
-		$bstate=$_POST['bilingstate'];
-		$bcity=$_POST['billingcity'];
-		// $bpincode=$_POST['billingpincode'];
-        $bpincode=mt_rand(1000, 9999);
-		$query=mysqli_query($con,"update tblusers set Diachithanhtoan='$baddress',Trangthaithanhtoan='$bstate',Thanhphothanhtoan='$bcity',Mapinthanhtoan='$bpincode' where Id='".$_SESSION['id']."'");
-		if($query)
-		{
-echo "<script>alert('Địa chỉ thanh toán đã được cập nhật');</script>";
-		}
-	}
-
-
 	if(isset($_POST['shipupdate']))
 	{
-		$saddress=$_POST['shippingaddress'];
-		$sstate=$_POST['shippingstate'];
+		$saddressa=$_POST['shippingaddress'];
 		$scity=$_POST['shippingcity'];
-		$spincode=$_POST['shippingpincode'];
-		$query=mysqli_query($con,"update users set shippingAddress='$saddress',shippingState='$sstate',shippingCity='$scity',shippingPincode='$spincode' where id='".$_SESSION['id']."'");
+		$bpincode=mt_rand(1000, 9999);
+		$query=mysqli_query($con,"update tblusers set Diachigiaohang='$saddressa',Thanhphovanchuyen='$scity',Mapinvanchuyen='$bpincode' where id='".$_SESSION['id']."'");
 		if($query)
 		{
-echo "<script>alert('Shipping Address has been updated');</script>";
+echo "<script>alert('Địa chỉ giao hàng đã được cập nhật');</script>";
 		}
 	}
 
@@ -96,119 +80,29 @@ echo "<script>alert('Shipping Address has been updated');</script>";
                 <div class="row">
                     <div class="col-md-8">
                         <div class="panel-group checkout-steps" id="accordion">
-                            <div class="panel panel-default checkout-step-01">
-                                <div class="panel-heading">
-                                    <h4 class="unicase-checkout-title">
-                                        <a data-toggle="collapse" class="" data-parent="#accordion" href="#collapseOne" style="font-family:times new roman">
-                                            <span>1</span>Địa chỉ thanh toán
-                                        </a>
-                                    </h4>
-                                </div>
-
-                                <div id="collapseOne" class="panel-collapse collapse in">
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12 already-registered-login">
-                                                <?php
-													$query=mysqli_query($con,"select * from tblusers where Id='".$_SESSION['id']."'");
-													while($row=mysqli_fetch_array($query))
-													{
-												?>
-                                                <form class="register-form" role="form" method="post">
-                                                    <form class="register-form" role="form" method="post">
-                                                        <div class="form-group">
-                                                            <label class="info-title" for="Billing Address">Địa chỉ
-                                                                thanh toán<span>*</span></label>
-                                                            <textarea
-                                                                class="form-control unicase-form-control text-input"
-                                                                name="billingaddress"
-                                                                required="required"><?php echo $row['Diachithanhtoan'];?></textarea>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label class="info-title" for="Billing State ">Trạng thái
-                                                                thanh toán
-                                                                <span>*</span></label>
-                                                            <input type="text"
-                                                                class="form-control unicase-form-control text-input"
-                                                                id="bilingstate" name="bilingstate"
-                                                                value="<?php echo $row['Trangthaithanhtoan'];?>"
-                                                                required>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="info-title" for="Billing City">Thành phố
-                                                                <span>*</span></label>
-                                                            <input type="text"
-                                                                class="form-control unicase-form-control text-input"
-                                                                id="billingcity" name="billingcity" required="required"
-                                                                value="<?php echo $row['Thanhphothanhtoan'];?>">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="info-title" for="Billing Pincode">Mã pin
-                                                                <span>*</span></label>
-                                                            <input type="text"
-                                                                class="form-control unicase-form-control text-input"
-                                                                id="billingpincode" name="billingpincode" readonly
-                                                                value="<?php echo $bpincode;?>">
-                                                        </div>
-
-
-                                                        <button type="submit" name="update"
-                                                            class="btn-upper btn btn-primary checkout-page-button">Cập
-                                                            nhật</button>
-                                                    </form>
-                                                    <?php } ?>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="panel panel-default checkout-step-02" style="font-family:times new roman;font-size:1.5rem">
-                                <div class="panel-heading">
-                                    <h4 class="unicase-checkout-title">
-                                        <a data-toggle="collapse" class="collapsed" data-parent="#accordion"
-                                            href="#collapseTwo" style="font-family:times new roman">
-                                            <span>2</span>Địa chỉ giao hàng
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseTwo" class="panel-collapse collapse">
-                                    <div class="panel-body">
 
                                         <?php
-$query=mysqli_query($con,"select * from tblusers where Id='".$_SESSION['id']."'");
-while($row=mysqli_fetch_array($query))
-{
-?>
+                                        $query=mysqli_query($con,"select * from tblusers where Id='".$_SESSION['id']."'");
+                                        while($row=mysqli_fetch_array($query))
+                                        {
+                                        ?>
 
                                         <form class="register-form" role="form" method="post">
                                             <div class="form-group">
-                                                <label class="info-title" for="Shipping Address">Địa chỉ giao hàng<span>*</span></label>
-                                                <textarea class="form-control unicase-form-control text-input" name="
-                                                    shippingaddress"
+                                                <label class="info-title" for="Shipping Address" style="font-family:times new roman;font-size:1.7rem">Địa chỉ giao hàng <span style="color:red">*</span></label>
+                                                <textarea class="form-control unicase-form-control text-input" name="shippingaddress"
                                                     required="required"><?php echo $row['Diachigiaohang'];?></textarea>
                                             </div>
-
-
-
                                             <div class="form-group">
-                                                <label class="info-title" for="Billing State ">Trạng thái giao hàng
-                                                    <span>*</span></label>
-                                                <input type="text" class="form-control unicase-form-control text-input"
-                                                    id="shippingstate" name="shippingstate"
-                                                    value="<?php echo $row['Trangthaivanchuyen'];?>" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="info-title" for="Billing City">Thành phố giao hàng
-                                                    <span>*</span></label>
+                                                <label class="info-title" for="Billing City"  style="font-family:times new roman;font-size:1.7rem">Thành phố giao hàng
+                                                    <span  style="color:red">*</span></label>
                                                 <input type="text" class="form-control unicase-form-control text-input"
                                                     id="shippingcity" name="shippingcity" required="required"
                                                     value="<?php echo $row['Thanhphovanchuyen'];?>">
                                             </div>
                                             <div class="form-group">
-                                                <label class="info-title" for="Billing Pincode">Mã pin
-                                                    <span>*</span></label>
+                                                <label class="info-title" for="Billing Pincode"  style="font-family:times new roman;font-size:1.7rem">Mã pin
+                                                    <span  style="color:red">*</span></label>
                                                 <input type="text" class="form-control unicase-form-control text-input"
                                                     id="shippingpincode" name="shippingpincode" readonly
                                                     value="<?php echo $bpincode;?>">
@@ -216,17 +110,9 @@ while($row=mysqli_fetch_array($query))
 
 
                                             <button type="submit" name="shipupdate"
-                                                class="btn-upper btn btn-primary checkout-page-button">Cập nhật</button>
+                                                class="btn-upper btn btn-primary checkout-page-button"  style="font-family:times new roman">Cập nhật</button>
                                         </form>
                                         <?php } ?>
-
-
-
-
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                     <?php include('includes/myaccount-sidebar.php');?>

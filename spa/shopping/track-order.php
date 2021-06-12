@@ -29,11 +29,11 @@ function f3() {
 <body>
     <div style="margin-left:50px;">
         <form name="updateticket" id="updateticket" method="post">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-family:times new roman">
 
                 <tr height="50">
                     <td colspan="2" class="fontkink2" style="padding-left:0px;">
-                        <div class="fontpink2"> <b>Theo dõi chi tiết đơn hàng !</b></div>
+                        <div class="fontpink2"> <b style="font-size:1.7rem">Theo dõi chi tiết đơn hàng !</b></div>
                     </td>
                 </tr>
                 <tr height="30">

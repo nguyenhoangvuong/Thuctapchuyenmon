@@ -87,7 +87,9 @@ if(isset($_POST['submit']))
 							<div class="form-group"> <label for="exampleInputEmail1">Chi tiết</label> <textarea type="text" class="form-control" id="details" name="details" placeholder="Chi tiết" required="true" rows="12" cols="4"><?php  echo $row['Chitiet'];?></textarea> </div>
 							<div class="form-group"> <label for="exampleInputPassword1">Ngày tạo</label> <input type="text" id="" name="" class="form-control"  value="<?php  echo $row['Ngaytao'];?>" readonly='true'> </div>
 							 <?php } ?>
-							  <button type="submit" name="submit" class="btn btn-default">Cập nhật</button> </form> 
+							  <button type="submit" name="submit" class="btn btn-default">Cập nhật</button>
+							  <a href="customer-list.php" type="submit" name="submit" class="btn btn-default">Trở về</a> </form> 
+							  
 						</div>
 					</div>
 			</div>

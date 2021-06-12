@@ -13,6 +13,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
 	$id=intval($_GET['id']);
 	if(isset($_SESSION['cart'][$id])){
 		$_SESSION['cart'][$id]['quantity']++;
+        header('Location:index.php');
         echo "<script>alert('Sản phẩm đã được cập nhật số lượng vào giỏ hàng')</script>";
 	}else{
 		$sql_p="SELECT * FROM tblsanpham WHERE Id={$id}";
@@ -20,7 +21,8 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
 		if(mysqli_num_rows($query_p)!=0){
 			$row_p=mysqli_fetch_array($query_p);
 			$_SESSION['cart'][$row_p['Id']]=array("quantity" => 1, "price" => $row_p['Giasanpham']);
-					echo "<script>alert('Sản phẩm đã được thêm vào giỏ hàng')</script>";
+                header('Location:index.php');
+                echo "<script>alert('Sản phẩm đã được thêm vào giỏ hàng')</script>";
 		}else{
 			$message="ID sản phẩm không hợp lệ";
 		}
@@ -59,6 +61,45 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
     <link rel="shortcut icon" href="assets/images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="css/style1.css">
     <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
+    <style>
+            .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        }
+
+        /* The Close Button */
+        .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        }
+    </style>
 </head>
 
 <body class="cnt-home">
@@ -79,31 +120,30 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                         <div id="hero" class="homepage-slider3">
                             <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
                                 <div class="full-width-slider">
-                                    <div class="item" style="background-image: url(../images/slide1.jpg);">
+                                    <div class="item" style="background-image: url(../images/slides1.jpg);">
+                                    </div>
+                                </div>
+                                <div class="full-width-slider">
+                                    <div class="item full-width-slider"
+                                        style="background-image: url(../images/slides2.jpg);">
                                     </div>
                                 </div>
 
                                 <div class="full-width-slider">
                                     <div class="item full-width-slider"
-                                        style="background-image: url(../images/slide2.jpg);">
+                                        style="background-image: url(../images/slides3.jpg);">
                                     </div>
                                 </div>
 
                                 <div class="full-width-slider">
                                     <div class="item full-width-slider"
-                                        style="background-image: url(../images/slide3.jpg);">
+                                        style="background-image: url(../images/slides4.jpg);">
                                     </div>
                                 </div>
 
                                 <div class="full-width-slider">
                                     <div class="item full-width-slider"
-                                        style="background-image: url(../images/slide4.jpg);">
-                                    </div>
-                                </div>
-
-                                <div class="full-width-slider">
-                                    <div class="item full-width-slider"
-                                        style="background-image: url(../images/slide5.jpg);">
+                                        style="background-image: url(../images/slides5.jpg);">
                                     </div>
                                 </div>
                             </div>
@@ -112,11 +152,12 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                 </div>
                 <div id="product-tabs-slider" class="scroll-tabs inner-bottom-vs  wow fadeInUp">
                     <div class="more-info-tab clearfix">
-                        <h3 class="new-product-title pull-left" style="font-family:times new roman">Sản phẩm nổi bật</h3>
+                        <h3 class="new-product-title pull-left" style="font-family:times new roman">Sản phẩm nổi bật
+                        </h3>
                         <ul class="nav nav-tabs nav-tab-line pull-right" id="new-products-1">
                             <li class="active"><a href="#all" data-toggle="tab">All</a></li>
-                            <li><a href="#kem" data-toggle="tab">Kem</a></li>
-                            <li><a href="#suaruamat" data-toggle="tab">Sữa rửa mặt</a></li>
+                            <li><a href="#kem" data-toggle="tab">Mỹ phẩm</a></li>
+                            <li><a href="#vienuong" data-toggle="tab">Viên uống</a></li>
                         </ul>
                     </div>
 
@@ -125,7 +166,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                             <div class="product-slider">
                                 <div class="owl-carousel home-owl-carousel custom-carousel owl-theme" data-item="4">
                                     <<?php
-										$ret=mysqli_query($con,"select * from tblsanpham");
+										$ret=mysqli_query($con,"select * from tblsanpham order by RAND()");
 										while ($row=mysqli_fetch_array($ret)) 
 										{
 									?> <div class="item item-carousel">
@@ -150,14 +191,16 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                                     <div class="product-price">
                                                         <span class="price">
                                                             <?php echo currency_format(htmlentities($row['Giasanpham']));?></span>
-                                                        <span class="price-before-discount"><?php echo currency_format(htmlentities($row['Giasanphamtruockhigiam']));?></span>
+                                                        <span
+                                                            class="price-before-discount"><?php echo currency_format(htmlentities($row['Giasanphamtruockhigiam']));?></span>
 
                                                     </div>
 
                                                 </div>
                                                 <div class="action"><a
                                                         href="index.php?page=product&action=add&id=<?php echo $row['Id']; ?>"
-                                                        class="lnk btn btn-primary" style="font-family:times new roman;">Thêm vào giỏ hàng</a></div>
+                                                        class="lnk btn btn-primary"
+                                                        style="font-family:times new roman;">Thêm vào giỏ hàng</a></div>
                                             </div>
                                         </div>
                                 </div>
@@ -186,7 +229,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                                 </div>
                                             </div>
                                             <div class="product-info text-left">
-                                                <h3 class="name"><a
+                                                <h3 class="name"><a style="font-family:times new roman"
                                                         href="product-details.php?pid=<?php echo htmlentities($row['Id']);?>"><?php echo htmlentities($row['Tensanpham']);?></a>
                                                 </h3>
                                                 <div class="rating rateit-small"></div>
@@ -203,7 +246,8 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                             </div>
                                             <div class="action"><a
                                                     href="index.php?page=product&action=add&id=<?php echo $row['Id']; ?>"
-                                                    class="lnk btn btn-primary" style="font-family:times new roman;">Thêm vào giỏ hàng</a></div>
+                                                    class="lnk btn btn-primary"
+                                                    style="font-family:times new roman;">Thêm vào giỏ hàng</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -211,7 +255,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane" id="suaruamat">
+                    <div class="tab-pane" id="vienuong">
                         <div class="product-slider">
                             <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
                                 <?php
@@ -232,7 +276,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                                 </div>
                                             </div>
                                             <div class="product-info text-left">
-                                                <h3 class="name"><a
+                                                <h3 class="name"><a style="font-family:times new roman"
                                                         href="product-details.php?pid=<?php echo htmlentities($row['Id']);?>"><?php echo htmlentities($row['Tensanpham']);?></a>
                                                 </h3>
                                                 <div class="rating rateit-small"></div>
@@ -240,7 +284,8 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
 
                                                 <div class="product-price">
                                                     <span class="price">
-                                                        <?php echo currency_format(htmlentities($row['Giasanpham']));?> </span>
+                                                        <?php echo currency_format(htmlentities($row['Giasanpham']));?>
+                                                    </span>
                                                     <span
                                                         class="price-before-discount"><?php echo currency_format(htmlentities($row['Giasanphamtruockhigiam']));?></span>
 
@@ -249,7 +294,8 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                             </div>
                                             <div class="action"><a
                                                     href="index.php?page=product&action=add&id=<?php echo $row['Id']; ?>"
-                                                    class="lnk btn btn-primary" style="font-family:times new roman;">Thêm vào giỏ hàng</a></div>
+                                                    class="lnk btn btn-primary"
+                                                    style="font-family:times new roman;">Thêm vào giỏ hàng</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -263,12 +309,12 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                 <div class="row">
                     <div class="col-md-6">
                         <section class="section">
-                            <h3 class="section-title" style="font-family:times new roman;">Sản phẩm trị mụn</h3>
+                            <h3 class="section-title" style="font-family:times new roman;">Viên uống trị mụn</h3>
                             <div class="owl-carousel homepage-owl-carousel custom-carousel outer-top-xs owl-theme"
                                 data-item="2">
 
                                 <?php
-										$ret=mysqli_query($con,"select * from tblsanpham where TheloaiId=4 and TheloaiphuId=4");
+										$ret=mysqli_query($con,"select * from tblsanpham where TheloaiId=5 and TheloaiphuId=18");
 										while ($row=mysqli_fetch_array($ret)) 
 										{
 									?>
@@ -302,7 +348,8 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                             </div>
                                             <div class="action"><a
                                                     href="index.php?page=product&action=add&id=<?php echo $row['Id']; ?>"
-                                                    class="lnk btn btn-primary" style="font-family:times new roman">thêm vào giỏ hàng</a></div>
+                                                    class="lnk btn btn-primary" style="font-family:times new roman">thêm
+                                                    vào giỏ hàng</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -316,7 +363,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                             <div class="owl-carousel homepage-owl-carousel custom-carousel outer-top-xs owl-theme"
                                 data-item="2">
                                 <?php
-										$ret=mysqli_query($con,"select * from tblsanpham where TheloaiId=4 and TheloaiphuId=6");
+										$ret=mysqli_query($con,"select * from tblsanpham where TheloaiId=3 and TheloaiphuId=4");
 										while ($row=mysqli_fetch_array($ret)) 
 										{
 									?>
@@ -352,7 +399,8 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                             </div>
                                             <div class="action"><a
                                                     href="index.php?page=product&action=add&id=<?php echo $row['Id']; ?>"
-                                                    class="lnk btn btn-primary" style="font-family:times new roman;">Thêm vào giỏ hàng</a></div>
+                                                    class="lnk btn btn-primary"
+                                                    style="font-family:times new roman;">Thêm vào giỏ hàng</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -367,10 +415,10 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                 </div>
             </div>
             <section class="section featured-product inner-xs wow fadeInUp">
-                <h3 class="section-title" style="font-family:times new roman;">Serum trị mụn</h3>
+                <h3 class="section-title" style="font-family:times new roman;">Mỹ phẩm</h3>
                 <div class="owl-carousel best-seller custom-carousel owl-theme outer-top-xs">
                     <?php
-							$ret=mysqli_query($con,"select * from tblsanpham where TheloaiID=6");
+							$ret=mysqli_query($con,"select * from tblsanpham where TheloaiID=3");
 							while ($row=mysqli_fetch_array($ret)) 
 							{
 						?>
@@ -382,7 +430,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                         <div class="col col-xs-6">
                                             <div class="product-image">
                                                 <div class="image">
-                                                    <a href="admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
+                                                    <a href="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
                                                         data-lightbox="image-1"
                                                         data-title="<?php echo htmlentities($row['Tensanpham']);?>">
                                                         <img data-echo="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
@@ -409,7 +457,8 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                                 </div>
                                                 <div class="action"><a
                                                         href="index.php?page=product&action=add&id=<?php echo $row['Id']; ?>"
-                                                        class="lnk btn btn-primary" style="font-family:times new roman;">Thêm vào giỏ hàng</a></div>
+                                                        class="lnk btn btn-primary"
+                                                        style="font-family:times new roman;">Thêm vào giỏ hàng</a></div>
                                             </div>
                                         </div>
                                     </div>
@@ -420,10 +469,9 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                 </div>
             </section>
             <section class="new-arrival">
-                <!-- heading -->
                 <div class="arrival-heading">
-                    <strong>Feature Items</strong>
-                    <p>We Provide New Design Fashion Clothes</p>
+                    <strong style="font-family:times new roman">Sản phẩm mới</strong>
+                    <p style="font-family:times new roman">Chúng tôi luôn cập nhật những sản phẩm tốt và mới nhất</p>
                 </div>
                 <div class="product-container">
                     <?php
@@ -445,6 +493,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                         </div>
                         <div class="product-details">
                             <a href="product-details.php?pid=<?php echo htmlentities($row11['Id']);?>"
+                                style="font-family:times new roman"
                                 class="p-name"><?php echo $row11['Tensanpham']; ?></a>
                             <span class="p-price"><?php echo currency_format($row11['Giasanpham']); ?></span>
                         </div>
@@ -455,7 +504,16 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                 </div>
             </section>
             <?php include('includes/brands-slider.php');?>
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.4405475805665!2d106.80599801462142!3d10.854058560724392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175274f32968a43%3A0x578a57668fc28864!2zNDEsIDU4YSBD4bqndSBYw6J5LCBUw6JuIFBow7osIFF14bqtbiA5LCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1623304564925!5m2!1svi!2s" width="1150" height="500" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
+                </div>
+            </div>
+            <button style="position:fixed;bottom:20px;left:10px;background-color:#F8D0C2;outline:none;border:0px;border-radius:5px" id="myBtn">Xem địa chỉ shop</button>
         </div>
+        <a href="#" style="position:fixed;bottom:50px;left:20px;outline:none;background-color:#F8D0C2;border:0px;border-radius:50%;font-size:3rem;color:white">^</a>
+
     </div>
     <?php include('includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.min.js"></script>
@@ -476,6 +534,23 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
     <script src="switchstylesheet/switchstylesheet.js"></script>
 
     <script>
+var modal = document.getElementById("myModal");
+var btn = document.getElementById("myBtn");
+var span = document.getElementsByClassName("close")[0];
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+span.onclick = function() {
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+    <script>
     $(document).ready(function() {
         $(".changecolor").switchstylesheet({
             seperator: "color"
@@ -490,6 +565,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
         $('.show-theme-options').delay(2000).trigger('click');
     });
     </script>
+
 </body>
 
 </html>

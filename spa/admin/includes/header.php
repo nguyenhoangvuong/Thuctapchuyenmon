@@ -13,7 +13,7 @@
         <div class="profile_details_left">
           <ul class="nofitications-dropdown">
             <?php
-              $ret1=mysqli_query($con,"select ID,Ten from  tblcuochen where Trangthai=''");
+              $ret1=mysqli_query($con,"select ID,Ten from  tblcuochen where Trangthai =''");
               $num=mysqli_num_rows($ret1);
             ?>  
             <li class="dropdown head-dpdn">

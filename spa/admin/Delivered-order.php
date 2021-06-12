@@ -89,16 +89,16 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                         <th>Email / SĐT</th>
                                         <th>Địa chỉ giao hàng</th>
                                         <th>Sản phẩm</th>
-                                        <th>Số lượng</th>
+                                        <th>SL</th>
                                         <th>Tổng tiền</th>
                                         <th>Ngày đặt</th>
-                                        <th>Thao tác</th>
+                                        <th>TTác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                 $status = 'Delivered';
-								$ret=mysqli_query($con,"select tblusers.Ten as username,tblusers.Email as useremail,tblusers.Lienhe as usercontact,tblusers.Diachigiaohang as shippingaddress,tblusers.Thanhphovanchuyen as shippingcity,tblusers.Trangthaivanchuyen as shippingstate,tblusers.Mapinvanchuyen as shippingpincode,tblsanpham.Tensanpham as productname,tblsanpham.Phivanchuyen as shippingcharge,tblorders.Soluong as quantity,tblorders.Ngayorder as orderdate,tblsanpham.Giasanpham as productprice,tblorders.Id as id from tblorders join tblusers on tblorders.UserId = tblusers.Id join tblsanpham on tblsanpham.Id = tblorders.SanphamId where tblorders.Tinhtrangorder ='$status'");
+								$ret=mysqli_query($con,"select tblusers.Ten as username,tblusers.Email as useremail,tblusers.Lienhe as usercontact,tblusers.Diachigiaohang as shippingaddress,tblusers.Thanhphovanchuyen as shippingcity, tblusers.Mapinvanchuyen as shippingpincode,tblsanpham.Tensanpham as productname,tblsanpham.Phivanchuyen as shippingcharge,tblorders.Soluong as quantity,tblorders.Ngayorder as orderdate,tblsanpham.Giasanpham as productprice,tblorders.Id as id from tblorders join tblusers on tblorders.UserId = tblusers.Id join tblsanpham on tblsanpham.Id = tblorders.SanphamId where tblorders.Tinhtrangorder ='$status'");
 								$cnt=1;
 								while ($row=mysqli_fetch_array($ret)) {
 							?>
@@ -106,14 +106,14 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                         <th scope="row"><?php echo $cnt;?></th>
                                         <td><?php  echo $row['username'];?></td>
                                         <td><?php  echo $row['useremail']." | ".$row['usercontact'];?></td>
-                                        <td><?php  echo $row['shippingaddress'].", ".$row['shippingcity'].", ".$row['shippingstate'].", ".$row['shippingpincode'];?>
+                                        <td><?php  echo $row['shippingaddress'].", ".$row['shippingcity'].", ".$row['shippingpincode'];?>
                                         </td>
                                         <td><?php  echo $row['productname'];?></td>
                                         <td><?php  echo $row['quantity'];?></td>
                                         <td><?php  echo currency_format($row['productprice']*$row['quantity']+$row['shippingcharge']);?>
                                         </td>
                                         <td><?php  echo $row['orderdate'];?></td>
-                                        <td><a class="btn btn-primary" href='Delivered-order.php?oid=<?php echo $row['id']; ?>' id="myBtn"
+                                        <td><a class="btn btn-primary" href='delivered-order.php?oid=<?php echo $row['id']; ?>' id="myBtn"
                                                 class="user">Xem</a>
                                             <?php $a =$row['id']; ?>
                                         </td>
@@ -138,7 +138,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                     if($oid){
                     ?>
                     <form method='post' class="form">
-                        <div class="old"><a id='hide' style='color:white' href='Delivered-order.php?oid='>X X</a></div>
+                        <div class="old"><a id='hide' style='color:white' href='delivered-order.php?oid='>X X</a></div>
 
                         <div id='noidung'>
                             <h3 class="tittle">Đơn hàng</h3>
@@ -205,8 +205,8 @@ if (strlen($_SESSION['bpmsaid']==0)) {
             </div>
         </div>
     </div>
-    <?php include_once('includes/footer.php');?>
     </div>
+    <?php include_once('includes/footer.php');?>
     <script src="js/classie.js"></script>
     <script>
         function CallPrint(strid) {

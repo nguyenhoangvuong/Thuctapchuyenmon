@@ -118,14 +118,14 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                 </tr>
                             </thead>
                             <?php
-						$ret=mysqli_query($con,"select year(tblorders.Ngayorder) as lyear,sum(tblorders.Soluong+tblsanpham.Giasanpham) as totalprice from  tblorders join tblsanpham on tblsanpham.ID= tblorders.SanphamId where date(tblorders.Ngayorder) between '$fdate' and '$tdate' group by lyear");
+						$ret=mysqli_query($con,"select year(tblorders.Ngayorder) as lyear,sum(tblorders.Soluong+tblsanpham.Giasanpham) as totalprice from  tblorders join tblsanpham on tblsanpham.ID= tblorders.SanphamId where tblorders.Tinhtrangorder = 'Delivered' and date(tblorders.Ngayorder) between '$fdate' and '$tdate' group by lyear");
 						$cnt=1;
 						while ($row=mysqli_fetch_array($ret)) {
 					?>
                             <tr>
                                 <td><?php echo $cnt;?></td>
                                 <td><?php  echo $row['lyear'];?></td>
-                                <td><?php  echo $total=$row['totalprice'];?></td>
+                                <td><?php  echo currency_format($total=$row['totalprice']);?></td>
                             </tr>
                             <?php
 						$ftotal+=$total;
@@ -165,6 +165,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
     <script src="js/jquery.nicescroll.js"></script>
     <script src="js/scripts.js"></script>
     <script src="js/bootstrap.js"> </script>
+    
 </body>
 
 </html>

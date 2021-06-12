@@ -89,7 +89,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                 $tonsotin = mysqli_num_rows($ret1);
                                 $sotrang = ceil($tonsotin / $sotin1trang);
                                 for($t = $sotrang; $t >= 1;$t--){
-                                    echo "<div style='width:100%;'><a style='color:red;margin-right:2%;float:right' href='user-log.php?trang=$t'>Trang $t  </a></div>";
+                                    echo "<div style='width:100%;'><a style='color:white;margin-right:2%;float:right;background-color:#00FFFF;border-radius:50%;width:20px;text-align:center' href='user-log.php?trang=$t'> $t  </a></div>";
                                 }
                             ?>
                         </div>

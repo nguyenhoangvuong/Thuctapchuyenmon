@@ -9,13 +9,13 @@
 		$contactno=$_POST['contactno'];
 		$password=md5($_POST['password']);
 		$query=mysqli_query($con,"insert into tblusers(Ten,Email,Lienhe,Matkhau) values('$name','$email','$contactno','$password')");
-	if($query)
-	{
-		echo "<script>alert('Bạn đã đăng ký thành công');</script>";
-	}
-	else{
-		echo "<script>alert('Đăng ký đã gặp lỗi.Thử lại !');</script>";
-	}
+            if($query)
+            {
+                echo "<script>alert('Bạn đã đăng ký thành công');</script>";
+            }
+            else{
+                echo "<script>alert('Đăng ký đã gặp lỗi.Thử lại !');</script>";
+            }
     if(isset($_POST['fbsubmit'])){
         $name = $_SESSION['username']; 
         $email = $_SESSION['login']; 
@@ -61,7 +61,7 @@ if(isset($_POST['login']))
 		$log=mysqli_query($con,"insert into tblnhatkynguoidung(Emailnguoidung,Ipnguoidung,Trangthai) values('".$_SESSION['login']."','$uip','$status')");
 		$host=$_SERVER['HTTP_HOST'];
 		$uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-		header("location:http://$host$uri/my-cart.php");
+		header("location:http://$host$uri/index.php");
 		exit();
 	}
 	else
@@ -81,6 +81,7 @@ if(isset($_POST['login']))
 
 <?php
 	require_once 'configfb.php';
+    include('../includes/dbconnection.php');
 
 	$permissions = ['email'];
 
@@ -98,10 +99,7 @@ if(isset($_POST['login']))
 		{
 			$fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
 		}
-		if (isset($_GET['code'])) 
-		{
-			header('Location: ./');
-		}
+		
 		
 		try {
 			$fb_response = $fb->get('/me?fields=name,first_name,last_name,email');
@@ -109,13 +107,12 @@ if(isset($_POST['login']))
 			
 			$fb_user = $fb_response->getGraphUser();
 			$picture = $fb_response_picture->getGraphUser();
-			
-			$_SESSION['id'] = $fb_user->getProperty('id');
-			$_SESSION['login'] = $fb_user->getProperty('name');
-			$_SESSION['username'] = $fb_user->getProperty('email');
+            
+			$_SESSION['id1'] = $fb_user->getProperty('id');
+			$_SESSION['username'] = $fb_user->getProperty('name');
+			$_SESSION['login'] = $fb_user->getProperty('email');
 			$_SESSION['fb_user_pic'] = $picture['url'];
-			
-			
+	
 		} catch(Facebook\Exceptions\FacebookResponseException $e) {
 			echo 'Facebook API Error: ' . $e->getMessage();
 			session_destroy();
@@ -125,11 +122,37 @@ if(isset($_POST['login']))
 			echo 'Facebook SDK Error: ' . $e->getMessage();
 			exit;
 		}
+
 	} 
 	else 
 	{	
 		$fb_login_url = $fb_helper->getLoginUrl('http://localhost:8080/Manage_Spa/spa/shopping/login.php', $permissions);
 	}
+    
+    if(isset($_GET['code'])){
+        $email=$_SESSION['login'];
+        $username=$_SESSION['username'];
+        $id_fb = $_SESSION['id1'];
+        $qu = mysqli_query($con,"select Email from tblusers where Email = '$email'");
+        $row = mysqli_num_rows($qu);
+        if($row == 0){
+            $query=mysqli_query($con,"insert into tblusers(Ten,Email,id_fb) values('$username','$email','$id_fb')");
+            if($query)
+            {
+                echo "<script>alert('Đăng nhập thành công');</script>";
+            }
+            else{
+                echo "<script>alert('Đăng nhập thất bại !');</script>";
+            }
+        }
+        else{
+            $qurry = mysqli_query($con,"select * from tblusers where id_fb = '$id_fb'");
+            $r = mysqli_fetch_array($qurry);
+            if($r > 0){
+                $_SESSION['id'] = $r['Id']; 
+            }
+        }
+    }
 ?>
 
 
@@ -242,23 +265,10 @@ if(isset($_POST['login']))
                             <div class="radio outer-xs">
                                 <a href="forgot-password.php" class="forgot-password pull-right">Quên mật khẩu?</a>
                             </div>
-                            <button type="submit" class="btn-upper btn btn-primary checkout-page-button"
-                                name="login">Đăng nhập</button>
-
-                            <?php if(isset($_SESSION['id'])): ?>
-
-                            <a class="nav-link" href="logout.php">Logout</a>
-                            <?php echo $_SESSION['id']; ?>
-                            <?php echo $_SESSION['login']; ?>
-                            <?php echo $_SESSION['username']; ?>
-                            <?php else: ?>
+                            <button type="submit" class="btn-upper btn btn-primary checkout-page-button" name="login">Đăng nhập</button>
                                 <form action="" method="post">
-                                    <div class="text-center social-btn">
-                                        <a name="fbsubmit" href="<?php echo $fb_login_url;?>" class="btn btn-primary btn-block">Sign in
-                                            with <b>Facebook</b></a>
-                                    </div>
+                                    <a name="fbsubmit" href="<?php echo $fb_login_url;?>" class="btn btn-primary" style="background-color:#0099FF">Sign in with <b>Facebook</b></a>
                                 </form>
-                                <?php endif ?>
                         </form>
                     </div>
 

@@ -8,16 +8,9 @@ header('location:login.php');
 }
 else{
 	if (isset($_POST['submit'])) {
-        if(strlen($_SESSION['login'])!=0 && strlen($_SESSION['fb_user_email'])==0){
-            mysqli_query($con,"update tblorders set Phuongthucthanhtoan='".$_POST['paymethod']."' where UserId='".$_SESSION['id']."' and Phuongthucthanhtoan is null ");
-            unset($_SESSION['cart']);
-            header('location:order-history.php');
-        }else{
-            mysqli_query($con,"update tblorders set Phuongthucthanhtoan='".$_POST['paymethod']."' where UserId='".$_SESSION['id']."' and Phuongthucthanhtoan is null ");
-            unset($_SESSION['cart']);
-            header('location:order-history.php');
-        }
-		
+        mysqli_query($con,"update tblorders set Phuongthucthanhtoan='".$_POST['paymethod']."' where UserId='".$_SESSION['id']."' and Phuongthucthanhtoan is null ");
+        unset($_SESSION['cart']);
+        header('location:order-history.php');
 	}
 ?>
 <!DOCTYPE html>
@@ -90,10 +83,10 @@ else{
                                     <div class="panel-body">
                                         <form name="payment" method="post">
                                             <input type="radio" name="paymethod" value="COD" checked="checked"> COD
-                                            <input type="radio" name="paymethod" value="Internet Banking"> Internet
+                                            <!-- <input type="radio" name="paymethod" value="Internet Banking"> Internet
                                             Banking
                                             <input type="radio" name="paymethod" value="Debit / Credit card"> Debit /
-                                            Credit card <br /><br />
+                                            Credit card <br /><br /> -->
                                             <input type="submit" value="submit" name="submit" class="btn btn-primary">
                                         </form>
                                     </div>
@@ -119,6 +112,8 @@ else{
         <script src="assets/js/wow.min.js"></script>
         <script src="assets/js/scripts.js"></script>
         <script src="switchstylesheet/switchstylesheet.js"></script>
+
+        
 
         <script>
         $(document).ready(function() {

@@ -84,6 +84,7 @@ if(isset($_POST['submit']))
                                         value="<?php  echo $row['Motatheloai'];?>" required="true"> </div>
                                 <?php } ?>
                                 <button type="submit" name="submit" class="btn btn-default">Cập nhật</button>
+                                <a href="./manage-category.php" type="submit" name="submit" class="btn btn-default">Trở lại</a>
                             </form>
                         </div>
                     </div>

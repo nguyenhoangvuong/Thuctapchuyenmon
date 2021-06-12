@@ -301,19 +301,19 @@ nav{
     background-position: center;
 }
 .f-slider-1{
-    background-image: url(../images/slider1.jpg);
+    background-image: url(/spa/images/slides1.jpg);
 }
 .f-slider-2{
-    background-image: url(../images/slider5.jpg);
+    background-image: url(/spa/images/slides2.jpg);
 }
 .f-slider-3{
-    background-image: url(../images/slider2.jpg);
+    background-image: url(/spa/images/slides3.jpg);
 }
 .f-slider-4{
-    background-image: url(../images/slider4.jpg);
+    background-image: url(../images/slides4.jpg);
 }
 .f-slider-5{
-    background-image: url(../images/slider2.jpg);
+    background-image: url(/spa/images/slides5.jpg);
 }
 .slider-text-container,
 .banner-text-container{
@@ -444,7 +444,6 @@ nav{
     margin: 20px;
     border: 1px solid #dad2d2;
     border-radius: 10px;
-    background-color: #d1d1d1;
 }
 .product-img{
     width: 220px;

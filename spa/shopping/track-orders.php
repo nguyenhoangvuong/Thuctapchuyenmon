@@ -58,7 +58,7 @@ include('../includes/dbconnection.php');
 		<div class="track-order-page inner-bottom-sm">
 			<div class="row">
 				<div class="col-md-12">
-	<h2>Theo dõi đơn hàng của bạn</h2>
+	<h2 style="font-family:times new roman">Theo dõi đơn hàng của bạn</h2>
 	<span class="title-tag inner-top-vs">Vui lòng nhập ID đơn hàng của bạn vào ô bên dưới và nhấn Enter.</span>
 	<form class="register-form outer-top-xs" role="form" method="post" action="order-details.php">
 		<div class="form-group">

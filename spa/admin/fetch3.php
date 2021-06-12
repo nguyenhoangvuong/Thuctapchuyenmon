@@ -12,7 +12,7 @@ if($result > 0){
                                     <th>Tên</th>
                                     <th>Số điện thoại</th>
                                     <th>Ngày tạo</th>
-                                    <th>Thao tác</th>
+                                    <th style="width:18%">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>

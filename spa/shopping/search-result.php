@@ -2,6 +2,13 @@
 session_start();
 error_reporting(0);
 include('../includes/dbconnection.php');
+if (!function_exists('currency_format')) {
+    function currency_format($number, $suffix = 'đ') {
+        if (!empty($number)) {
+            return number_format($number, 0, ',', '.') . "{$suffix}";
+        }
+    }
+}
 $find="%{$_POST['product']}%";
 if(isset($_GET['action']) && $_GET['action']=="add"){
 	$id=intval($_GET['id']);
@@ -135,7 +142,7 @@ header('location:login.php');
                         <div class="item">
                             <div class="image">
                                 <div class="full-width-slider" style="width:830px">
-                                    <div class="item" style="background-image: url(assets/images/sliders/slider1.png);">
+                                    <div class="item" style="background-image: url(assets/images/3.jpg);">
                                     </div>
                                 </div>
                             </div>
@@ -161,7 +168,7 @@ header('location:login.php');
 										while ($row=mysqli_fetch_array($ret)) 
 										{?>
                                         <div class="col-sm-6 col-md-4 wow fadeInUp">
-                                            <div class="products">
+                                            <div class="products loadmore">
                                                 <div class="product">
                                                     <div class="product-image">
                                                         <div class="image">
@@ -182,11 +189,11 @@ header('location:login.php');
 
                                                         <div class="product-price">
                                                             <span class="price">
-                                                                <?php echo htmlentities($row['Giasanpham']);?>
-                                                                VNĐ</span>
+                                                                <?php echo currency_format(htmlentities($row['Giasanpham']));?>
+                                                                </span>
                                                             <span
-                                                                class="price-before-discount"><?php echo htmlentities($row['productPriceBeforeDiscount']);?>
-                                                                VNĐ</span>
+                                                                class="price-before-discount"><?php echo currency_format(htmlentities($row['productPriceBeforeDiscount']));?>
+                                                                </span>
 
                                                         </div>
                                                     </div>

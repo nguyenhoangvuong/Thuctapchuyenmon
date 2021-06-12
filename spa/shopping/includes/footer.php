@@ -16,13 +16,13 @@
 <body>
     <!-- Banner -->
 
-    <div class="banner-box f-slider-4">
+    <div class="banner-box" style="background-image: url(../images/slides2.jpg);">
         <!-- slider text container -->
         <div class="banner-text-container">
             <div class="banner-text">
                 <span>Limited Offer</span>
-                <strong>30% of</br>with <font>promo code</font></strong>
-                <a href="#" class="banner-btn">Shop now</a>
+                <strong>30% of</br>with <font>pro</font></strong>
+                <a href="index.php" class="banner-btn">Shop now</a>
             </div>
         </div>
     </div>

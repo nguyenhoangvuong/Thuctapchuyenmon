@@ -146,7 +146,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                             <?php
 							$ret=mysqli_query($con,"select tblsanpham.Tensanpham,tblsanpham.Giasanpham  
 								from  tblhoadon 
-								join tblsanpham on tblsanpham.ID=tblhoadon.SanphamIdđê 
+								join tblsanpham on tblsanpham.ID=tblhoadon.SanphamId 
 								where tblhoadon.BillId='$invid'");
 							$cnt=1;
 							while ($row=mysqli_fetch_array($ret)) {

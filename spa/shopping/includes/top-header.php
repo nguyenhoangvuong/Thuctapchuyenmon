@@ -4,7 +4,7 @@
 session_start();
 include('../includes/syle.css');
 ?>
-<div class="top-bar animate-dropdown"style="background-image: url('../img/background.jpg');">
+<div class="top-bar animate-dropdown" style="background-color:#F8D0C2;">
     <div class="container">
         <div class="header-top-inner">
             <div class="cnt-account">
@@ -12,7 +12,7 @@ include('../includes/syle.css');
                     <?php if(strlen($_SESSION['login']))
 						{   ?>
                     <li><a href="https://www.facebook.com/vuongml0123/" style="color:white"><i class="icon fa fa-key"></i>Xin chào :
-                             <?php echo htmlentities($_SESSION['username']);?></a></li>
+                             <?php echo htmlentities($_SESSION['login']);?></a></li>
                     <?php } ?>
 
                     <li><a href="my-account.php" style="color:white"><i class="icon fa fa-user"></i>Tài khoản của tôi</a></li>
@@ -31,7 +31,7 @@ include('../includes/syle.css');
             <div class="cnt-block">
                 <ul class="list-unstyled list-inline">
                     <li class="dropdown dropdown-small">
-                        <a href="track-orders.php" class="dropdown-toggle" style="color:white;background-color:#6BC3D1;font-size:15px"><span class="key">Theo dõi đặt hàng</b></a>
+                        <a href="track-orders.php" class="dropdown-toggle" style="color:#ffff00;font-size:15px;font-family:times new roman"><span class="key">THEO DÕI ĐẶT HÀNG</b></a>
                     </li>
                 </ul>
             </div>

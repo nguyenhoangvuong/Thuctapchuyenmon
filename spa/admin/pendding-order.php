@@ -9,7 +9,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
     if(isset($_POST['submit2'])){
         $status = $_POST['status'];
         $remark = $_POST['remark'];
-        $query = mysqli_query($con,"insert into tbltheodoilichsu(OrderId,Trangthai,Nhanxet) values('$oid','$status',$remark)");
+        $query = mysqli_query($con,"insert into tbltheodoilichsu(OrderId,Trangthai,Nhanxet) values('$oid','$status','$remark')");
         $sql = mysqli_query($con,"update tblorders set Tinhtrangorder = '$status' where Id = '$oid'");
         echo "<script>alert('Đơn đã được cập nhật !');</script>";
     }
@@ -82,7 +82,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                 <tbody>
                                     <?php
                                 $status = 'Delivered';
-								$ret=mysqli_query($con,"select tblusers.Ten as username,tblusers.Email as useremail,tblusers.Lienhe as usercontact,tblusers.Diachigiaohang as shippingaddress,tblusers.Thanhphovanchuyen as shippingcity,tblusers.Trangthaivanchuyen as shippingstate,tblusers.Mapinvanchuyen as shippingpincode,tblsanpham.Tensanpham as productname,tblsanpham.Phivanchuyen as shippingcharge,tblorders.Soluong as quantity,tblorders.Ngayorder as orderdate,tblsanpham.Giasanpham as productprice,tblorders.Id as id from tblorders join tblusers on tblorders.UserId = tblusers.Id join tblsanpham on tblsanpham.Id = tblorders.SanphamId where tblorders.Tinhtrangorder is null or tblorders.Tinhtrangorder !='$status'");
+								$ret=mysqli_query($con,"select tblusers.Ten as username,tblusers.Email as useremail,tblusers.Lienhe as usercontact,tblusers.Diachigiaohang as shippingaddress,tblusers.Thanhphovanchuyen as shippingcity,tblusers.Mapinvanchuyen as shippingpincode,tblsanpham.Tensanpham as productname,tblsanpham.Phivanchuyen as shippingcharge,tblorders.Soluong as quantity,tblorders.Ngayorder as orderdate,tblsanpham.Giasanpham as productprice,tblorders.Id as id from tblorders join tblusers on tblorders.UserId = tblusers.Id join tblsanpham on tblsanpham.Id = tblorders.SanphamId where tblorders.Tinhtrangorder is null or tblorders.Tinhtrangorder !='$status'");
 								$cnt=1;
 								while ($row=mysqli_fetch_array($ret)) {
 							?>
@@ -90,7 +90,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                         <th scope="row"><?php echo $cnt;?></th>
                                         <td><?php  echo $row['username'];?></td>
                                         <td><?php  echo $row['useremail']." | ".$row['usercontact'];?></td>
-                                        <td><?php  echo $row['shippingaddress'].", ".$row['shippingcity'].", ".$row['shippingstate'].", ".$row['shippingpincode'];?>
+                                        <td><?php  echo $row['shippingaddress'].", ".$row['shippingcity'].",".$row['shippingpincode'];?>
                                         </td>
                                         <td><?php  echo $row['productname'];?></td>
                                         <td><?php  echo $row['quantity'];?></td>

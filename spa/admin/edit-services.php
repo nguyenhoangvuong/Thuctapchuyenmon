@@ -84,13 +84,14 @@ if(isset($_POST['submit']))
                                         value="<?php  echo $row['Chiphi'];?>" required="true"> </div>
                                 <?php } ?>
                                 <button type="submit" name="submit" class="btn btn-default">Cập nhật</button>
+                                <a href="manage-services.php" type="submit" name="submit" class="btn btn-default">Trở về</a>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-            <?php include_once('includes/footer.php');?>
         </div>
+        <?php include_once('includes/footer.php');?>
         <script src="js/classie.js"></script>
         <script>
         var menuLeft = document.getElementById('cbp-spmenu-s1'),

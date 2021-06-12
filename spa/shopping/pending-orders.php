@@ -10,6 +10,14 @@ else{
 	if (isset($_GET['id'])) {
 		mysqli_query($con,"delete from tblorders  where UserId='".$_SESSION['id']."' and Tinhtrangorder is null and Id='".$_GET['id']."' ");
 	}
+
+    if (!function_exists('currency_format')) {
+        function currency_format($number, $suffix = 'đ') {
+            if (!empty($number)) {
+                return number_format($number, 0, ',', '.') . "{$suffix}";
+            }
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -66,24 +74,24 @@ else{
         <div class="container">
             <div class="row inner-bottom-sm">
                 <div class="shopping-cart">
-                    <div class="col-md-12 col-sm-12 shopping-cart-table ">
+                <div class="col-md-12 col-sm-12 shopping-cart-table ">
                     <h2 align="center" style="margin-top:-20px">Đơn hàng</h2>
                         <div class="table-responsive">
                             <form name="cart" method="post">
 
-                                <table class="table" style="border:1px solid #6AC2D6">
+                                <table class="table" style="border:0px">
                                     <thead>
-                                        <tr style="background-color:#6AC2D6;color:white">
+                                        <tr style="background-color:#EEEEEE;color:black" style="border:0px">
                                             <th style="font-family:times new roman" class="cart-romove item">#</th>
                                             <th style="font-family:times new roman" class="cart-description item">Hình ảnh</th>
                                             <th style="font-family:times new roman" class="cart-product-name item">Tên sản phẩm</th>
 
-                                            <th style="font-family:times new roman" class="cart-qty item">Số lượng</th>
+                                            <th style="font-family:times new roman" class="cart-qty item">SL</th>
                                             <th style="font-family:times new roman" class="cart-sub-total item">Giá mỗi đơn vị</th>
-                                            <th style="font-family:times new roman" class="cart-sub-total item">Phí vận chuyển</th>
+                                            <th style="font-family:times new roman" class="cart-sub-total item">Phí</th>
                                             <th style="font-family:times new roman" class="cart-total">Tổng</th>
-                                            <th style="font-family:times new roman" class="cart-total item">Phương thức thanh toán</th>
-                                            <th style="font-family:times new roman" class="cart-description item">Ngày đặt hàng</th>
+                                            <th style="font-family:times new roman" class="cart-total item">PTTT</th>
+                                            <th style="font-family:times new roman" class="cart-description item">Ngày đặt</th>
                                             <th style="font-family:times new roman" class="cart-total last-item">Thao tác</th>
                                         </tr>
                                     </thead>
@@ -97,7 +105,7 @@ else{
 											while($row=mysqli_fetch_array($query))
 											{
 										?>
-                                        <tr style="border:1px solid #6AC2D6;font-size:1.7rem">
+                                        <tr style="border:0px;font-size:1.7rem">
                                             <td><?php echo $cnt;?></td>
                                             <td class="cart-image">
                                                 <a class="entry-thumbnail" href="detail.html">
@@ -106,7 +114,7 @@ else{
                                                 </a>
                                             </td>
                                             <td class="cart-product-name-info">
-                                                <h4 class='cart-product-description'><a
+                                                <h4 class='cart-product-description'><a style="font-family:times new roman;"
                                                         href="product-details.php?pid=<?php echo $row['opid'];?>">
                                                         <?php echo $row['pname'];?></a></h4>
 
@@ -115,16 +123,16 @@ else{
                                             <td class="cart-product-quantity">
                                                 <?php echo $qty=$row['qty']; ?>
                                             </td>
-                                            <td class="cart-product-sub-total"><?php echo $price=$row['pprice']; ?>
+                                            <td class="cart-product-sub-total"><?php echo currency_format($price=$row['pprice']); ?>
                                             </td>
                                             <td class="cart-product-sub-total">
-                                                <?php echo $shippcharge=$row['shippingcharge']; ?> </td>
+                                                <?php echo currency_format($shippcharge=$row['shippingcharge']); ?> </td>
                                             <td class="cart-product-grand-total">
-                                                <?php echo (($qty*$price)+$shippcharge);?></td>
+                                                <?php echo currency_format(($qty*$price)+$shippcharge);?></td>
                                             <td class="cart-product-sub-total"><?php echo $row['paym']; ?> </td>
                                             <td class="cart-product-sub-total"><?php echo $row['odate']; ?> </td>
 
-                                            <td><a href="pending-orders.php?id=<?php echo $row['orderid']?>&del=delete" onClick="return confirm('Are you sure you want to delete?')">Delete</td>
+                                            <td><a class="btn btn-danger" href="pending-orders.php?id=<?php echo $row['orderid']?>&del=delete" onClick="return confirm('Are you sure you want to delete?')">Xóa</td>
   
 											</tr>
                                         <?php $cnt=$cnt+1;} ?>

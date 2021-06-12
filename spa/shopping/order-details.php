@@ -2,6 +2,13 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
+if (!function_exists('currency_format')) {
+    function currency_format($number, $suffix = 'đ') {
+        if (!empty($number)) {
+            return number_format($number, 0, ',', '.') . "{$suffix}";
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +43,6 @@ include('includes/config.php');
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
 		<link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
 		<link rel="shortcut icon" href="assets/images/favicon.ico">
-		<link rel="stylesheet" type="text/css" href="css/style1.css">
     <link type="text/css" rel="stylesheet" href="css/lightslider.css" />s
 	<script language="javascript" type="text/javascript">
 var popUpWin=0;
@@ -74,19 +80,19 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 				<div class="col-md-12 col-sm-12 shopping-cart-table ">
 	<div class="table-responsive">
 <form name="cart" method="post">	
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th class="cart-romove item">#</th>
-					<th class="cart-description item">Hình ảnh</th>
-					<th class="cart-product-name item">Tên sản phẩm</th>
+		<table class="table table-bordered" style="border:0px;font-family:times new roman">
+			<thead style="border:0px;background-color:#EEEEEE">
+				<tr style="border:0px">
+					<th class="cart-romove item" style="border:0px;font-family:times new roman">#</th>
+					<th class="cart-description item"style="border:0px;font-family:times new roman">Hình ảnh</th>
+					<th class="cart-product-name item" style="border:0px;font-family:times new roman">Tên sản phẩm</th>
 			
-					<th class="cart-qty item">Số lượng</th>
-					<th class="cart-sub-total item">Giá mỗi spham</th>
-					<th class="cart-total item">Tổng</th>
-					<th class="cart-total item">Phương thức thanh toán</th>
-					<th class="cart-description item">Ngày order</th>
-					<th class="cart-total last-item">Thao tác</th>
+					<th class="cart-qty item" style="border:0px;font-family:times new roman">SL</th>
+					<th class="cart-sub-total item" style="border:0px;font-family:times new roman">Giá</th>
+					<th class="cart-total item" style="border:0px;font-family:times new roman">Tổng</th>
+					<th class="cart-total item" style="border:0px;font-family:times new roman">PTTT</th>
+					<th class="cart-description item" style="border:0px;font-family:times new roman">Ngày order</th>
+					<th class="cart-total last-item" style="border:0px;font-family:times new roman">Thao tác</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -106,11 +112,11 @@ while($row=mysqli_fetch_array($query))
 					<td><?php echo $cnt;?></td>
 					<td class="cart-image">
 						<a class="entry-thumbnail" href="detail.html">
-							<img src="admin/productimages/<?php echo htmlentities($row['pname']);?>/<?php echo htmlentities($row['pimg1']);?>" alt="<?php echo htmlentities($row['pimg1']);?>" width="60" height="100">
+							<img src="../admin/productimages/<?php echo htmlentities($row['pname']);?>/<?php echo htmlentities($row['pimg1']);?>" alt="<?php echo htmlentities($row['pimg1']);?>" width="60" height="100">
 						</a>
 					</td>
 					<td class="cart-product-name-info">
-						<h4 class='cart-product-description'><a href="product-details.php?pid=<?php echo $row['opid'];?>">
+						<h4 class='cart-product-description'><a style="font-family:times new roman" href="product-details.php?pid=<?php echo $row['opid'];?>">
 						<?php echo $row['pname'];?></a></h4>
 						
 						
@@ -118,17 +124,17 @@ while($row=mysqli_fetch_array($query))
 					<td class="cart-product-quantity">
 						<?php echo $qty=$row['qty']; ?>   
 		            </td>
-					<td class="cart-product-sub-total"><?php echo $price=$row['pprice']; ?>  </td>
-					<td class="cart-product-grand-total"><?php echo $qty*$price;?></td>
-					<td class="cart-product-sub-total"><?php echo $row['paym']; ?>  </td>
-					<td class="cart-product-sub-total"><?php echo $row['odate']; ?>  </td>
+					<td class="cart-product-sub-total" style="font-size:1.6rem"><?php echo currency_format($price=$row['pprice']); ?>  </td>
+					<td class="cart-product-grand-total" style="font-size:1.6rem"><?php echo currency_format($qty*$price);?></td>
+					<td class="cart-product-sub-total" style="font-size:1.6rem"><?php echo $row['paym']; ?>  </td>
+					<td class="cart-product-sub-total" style="font-size:1.6rem"><?php echo $row['odate']; ?>  </td>
 					
-					<td>
- <a href="javascript:void(0);" onClick="popUpWindow('track-order.php?oid=<?php echo htmlentities($row['orderid']);?>');" title="Track order">
-					Track</td>
+					<td style="font-size:1.6rem" >
+ <a class="btn btn-danger" href="javascript:void(0);" onClick="popUpWindow('track-order.php?oid=<?php echo htmlentities($row['orderid']);?>');" title="Track order">
+					Theo dõi</td>
 				</tr>
 <?php $cnt=$cnt+1;} } else { ?>
-				<tr><td colspan="8">Either order id or  Registered email id is invalid</td></tr>
+				<tr><td colspan="8" style="font-size:1.6rem">Id đơn đặt hàng không hợp lệ</td></tr>
 				<?php } ?>
 			</tbody><!-- /tbody -->
 		</table><!-- /table -->
@@ -143,7 +149,7 @@ while($row=mysqli_fetch_array($query))
 <?php include('includes/brands-slider.php');?>
 <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->	</div><!-- /.container -->
 </div><!-- /.body-content -->
-<?php include('includes/footer.php');?>
+<?php include('includes/footer1.php');?>
 
 	<script src="assets/js/jquery-1.11.1.min.js"></script>
 	

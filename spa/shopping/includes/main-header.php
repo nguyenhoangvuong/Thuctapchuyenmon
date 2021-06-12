@@ -1,5 +1,11 @@
 <?php 
-
+if (!function_exists('currency_format')) {
+    function currency_format($number, $suffix = 'đ') {
+        if (!empty($number)) {
+            return number_format($number, 0, ',', '.') . "{$suffix}";
+        }
+    }
+}
  if(isset($_Get['action'])){
 		if(!empty($_SESSION['cart'])){
 		foreach($_POST['quantity'] as $key => $val){
@@ -11,6 +17,7 @@
 		}
 		}
 	}
+    
 ?>
 <div class="main-header" style="height:90px">
     <div class="container">
@@ -52,8 +59,8 @@ if(!empty($_SESSION['cart'])){
                             <div class="total-price-basket">
                                 <span class="lbl">Giỏ hàng -</span>
                                 <span class="total-price">
-                                    <span class="value"><?php echo $_SESSION['tp']; ?></span>
-                                    <span class="sign">VNĐ.</span>
+                                    <span class="value"><?php echo currency_format($_SESSION['tp']) ?></span>
+                                    <span class="sign"></span>
                                 </span>
                             </div>
                             <div class="basket">
@@ -94,10 +101,10 @@ if(!empty($_SESSION['cart'])){
                                     </div>
                                     <div class="col-xs-7">
 
-                                        <h3 class="name"><a
+                                        <h3 class="name"><a style="font-family:times new roman;font-size:1.5rem"
                                                 href="product-details.php?pid=<?php echo htmlentities($row['Id']);?>"><?php echo $row['Tensanpham']; ?></a></h3>
                                         <div class="price">
-                                            <?php echo ($row['Giasanpham']+$row['Phivanchuyen']); ?> x <?php echo $_SESSION['cart'][$row['Id']]['quantity']; ?> VNĐ
+                                            <?php echo currency_format(($row['Giasanpham']+$row['Phivanchuyen'])); ?> x <?php echo $_SESSION['cart'][$row['Id']]['quantity']; ?>
                                         </div>
                                     </div>
 
@@ -109,10 +116,8 @@ if(!empty($_SESSION['cart'])){
 
                             <div class="clearfix cart-total">
                                 <div class="pull-right">
-
-                                    <span class="text">Tổng :</span><span
-                                        class='price'><?php echo $_SESSION['tp']="$totalprice". ".00"; ?> VNĐ</span>
-
+                                    <span class="text" style="font-family:times new roman;font-size:1.5rem">Tổng :</span><span
+                                        class='price'><?php echo currency_format($_SESSION['tp']="$totalprice". ".00"); ?></span>
                                 </div>
 
                                 <div class="clearfix"></div>
@@ -129,8 +134,8 @@ if(!empty($_SESSION['cart'])){
                             <div class="total-price-basket">
                                 <span class="lbl">cart -</span>
                                 <span class="total-price">
-                                    <span class="sign">Rs.</span>
-                                    <span class="value">00.00</span>
+                                    <span class="sign">00.00</span>
+                                    <span class="value">VNĐ</span>
                                 </span>
                             </div>
                             <div class="basket">

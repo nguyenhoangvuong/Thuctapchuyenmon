@@ -123,7 +123,7 @@ if(isset($_POST['submit']))
                 <div class='col-md-3 sidebar'>
                     <div class="sidebar-module-container">
                         <div class="sidebar-widget outer-bottom-xs wow fadeInUp">
-                            <h3 class="section-title">Thể loại</h3>
+                            <h3 class="section-title" style="font-family:times new roman">Thể loại</h3>
                             <div class="sidebar-widget-body m-t-10">
                                 <div class="accordion">
                                     <?php $sql=mysqli_query($con,"select Id,Tentheloai  from tbltheloai");
@@ -143,7 +143,7 @@ if(isset($_POST['submit']))
                             </div>
                         </div>
                         <div class="sidebar-widget hot-deals wow fadeInUp">
-                            <h3 class="section-title">Sản phẩm nổi bật</h3>
+                            <h3 class="section-title" style="font-family:times new roman">Sản phẩm nổi bật</h3>
                             <div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-xs">
                                 <?php
 								$ret=mysqli_query($con,"select * from tblsanpham order by rand() limit 4 ");
@@ -158,18 +158,18 @@ if(isset($_POST['submit']))
                                             </div>
                                         </div>
                                         <div class="product-info text-left m-t-20">
-                                            <h3 class="name"><a
+                                            <h3 class="name"><a style="font-family:times new roman"
                                                     href="product-details.php?pid=<?php echo htmlentities($rws['Id']);?>"><?php echo htmlentities($rws['Tensanpham']);?></a>
                                             </h3>
                                             <div class="rating rateit-small"></div>
 
                                             <div class="product-price">
                                                 <span class="price">
-                                                    <?php echo htmlentities($rws['Giasanpham']);?> VNĐ
+                                                    <?php echo currency_format(htmlentities($rws['Giasanpham']));?>
                                                 </span>
                                                 <span
-                                                    class="price-before-discount"><?php echo htmlentities($rws['Giasanphamtruockhigiam']);?>
-                                                    VNĐ</span>
+                                                    class="price-before-discount"><?php echo currency_format(htmlentities($rws['Giasanphamtruockhigiam']));?>
+                                                   </span>
                                             </div>
                                         </div>
                                         <div class="cart clearfix animate-effect">
@@ -301,7 +301,7 @@ if(isset($_POST['submit']))
                                     <div class="row">
                                         <div class="col-sm-3">
                                             <div class="stock-box">
-                                                <span class="label">Khả dụng :</span>
+                                                <span class="label" style="font-family:times new roman">Khả dụng :</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-9">
@@ -316,7 +316,7 @@ if(isset($_POST['submit']))
                                     <div class="row">
                                         <div class="col-sm-3">
                                             <div class="stock-box">
-                                                <span class="label">Thương hiệu :</span>
+                                                <span class="label" style="font-family:times new roman">Thương hiệu :</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-9">
@@ -331,7 +331,7 @@ if(isset($_POST['submit']))
                                     <div class="row">
                                         <div class="col-sm-3">
                                             <div class="stock-box">
-                                                <span class="label">Phí giao hàng :</span>
+                                                <span class="label" style="font-family:times new roman">Phí giao hàng :</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-9">
@@ -342,7 +342,7 @@ if(isset($_POST['submit']))
 											}
 											else
 											{
-												echo htmlentities($row['Phivanchuyen']);
+												echo currency_format(htmlentities($row['Phivanchuyen']));
 											}
 
 											?></span>
@@ -355,10 +355,10 @@ if(isset($_POST['submit']))
                                         <div class="col-sm-6">
                                             <div class="price-box">
                                                 <span class="price">
-                                                    <?php echo htmlentities($row['Giasanpham']);?></span> VNĐ
+                                                    <?php echo currency_format(htmlentities($row['Giasanpham']));?></span>
                                                 <span
-                                                    class="price-strike"><?php echo htmlentities($row['Giasanphamtruockhigiam']);?>
-                                                    VNĐ</span>
+                                                    class="price-strike"><?php echo currency_format(htmlentities($row['Giasanphamtruockhigiam']));?>
+                                                    </span>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -378,7 +378,7 @@ if(isset($_POST['submit']))
                                     <div class="row">
 
                                         <div class="col-sm-2">
-                                            <span class="label">Số lượng :</span>
+                                            <span class="label" style="font-family:times new roman">Số lượng :</span>
                                         </div>
                                         <div class="col-sm-2">
                                             <div class="cart-quantity">
@@ -400,17 +400,16 @@ if(isset($_POST['submit']))
                                             </button>
                                             <a
                                                 href="index.php?page=product&action=add&id=<?php echo $row['Id']; ?>">
-                                                <button class="btn btn-primary" type="button">Thêm vào giỏ
+                                                <button class="btn btn-primary" type="button" style="font-family:times new roman">Thêm vào giỏ
                                                     hàng</button></a>
                                             <?php } else {?>
-                                            <div class="action" style="color:White">Hết hàng</div>
+                                            <div class="action" style="color:White" style="font-family:times new roman">Hết hàng</div>
                                             <?php } ?>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="product-social-link m-t-20 text-right">
-                                    <span class="social-label">Chia sẻ :</span>
                                     <div class="social-icons">
                                         <ul class="list-inline">
                                             <div class="fb-share-button" data-href="http://localhost:8080/Manage_Spa/spa/shopping/product-details.php?pid=2" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2FManage_Spa%2Fspa%2Fshopping%2Fproduct-details.php%3Fpid%3D2&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
@@ -431,8 +430,8 @@ if(isset($_POST['submit']))
                         <div class="row">
                             <div class="col-sm-3">
                                 <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
-                                    <li class="active"><a data-toggle="tab" href="#description">Mô tả</a></li>
-                                    <li><a data-toggle="tab" href="#review">Nhận xét</a></li>
+                                    <li class="active"><a data-toggle="tab" href="#description" style="font-family:times new roman">Mô tả</a></li>
+                                    <li><a data-toggle="tab" href="#review" style="font-family:times new roman">Nhận xét</a></li>
                                 </ul>
                             </div>
                             <div class="col-sm-9">
@@ -447,22 +446,19 @@ if(isset($_POST['submit']))
                                         <div class="product-tab">
 
                                             <div class="product-reviews">
-                                                <h4 class="title">Tất cả nhận xét</h4>
+                                                <h4 class="title" style="font-family:times new roman">Tất cả nhận xét</h4>
                                                 <?php $qry=mysqli_query($con,"select * from tbldanhgiasanpham where SanphamId='$pid'");
 											while($rvw=mysqli_fetch_array($qry))
 											{
 											?>
-                                                <div class="reviews" style="border: solid 1px #000; padding-left: 2% ">
+                                                <div class="reviews" style="border: solid 1px #EEEEEE; padding-left: 2% ">
                                                     <div class="review">
-                                                    <div class="fb-share-button" data-href="https://www.youtube.com/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.youtube.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
+                                                    <div class="fb-share-button" data-href="https://www.youtube.com/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.youtube.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ </a></div>
                                                         <div class="text">"<?php echo htmlentities($rvw['Review']);?>"
                                                         </div>
                                                         <div class="text"><b>Quality :</b>
-                                                            <?php echo htmlentities($rvw['Chatluong']);?> Star</div>
-                                                        <div class="text"><b>Price :</b>
-                                                            <?php echo htmlentities($rvw['Gia']);?> Star</div>
-                                                        <div class="text"><b>value :</b>
-                                                            <?php echo htmlentities($rvw['Giatri']);?> Star</div>
+                                                            <?php echo htmlentities($rvw['Chatluong']);?> Star<b>   Price :</b><?php echo htmlentities($rvw['Gia']);?> Star<b>   value :</b><?php echo htmlentities($rvw['Giatri']);?> Star
+                                                        </div>
                                                         <div class="author m-t-15"><i class="fa fa-pencil-square-o"></i>
                                                             <span
                                                                 class="name"><?php echo htmlentities($rvw['Ten']);?></span>
@@ -474,7 +470,7 @@ if(isset($_POST['submit']))
                                             <form role="form" class="cnt-form" name="review" method="post">
                                                 <div class="product-add-review">
                                                     <p></p>
-                                                    <h4 class="title">Viết nhận xét của bạn</h4>
+                                                    <h4 class="title" style="font-family:times new roman">Viết nhận xét của bạn</h4>
                                                     <div class="review-table">
                                                         <div class="table-responsive">
                                                             <table class="table table-bordered">
@@ -538,14 +534,14 @@ if(isset($_POST['submit']))
                                                             <div class="row">
                                                                 <div class="col-sm-6">
                                                                     <div class="form-group">
-                                                                        <label for="exampleInputName">Họ tên <span
+                                                                        <label for="exampleInputName" style="font-family:times new roman">Họ tên <span
                                                                                 class="astk">*</span></label>
                                                                         <input type="text" class="form-control txt"
                                                                             id="exampleInputName" placeholder=""
                                                                             name="name" required="required">
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="exampleInputSummary">Tóm lược <span
+                                                                        <label for="exampleInputSummary" style="font-family:times new roman">Tóm lược <span
                                                                                 class="astk">*</span></label>
                                                                         <input type="text" class="form-control txt"
                                                                             id="exampleInputSummary" placeholder=""
@@ -555,7 +551,7 @@ if(isset($_POST['submit']))
 
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
-                                                                        <label for="exampleInputReview">Nhận xét <span
+                                                                        <label for="exampleInputReview" style="font-family:times new roman" >Nhận xét <span
                                                                                 class="astk">*</span></label>
 
                                                                         <textarea class="form-control txt txt-review"
@@ -568,7 +564,7 @@ if(isset($_POST['submit']))
 
                                                             <div class="action text-right">
                                                                 <button name="submit"
-                                                                    class="btn btn-primary btn-upper">Gửi nhận xét
+                                                                    class="btn btn-primary btn-upper" style="font-family:times new roman">Gửi nhận xét
                                                                 </button>
                                                             </div>
                                             </form>
@@ -584,7 +580,7 @@ if(isset($_POST['submit']))
         <?php $cid=$row['TheloaiId'];
 			$subcid=$row['TheloaiphuId']; } ?>
         <section class="section featured-product wow fadeInUp">
-            <h3 class="section-title">Sản phẩm liên quan </h3>
+            <h3 class="section-title" style="font-family:times new roman">Sản phẩm liên quan </h3>
             <div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
                 <?php 
                     $qry=mysqli_query($con,"select * from tblsanpham where TheloaiphuId='$subcid' and TheloaiId='$cid'");
@@ -611,9 +607,9 @@ if(isset($_POST['submit']))
 
                                 <div class="product-price">
                                     <span class="price">
-                                        <?php echo htmlentities($rw['Giasanpham']);?> VNĐ </span>
+                                        <?php echo currency_format(htmlentities($rw['Giasanpham']));?></span>
                                     <span class="price-before-discount">
-                                        <?php echo htmlentities($rw['Giasanphamtruockhigiam']);?> VNĐ</span>
+                                        <?php echo currency_format(htmlentities($rw['Giasanphamtruockhigiam']));?></span>
                                 </div>
                             </div>
                             <div class="cart clearfix animate-effect">
@@ -624,7 +620,7 @@ if(isset($_POST['submit']))
                                                 <i class="fa fa-shopping-cart"></i>
                                             </button>
                                             <a href="product-details.php?page=product&action=add&id=<?php echo $rw['Id']; ?>"
-                                                class="lnk btn btn-primary">thêm vào giỏ hàng</a>
+                                                class="lnk btn btn-primary">Thêm vào giỏ hàng</a>
                                         </li>
                                     </ul>
                                 </div>

@@ -32,6 +32,7 @@ $_SESSION['aptno']=$result['Socuochen'];
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
     <title>BPMS||Trang chủ</title>
         
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
@@ -70,6 +71,7 @@ $_SESSION['aptno']=$result['Socuochen'];
 	</style>
   </head>
   <body>
+  
 	  <?php include_once('includes/header.php');?>
     <!-- END nav -->
 

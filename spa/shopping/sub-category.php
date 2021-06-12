@@ -34,6 +34,13 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
 		header('location:my-wishlist.php');
 	}
 }
+if (!function_exists('currency_format')) {
+    function currency_format($number, $suffix = 'đ') {
+        if (!empty($number)) {
+            return number_format($number, 0, ',', '.') . "{$suffix}";
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -120,7 +127,7 @@ while($row=mysqli_fetch_array($sql))
 						    <div class="image">
                                 
 								<div class="full-width-slider">
-                                    <div class="item" style="background-image: url(assets/images/sliders/slider1.png);">
+                                    <div class="item" style="background-image: url(assets/images/cover-fanpage-facebook-ladykin-korea.jpg);">
                                     </div>
                                 </div>
                             </div>
@@ -179,10 +186,10 @@ while($row=mysqli_fetch_array($sql))
 
                                                         <div class="product-price">
                                                             <span class="price">
-                                                                <?php echo htmlentities($row['Giasanpham']);?> VNĐ
+                                                                <?php echo currency_format(htmlentities($row['Giasanpham']));?>
                                                             </span>
                                                             <span class="price-before-discount">
-                                                                <?php echo htmlentities($row['Giasanphamtruockhigiam']);?> VNĐ</span>
+                                                                <?php echo currency_format(htmlentities($row['Giasanphamtruockhigiam']));?></span>
 
                                                         </div>
                                                     </div>

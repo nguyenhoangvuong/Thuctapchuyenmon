@@ -1,17 +1,20 @@
 <?php
 session_start();
 error_reporting(0);
-$sotin1trang = 10;
-$trang = $_GET['trang'];
 include('../includes/dbconnection.php');
 if (strlen($_SESSION['bpmsaid']==0)) {
   header('location:logout.php');
-  } else{
+  } 
+  else{
     if(isset($_GET['del']))
-              {
-                      mysqli_query($con,"delete from tblsanpham where Id = '".$_GET['id']."'");
-                      $_SESSION['delmsg']="Xóa thành công !!";
-              }
+        {
+            mysqli_query($con,"delete from tblsanpham where Id = '".$_GET['id']."'");
+            $_SESSION['delmsg']="Xóa thành công !!";
+        }
+
+        if(isset($_GET['search'])){
+            $b1 = $_GET['search'];
+        }
   ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -27,7 +30,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         window.scrollTo(0, 1);
     }
     </script>
-    <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="css/bootstrap22.css" rel='stylesheet' type='text/css' />
     <link href="css/style.css" rel='stylesheet' type='text/css' />
     <link href="css/font-awesome.css" rel="stylesheet">
     <script src="js/jquery-1.11.1.min.js"></script>
@@ -42,6 +45,9 @@ if (strlen($_SESSION['bpmsaid']==0)) {
     <script src="js/metisMenu.min.js"></script>
     <script src="js/custom.js"></script>
     <link href="css/custom.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
 <style>
     .alert-success {
         background: #eaf4e2;
@@ -103,8 +109,8 @@ if (strlen($_SESSION['bpmsaid']==0)) {
             <div class="main-page">
                 <div class="tables">
                     <div class="table-responsive bs-example widget-shadow">
-                        <h4>Danh sách: <a href="insert-product.php" class="btn btn-primary"> Thêm mới</a></h4>
-                        <table class="table table-bordered">
+                        
+                        <table class="table table-bordered" id="example">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -118,8 +124,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                             </thead>
                             <tbody>
                                 <?php
-                            $fr = ($trang - 1) * $sotin1trang;
-							$ret=mysqli_query($con,"select tblsanpham.*,tbltheloai.Tentheloai,tbltheloaiphu.theloaiphu from tblsanpham join tbltheloai on tbltheloai.Id=tblsanpham.TheloaiId join tbltheloaiphu on tbltheloaiphu.Id=tblsanpham.TheloaiphuId limit $fr,$sotin1trang");
+							$ret=mysqli_query($con,"select tblsanpham.*,tbltheloai.Tentheloai,tbltheloaiphu.theloaiphu from tblsanpham join tbltheloai on tbltheloai.Id=tblsanpham.TheloaiId join tbltheloaiphu on tbltheloaiphu.Id=tblsanpham.TheloaiphuId");
                             $cnt=1;
                             
 							while ($row=mysqli_fetch_array($ret)) {
@@ -132,25 +137,13 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                     <td><?php  echo $row['Sanphamcongty'];?></td>
                                     <td><?php  echo $row['Ngaydang'];?></td>
                                     <td><a href="edit-products.php?editid=<?php echo $row['Id'];?>">Sửa</a> || <a
-                                            href="manage-product.php?id=<?php echo $row['Id'];?>&del=delete"
+                                            href="manage-product.php?trang=<?php echo $trang?>&&id=<?php echo $row['Id'];?>&del=delete"
                                             onClick="return confirm('Bạn chắc chắn muốn xóa ?');">Xóa</a></td>
                                 </tr> <?php 
 								$cnt=$cnt+1;
 								}?>
                             </tbody>
                         </table>
-
-                        <div id="phantrang">
-                            <?php
-                                $ret1=mysqli_query($con,"select tblsanpham.*,tbltheloai.Tentheloai,tbltheloaiphu.theloaiphu from tblsanpham join tbltheloai on tbltheloai.Id=tblsanpham.TheloaiId join tbltheloaiphu on tbltheloaiphu.Id=tblsanpham.TheloaiphuId");
-                                $tonsotin = mysqli_num_rows($ret1);
-                                $sotrang = ceil($tonsotin / $sotin1trang);
-                                for($t = $sotrang; $t >= 1;$t--){
-                                    echo "<div style='width:100%;'><a style='color:red;margin-right:2%;float:right' href='manage-product.php?trang=$t'>Trang $t  </a></div>";
-                                }
-                            ?>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -158,6 +151,33 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         <?php include_once('includes/footer.php');?>
     </div>
     <script src="js/classie.js"></script>
+    <script>
+        $(document).ready(function() {
+
+// Cấu hình các nhãn phân trang
+$('#example').dataTable({
+    "language": {
+        "sProcessing": "Đang xử lý...",
+        "sLengthMenu": "Xem _MENU_ mục",
+        "sZeroRecords": "Không tìm thấy dòng nào phù hợp",
+        "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
+        "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
+        "sInfoFiltered": "(được lọc từ _MAX_ mục)",
+        "sInfoPostFix": "",
+        "sSearch": "Tìm:",
+        "sUrl": "",
+        "oPaginate": {
+            "sFirst": "Đầu",
+            "sPrevious": "Trước",
+            "sNext": "Tiếp",
+            "sLast": "Cuối"
+        }
+    }
+});
+
+});
+</script>
+    </script>
     <script>
     var menuLeft = document.getElementById('cbp-spmenu-s1'),
         showLeftPush = document.getElementById('showLeftPush'),
@@ -179,6 +199,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
     <script src="js/jquery.nicescroll.js"></script>
     <script src="js/scripts.js"></script>
     <script src="js/bootstrap.js"> </script>
+    
 </body>
 
 </html>

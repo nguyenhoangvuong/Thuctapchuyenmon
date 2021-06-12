@@ -35,6 +35,13 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
 		header('location:my-wishlist.php');
 	}
 }
+if (!function_exists('currency_format')) {
+    function currency_format($number, $suffix = 'đ') {
+        if (!empty($number)) {
+            return number_format($number, 0, ',', '.') . "{$suffix}";
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,6 +76,11 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
     <link rel="shortcut icon" href="assets/images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="css/style1.css">
     <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
+    <style>
+        .product{
+            display:none;
+        }
+    </style>
 </head>
 
 <body class="cnt-home">
@@ -108,8 +120,8 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
                         <h3 class="section-title" style="font-family:times new roman">shop by</h3>
                         <div class="sidebar-filter">
                             <div class="sidebar-widget wow fadeInUp outer-bottom-xs ">
-                                <div class="widget-header m-t-20">
-                                    <h4 class="widget-title" style="font-family:times new roman">Thể loại</h4>
+                                <div class="widget-header m-t-20" style="background-color:black">
+                                    <h4 class="widget-title" style="font-family:times new roman;font-size:1.7rem;color:white">Thể loại</h4>
                                 </div>
                                 <div class="sidebar-widget-body m-t-10">
                                     <?php $sql=mysqli_query($con,"select Id,Tentheloai  from tbltheloai");
@@ -119,7 +131,7 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
                                     <div class="accordion">
                                         <div class="accordion-group">
                                             <div class="accordion-heading">
-                                                <a href="category.php?cid=<?php echo $row['Id'];?>"
+                                                <a href="category.php?cid=<?php echo $row['Id'];?>" style="font-size:1.5rem;color:black"
                                                     class="accordion-toggle collapsed">
                                                     <?php echo $row['Tentheloai'];?>
                                                 </a>
@@ -138,7 +150,7 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
                             <div class="image">
 
                                 <div class="full-width-slider" style="width:840px">
-                                    <div class="item" style="background-image: url(assets/images/sliders/slider1.png);">
+                                    <div class="item" style="background-image: url(assets/images/3.jpg);">
                                     </div>
                                 </div>
                             </div>
@@ -193,11 +205,10 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
 
                                                         <div class="product-price">
                                                             <span class="price">
-                                                                <?php echo htmlentities($row['Giasanpham']);?> VNĐ
+                                                                <?php echo currency_format(htmlentities($row['Giasanpham']));?>
                                                             </span>
                                                             <span class="price-before-discount">
-                                                                <?php echo htmlentities($row['Giasanphamtruockhigiam']);?>
-                                                                VNĐ</span>
+                                                                <?php echo currency_format(htmlentities($row['Giasanphamtruockhigiam']));?></span>
                                                         </div>
                                                     </div>
                                                     <div class="cart clearfix animate-effect">
@@ -231,9 +242,9 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
                                         <div class="col-sm-6 col-md-4 wow fadeInUp">
                                             <h3 style="font-family:times new roman">Không tìm thấy sản phẩm nào</h3>
                                         </div>
-
                                         <?php } ?>
                                     </div>
+                                    <button class="btn btn-danger center-block loadMore">Xem thêm</button>
                                 </div>
                             </div>
                         </div>
@@ -272,6 +283,17 @@ if(isset($_GET['pid']) && $_GET['action']=="wishlist" ){
         $(window).bind("load", function() {
             $('.show-theme-options').delay(2000).trigger('click');
         });
+        </script>
+        <script>
+            $(".product").slice(0,6).show();
+
+            $(".loadMore").on("click",function(){
+                $(".product:hidden").slice(0,6).show();
+
+                if($(".product:hidden").length == 0){
+                    $(".loadMore").fadeOut();
+                }
+            })
         </script>
 </body>
 

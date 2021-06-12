@@ -84,7 +84,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                 <div class="forms">
                     <div class="form-grids row widget-shadow" data-example-id="basic-forms">
                     <div class="form-title">
-                            <h4>Sửa sản phẩm</h4>
+                            <h4>Sửa sản phẩm <a href="manage-product.php" type="submit" name="submit" class="btn btn-default">Trở lại</a></h4>
                         </div>
                         <div class="form-body">
                         <form class="form-horizontal row-fluid" name="insertproduct" method="post"
@@ -252,8 +252,8 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                     </div>
                 </div>
             </div>
-            <?php include_once('includes/footer.php');?>
         </div>
+        <?php include_once('includes/footer.php');?>
         <script src="js/classie.js"></script>
         <script>
         var menuLeft = document.getElementById('cbp-spmenu-s1'),

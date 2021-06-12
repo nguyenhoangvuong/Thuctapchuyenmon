@@ -91,8 +91,6 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 						}?>
                                 </tbody>
                             </table>
-                            <input type="hidden" name="file_content" id="file_content" />
-                            <button type="button" name="convert" id="convert" class="btn btn-primary">Convert</button>
                         </form>
                     </div>
                 </div>
