@@ -13,26 +13,30 @@ Giảng viên: Thầy Nguyễn Lê Minh. 
 
 ## Phần 2: Các chức năng đã hoàn thành:
 1. Xây dựng được cơ sở dữ liệu.
-2. Đăng nhập, đăng xuất, đổi mật khẩu, dùng gmail và số điện thoại đã cung cấp để đổi lại mật khẩu.
+2. Đăng nhập, đăng xuất, đổi mật khẩu, dùng gmail và số điện thoại đã cung cấp để đổi lại mật khẩu, có đăng nhập facebook nhưng chưa dùng để mua được.
 3. Đặt lịch, duyệt lịch.
-4. Thêm sửa xóa.
-5. Thống kê doanh thu,khách,...
+4. Thêm, sửa, xóa, xem chi tiết các hóa đơn.
+5. Thống kê doanh thu theo các mục, khách, cuộc hẹn...
 6. Thêm sản phẩm vào giỏ hàng.
-7. Thanh toán COD.
+7. Thanh toán COD,thanh toán online qua Paypal.
 8. Mã hóa mật khẩu sang MD5
-9. Tìm kiếm.
+9. Chat Messenger, Zalo, Live Chat, Chia sẻ trang.
 10. Tạo được danh sách yêu thích.
 11. Lịch sử đơn hàng
-12. Theo dõi đơn hàng
+12. Theo dõi đơn hàng đã mua,đơn hàng chưa duyệt và đơn hàng chưa thanh toán
 14. Xuất hóa đơn.
 15. Duyệt đơn hàng.
-16. Nhận xét và đánh giá sản phẩm
+16. Nhận xét và đánh giá sản phẩm.
 17. Gửi Gmail thông báo về lịch đặt.
+18. Xuất Excel các dịch vụ, Cuộc hẹn.
+19. Phân trang, xem thêm sản phẩm, gợi ý các sản phẩm liên quan,đưa ra sản phẩm nổi bật.
+20. Tạo địa chỉ cho shop(google map).
+21. Tìm kiếm teo nhiều cột.
+22. Quản lý các mục sản phẩm, thể loại, thể lọai phụ, hóa đơn đơn hàng, khách hàng,...
+23. Xem báo cáo doanh thu theo tháng,năm,..
 
 ## Phần 3: Các chức năng chưa hoàn thành:
-1. Thanh toán online.
-2. Trò chuyện với admin.
-3. Đăng nhập facebook,gmail.
+1. Đăng nhập gmail.
 
 ## Hướng dẫn sử dụng:
 1. Tải xuống tệp zip.
