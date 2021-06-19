@@ -10,30 +10,48 @@ Giảng viên: Thầy Nguyễn Lê Minh. 
 1. Visual Studio Code
 2. MySql
 3. XAMPP
+4. HTML/CSS/JS
+5. API Google, Facebook, Paypal
 
 ## Phần 2: Các chức năng đã hoàn thành:
-1. Xây dựng được cơ sở dữ liệu.
-2. Đăng nhập, đăng xuất, đổi mật khẩu, dùng gmail và số điện thoại đã cung cấp để đổi lại mật khẩu, có đăng nhập facebook nhưng chưa dùng để mua được.
-3. Đặt lịch, duyệt lịch.
-4. Thêm, sửa, xóa, xem chi tiết các hóa đơn.
-5. Thống kê doanh thu theo các mục, khách, cuộc hẹn...
-6. Thêm sản phẩm vào giỏ hàng.
-7. Thanh toán COD,thanh toán online qua Paypal.
-8. Mã hóa mật khẩu sang MD5
-9. Chat Messenger, Zalo, Live Chat, Chia sẻ trang.
-10. Tạo được danh sách yêu thích.
-11. Lịch sử đơn hàng
-12. Theo dõi đơn hàng đã mua,đơn hàng chưa duyệt và đơn hàng chưa thanh toán
-14. Xuất hóa đơn.
-15. Duyệt đơn hàng.
-16. Nhận xét và đánh giá sản phẩm.
-17. Gửi Gmail thông báo về lịch đặt.
-18. Xuất Excel các dịch vụ, Cuộc hẹn.
-19. Phân trang, xem thêm sản phẩm, gợi ý các sản phẩm liên quan,đưa ra sản phẩm nổi bật.
-20. Tạo địa chỉ cho shop(google map).
-21. Tìm kiếm teo nhiều cột.
-22. Quản lý các mục sản phẩm, thể loại, thể lọai phụ, hóa đơn đơn hàng, khách hàng,...
-23. Xem báo cáo doanh thu theo tháng,năm,..
+1. Xây dựng cơ sở dữ liệu.
+2. Đăng nhập : Tài khoản đăng ký, Facebook
+3. Đăng xuất, xóa phiên làm việc
+4. Đổi mật khẩu, dùng gmail và số điện thoại đã cung cấp để đổi lại mật khẩu.
+5. Đặt lịch hẹn, duyệt lịch hẹn.
+6. Quản lý sản phẩm.
+7. Quản lý thể loại, thể loại phụ.
+8. Quản lý dịch vụ.
+9. Quản lý cuộc hẹn.
+10. Xuất Excel.
+11. Hiển thị tổng tiền.
+12. Quản lý hóa đơn, duyệt hóa đơn.
+13. Quản lý khách hàng, người dùng.
+14. Thống kê doanh thu.
+15. Thêm sản phẩm vào giỏ hàng.
+16. Thanh toán COD, thanh toán online qua Paypal.
+17. Mã hóa mật khẩu sang MD5
+18. Chat Messenger, Zalo, Live Chat, Chia sẻ trang.
+19. Tạo được danh sách yêu thích.
+20. Theo dõi lịch sử mua hàng.
+21. Theo dõi đơn hàng đã mua,đơn hàng chưa duyệt và đơn hàng chưa thanh toán.
+22. Xuất PDF.
+23. Tìm kiếm tự động đề xuất hoàn thành từ khóa(user), tìm kiếm theo nhiều cột(admin)
+24. Nhận xét và đánh giá sản phẩm.
+25. Gửi Gmail thông báo về lịch đặt.
+26. Lọc giá sản phẩm.
+27. Phân trang.
+28. Xử lý page not found.
+29. Xem thêm sản phẩm
+30. Gợi ý các sản phẩm liên quan.
+31. Tạo được sản phẩm nổi bật, sản phẩm mới.
+32. Tạo được sản phẩm freeship.
+33. Tạo được sản phẩm giảm giá nhiều.
+34. Tạo địa chỉ cho shop(google map).
+35. Tìm kiếm teo nhiều cột.
+36. Xem báo cáo doanh thu theo tháng,năm.
+37. Hiển thị thông tin chi tiết sản phẩm.
+38. Deploy website.
 
 ## Phần 3: Các chức năng chưa hoàn thành:
 1. Đăng nhập gmail.
