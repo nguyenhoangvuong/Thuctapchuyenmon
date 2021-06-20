@@ -7,28 +7,14 @@ if(strlen($_SESSION['login'])==0)
 header('location:index.php');
 }
 else{
-	// code for billing address updation
-	if(isset($_POST['update']))
-	{
-		$baddress=$_POST['billingaddress'];
-		$bstate=$_POST['bilingstate'];
-		$bcity=$_POST['billingcity'];
-		$bpincode=mt_rand(1000, 9999);
-		$query=mysqli_query($con,"update users set Diachithanhtoan='$baddress',Trangthaithanhtoan='$bstate',Thanhphothanhtoan='$bcity',Mapinthanhtoan='$bpincode' where Id='".$_SESSION['id']."'");
-		if($query)
-		{
-echo "<script>alert('Địa chỉ thanh toán đã được cập nhật');</script>";
-		}
-	}
-
 
 	if(isset($_POST['shipupdate']))
 	{
 		$saddress=$_POST['shippingaddress'];
 		$sstate=$_POST['shippingstate'];
 		$scity=$_POST['shippingcity'];
-		$spincode=$_POST['shippingpincode'];
-		$query=mysqli_query($con,"update users set Diachigiaohang='$saddress',Trangthaivanchuyen='$sstate',Thanhphovanchuyen='$scity',Mapinvanchuyen='$spincode' where Id='".$_SESSION['id']."'");
+		$spincode=mt_rand(1000, 9999);
+		$query=mysqli_query($con,"update tblusers set Diachigiaohang='$saddress',Thanhphovanchuyen='$scity',Mapinvanchuyen='$spincode' where Id='".$_SESSION['id']."'");
 		if($query)
 		{
 echo "<script>alert('Địa chỉ giao hàng đã được cập nhật');</script>";
@@ -42,7 +28,6 @@ echo "<script>alert('Địa chỉ giao hàng đã được cập nhật');</scri
 <html lang="en">
 
 <head>
-    <!-- Meta -->
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -52,8 +37,6 @@ echo "<script>alert('Địa chỉ giao hàng đã được cập nhật');</scri
     <meta name="robots" content="all">
 
     <title>My Account</title>
-
-    <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
     <!-- Customizable CSS -->
@@ -85,17 +68,10 @@ echo "<script>alert('Địa chỉ giao hàng đã được cập nhật');</scri
 
 <body class="cnt-home">
     <header class="header-style-1">
-
-        <!-- ============================================== TOP MENU ============================================== -->
         <?php include('includes/top-header.php');?>
-        <!-- ============================================== TOP MENU : END ============================================== -->
         <?php include('includes/main-header.php');?>
-        <!-- ============================================== NAVBAR ============================================== -->
         <?php include('includes/menu-bar.php');?>
-        <!-- ============================================== NAVBAR : END ============================================== -->
-
     </header>
-    <!-- ============================================== HEADER : END ============================================== -->
     <div class="breadcrumb">
         <div class="container">
             <div class="breadcrumb-inner">
@@ -103,10 +79,9 @@ echo "<script>alert('Địa chỉ giao hàng đã được cập nhật');</scri
                     <li><a href="index.php">Home</a></li>
                     <li class='active'>Thanh toán</li>
                 </ul>
-            </div><!-- /.breadcrumb-inner -->
-        </div><!-- /.container -->
-    </div><!-- /.breadcrumb -->
-
+            </div>
+        </div>
+    </div>
     <div class="body-content outer-top-bd">
         <div class="container">
             <div class="checkout-box inner-bottom-sm">
@@ -141,23 +116,19 @@ while($row=mysqli_fetch_array($query))
                                                     <span style="color:red">*</span></label>
                                                 <input type="text" class="form-control unicase-form-control text-input"
                                                     id="shippingpincode" name="shippingpincode"
-                                                    value="<?php echo $bpincode;?>" readonly>
+                                                    value="<?php echo $spincode;?>" readonly>
                                             </div>
-
-
                                             <button type="submit" name="shipupdate"
                                                 class="btn-upper btn btn-primary checkout-page-button">Cập nhật</button>
                                         </form>
                                         <?php } ?>
                                 </div>
                             </div>
-                            <!-- checkout-step-02  -->
-
-                        </div><!-- /.checkout-steps -->
+                        </div>
                     </div>
                     <?php include('includes/myaccount-sidebar2.php');?>
-                </div><!-- /.row -->
-            </div><!-- /.checkout-box -->
+                </div>
+            </div>
             <?php include('includes/brands-slider.php');?>
 
         </div>
@@ -178,8 +149,6 @@ while($row=mysqli_fetch_array($query))
     <script src="assets/js/bootstrap-select.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/scripts.js"></script>
-
-    <!-- For demo purposes – can be removed on production -->
 
     <script src="switchstylesheet/switchstylesheet.js"></script>
 

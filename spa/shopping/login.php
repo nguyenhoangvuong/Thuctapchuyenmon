@@ -132,25 +132,27 @@ if(isset($_POST['login']))
     if(isset($_GET['code'])){
         $email=$_SESSION['login'];
         $username=$_SESSION['username'];
-        $id_fb = $_SESSION['id1'];
         $qu = mysqli_query($con,"select Email from tblusers where Email = '$email'");
         $row = mysqli_num_rows($qu);
         if($row == 0){
-            $query=mysqli_query($con,"insert into tblusers(Ten,Email,id_fb) values('$username','$email','$id_fb')");
+            $query=mysqli_query($con,"insert into tblusers(Ten,Email,id_fb) values('$username','$email','".$_SESSION['id1']."')");
             if($query)
             {
-                echo "<script>alert('Đăng nhập thành công');</script>";
-            }
-            else{
-                echo "<script>alert('Đăng nhập thất bại !');</script>";
+                $_SESSION['id'] = mysqli_insert_id($con);
+                $uip=$_SERVER['REMOTE_ADDR'];
+                mysqli_query($con,"insert into tblnhatkynguoidung(Emailnguoidung,Ipnguoidung,Trangthai) values('".$_SESSION['login']."','$uip','0')");
+                header('Location:index.php');
             }
         }
         else{
-            $qurry = mysqli_query($con,"select * from tblusers where id_fb = '$id_fb'");
-            $r = mysqli_fetch_array($qurry);
-            if($r > 0){
-                $_SESSION['id'] = $r['Id']; 
+            $qurry = mysqli_query($con,"select * from tblusers where id_fb = '".$_SESSION['id1']."'");
+            while($r = mysqli_fetch_array($qurry)){
+                $a = $r['Id'];
             }
+            $_SESSION['id'] =  $a;
+            $uip=$_SERVER['REMOTE_ADDR'];
+            mysqli_query($con,"insert into tblnhatkynguoidung(Emailnguoidung,Ipnguoidung,Trangthai) values('".$_SESSION['login']."','$uip','1')");
+            header('Location:index.php');
         }
     }
 ?>
@@ -235,13 +237,13 @@ if(isset($_POST['login']))
         </div>
     </div>
 
-    <div class="body-content outer-top-bd">
+    <div class="body-content outer-top-bd" style="font-family:times new roman">
         <div class="container">
             <div class="sign-in-page inner-bottom-sm">
                 <div class="row">
                     <div class="col-md-6 col-sm-6 sign-in">
-                        <h4 class="">Login</h4>
-                        <p class="">Chào mừng đến với Spa.</p>
+                        <h4 class="" style="font-family:times new roman;FONT-WEIGHT:800">ĐĂNG NHẬP</h4>
+                        <p class="" style="font-size:1.8rem;color:lightblue" >Chào mừng đến với Spa.</p>
                         <form class="register-form outer-top-xs" method="post">
                             <span style="color:red;">
                                 <?php
@@ -253,17 +255,17 @@ if(isset($_POST['login']))
                             </span>
                             <p></p>
                             <div class="form-group">
-                                <label class="info-title" for="exampleInputEmail1">Địa chỉ Email <span>*</span></label>
+                                <label class="info-title" for="exampleInputEmail1" style="font-size:1.8rem">Địa chỉ Email <span>*</span></label>
                                 <input type="email" name="email" class="form-control unicase-form-control text-input"
                                     id="exampleInputEmail1">
                             </div>
                             <div class="form-group">
-                                <label class="info-title" for="exampleInputPassword1">Mật khẩu <span>*</span></label>
+                                <label class="info-title" for="exampleInputPassword1" style="font-size:1.8rem">Mật khẩu <span>*</span></label>
                                 <input type="password" name="password"
                                     class="form-control unicase-form-control text-input" id="exampleInputPassword1">
                             </div>
                             <div class="radio outer-xs">
-                                <a href="forgot-password.php" class="forgot-password pull-right">Quên mật khẩu?</a>
+                                <a href="forgot-password.php" class="forgot-password pull-right" style="font-size:1.8rem">Quên mật khẩu?</a>
                             </div>
                             <button type="submit" class="btn-upper btn btn-primary checkout-page-button" name="login">Đăng nhập</button>
                                 <form action="" method="post">
@@ -274,40 +276,40 @@ if(isset($_POST['login']))
 
 
                     <div class="col-md-6 col-sm-6 create-new-account">
-                        <h4 class="checkout-subtitle">create a new account</h4>
-                        <p class="text title-tag-line">Tạo tài khoản mua sắm cho riêng bạn.</p>
+                        <h4 class="checkout-subtitle" style="font-family:times new roman;FONT-WEIGHT:800">Tạo tài khoản mới</h4>
+                        <p class="text title-tag-line" style="font-size:1.8rem;color:lightblue">Tạo tài khoản mua sắm cho riêng bạn.</p>
                         <form class="register-form outer-top-xs" role="form" method="post" name="register"
                             onSubmit="return valid();">
                             <div class="form-group">
-                                <label class="info-title" for="fullname">Họ tên đầy đủ <span>*</span></label>
+                                <label class="info-title" for="fullname" style="font-size:1.8rem">Họ tên đầy đủ <span>*</span></label>
                                 <input type="text" class="form-control unicase-form-control text-input" id="fullname"
                                     name="fullname" required="required">
                             </div>
 
 
                             <div class="form-group">
-                                <label class="info-title" for="exampleInputEmail2">Địa chỉ Email. <span>*</span></label>
+                                <label class="info-title" for="exampleInputEmail2" style="font-size:1.8rem">Địa chỉ Email. <span>*</span></label>
                                 <input type="email" class="form-control unicase-form-control text-input" id="email"
                                     onBlur="userAvailability()" name="emailid" required>
                                 <span id="user-availability-status1" style="font-size:12px;"></span>
                             </div>
 
                             <div class="form-group">
-                                <label class="info-title" for="contactno">Liên hệ. <span>*</span></label>
+                                <label class="info-title" for="contactno" style="font-size:1.8rem">Liên hệ. <span>*</span></label>
                                 <input type="text" class="form-control unicase-form-control text-input" id="contactno"
                                     name="contactno" maxlength="10" required>
                             </div>
 
-                            <div class="form-group">
-                                <label class="info-title" for="password">Mật khẩu. <span>*</span></label>
-                                <input type="password" class="form-control unicase-form-control text-input"
+                            <div class="form-group" >
+                                <label class="info-title" for="password" style="font-size:1.8rem">Mật khẩu. <span>*</span></label>
+                                <input type="password" class="form-control unicase-form-control text-input" style="font-size:1.8rem"
                                     id="password" name="password" required>
                             </div>
 
                             <div class="form-group">
-                                <label class="info-title" for="confirmpassword">Xác nhận mật khẩu.
+                                <label class="info-title" for="confirmpassword" style="font-size:1.8rem">Xác nhận mật khẩu.
                                     <span>*</span></label>
-                                <input type="password" class="form-control unicase-form-control text-input"
+                                <input type="password" class="form-control unicase-form-control text-input" style="font-size:1.8rem"
                                     id="confirmpassword" name="confirmpassword" required>
                             </div>
 
@@ -315,7 +317,7 @@ if(isset($_POST['login']))
                             <button type="submit" name="submit" class="btn-upper btn btn-primary checkout-page-button"
                                 id="submit">Đăng ký</button>
                         </form>
-                        <span class="checkout-subtitle outer-top-xs">Đăng ký ngay hôm nay bạn có thể : </span>
+                        <span class="checkout-subtitle outer-top-xs" style="font-family:times new roman">Đăng ký ngay hôm nay bạn có thể : </span>
                         <div class="checkbox">
                             <label class="checkbox">
                                 Tăng tốc theo cách của bạn thông qua thanh toán.

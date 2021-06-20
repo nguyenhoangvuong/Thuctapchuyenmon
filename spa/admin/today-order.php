@@ -72,11 +72,9 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                         <th>Tên</th>
                                         <th>Email / SĐT</th>
                                         <th>Địa chỉ giao hàng</th>
-                                        <th>Sản phẩm</th>
-                                        <th>Số lượng</th>
                                         <th>Tổng tiền</th>
                                         <th>Ngày đặt</th>
-                                        <th>Thao tác</th>
+                                        <th colspan="2" style="text-align:center">Thao Tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -85,7 +83,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                 $from = date('Y-m-d')." ".$f1;
                                 $t1 ="23:59:59";
                                 $to = date('Y-m-d')." ".$t1; 
-								$ret=mysqli_query($con,"select tblusers.Ten as username,tblusers.Email as useremail,tblusers.Lienhe as usercontact,tblusers.Diachigiaohang as shippingaddress,tblusers.Thanhphovanchuyen as shippingcity,tblusers.Mapinvanchuyen as shippingpincode,tblsanpham.Tensanpham as productname,tblsanpham.Phivanchuyen as shippingcharge,tblorders.Soluong as quantity,tblorders.Ngayorder as orderdate,tblsanpham.Giasanpham as productprice,tblorders.Id as id from tblorders join tblusers on tblorders.UserId = tblusers.Id join tblsanpham on tblsanpham.Id = tblorders.SanphamId where tblorders.Ngayorder between '$from' and '$to'");
+								$ret=mysqli_query($con,"select tblusers.Ten as username,tblusers.Email as useremail,tblusers.Lienhe as usercontact,tblusers.Diachigiaohang as shippingaddress,tblusers.Thanhphovanchuyen as shippingcity,tblusers.Mapinvanchuyen as shippingpincode,tblorders.Ngayorder as orderdate,tblorders.Tongtien,tblorders.Id as id from tblorders join tblusers on tblorders.UserId = tblusers.Id where tblorders.Ngayorder between '$from' and '$to'");
 								$cnt=1;
 								while ($row=mysqli_fetch_array($ret)) {
 							?>
@@ -95,14 +93,15 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                         <td><?php  echo $row['useremail']." | ".$row['usercontact'];?></td>
                                         <td><?php  echo $row['shippingaddress'].", ".$row['shippingcity'].", ".$row['shippingpincode'];?>
                                         </td>
-                                        <td><?php  echo $row['productname'];?></td>
-                                        <td><?php  echo $row['quantity'];?></td>
-                                        <td><?php  echo currency_format($row['productprice']*$row['quantity']+$row['shippingcharge']);?>
+                                        <td><?php  echo currency_format($row['Tongtien']);?>
                                         </td>
                                         <td><?php  echo $row['orderdate'];?></td>
                                         <td><a class="btn btn-primary" href='today-order.php?oid=<?php echo $row['id']; ?>' id="myBtn"
-                                                class="user">Xem</a>
+                                                class="user">Duyệt</a>
                                             <?php $a =$row['id']; ?>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-danger" href='today-order-details.php?oid=<?php echo $a ?>'>Xem</a>
                                         </td>
                                     </tr>
 

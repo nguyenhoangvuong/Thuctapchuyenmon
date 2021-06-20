@@ -7,6 +7,8 @@
 header('location:login.php');
 }
 else{
+    mysqli_query($con,"update tblorders set Tongtien = '".$_SESSION['tp']."' where Id = '".$_SESSION['b']."'");
+    unset($_SESSION['b']);
     if (isset($_POST['submitcode'])) {
         mysqli_query($con,"update tblorders set Phuongthucthanhtoan='".$_POST['paymethod']."' where UserId='".$_SESSION['id']."' and Phuongthucthanhtoan is null ");
         unset($_SESSION['cart']);
@@ -59,7 +61,7 @@ paypal.Buttons({
         })
     },
     onCancel: function(data) {
-        window.location.replace("http://localhost:8080/PayPal_Integration_PHP/Oncancel.php")
+        window.location.replace("http://localhost:8080/Manage_Spa/spa/shopping/oncancel.php")
     }
 }).render('#paypal-payment-button');
 </script>

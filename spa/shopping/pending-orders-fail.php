@@ -83,27 +83,16 @@ else{
                                     <thead>
                                         <tr style="background-color:#EEEEEE;color:black">
                                             <th style="font-family:times new roman" class="cart-romove item">#</th>
-                                            <th style="font-family:times new roman" class="cart-description item">Hình
-                                                ảnh</th>
-                                            <th style="font-family:times new roman" class="cart-product-name item">Tên
-                                                sản phẩm</th>
-
-                                            <th style="font-family:times new roman" class="cart-qty item">Số lượng</th>
-                                            <th style="font-family:times new roman" class="cart-sub-total item">Giá mỗi
-                                                đơn vị</th>
-                                            <th style="font-family:times new roman" class="cart-sub-total item">Phí vận
-                                                chuyển</th>
-                                            <th style="font-family:times new roman" class="cart-total">Tổng</th>
-                                            <th style="font-family:times new roman" class="cart-total item">PTTT</th>
-                                            <th style="font-family:times new roman" class="cart-description item">Ngày
-                                                đặt hàng</th>
+                                            <th style="font-family:times new roman" class="cart-description item">ID hóa đơn</th>
+                                            <th style="font-family:times new roman" class="cart-product-name item">Tổng tiền</th>
+                                            <th style="font-family:times new roman" class="cart-qty item">Ngày đặt</th>
                                             <th style="font-family:times new roman" class="cart-total last-item">Thao
                                                 tác</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
-                                        <?php $query=mysqli_query($con,"select tblsanpham.Hinhanh1 as pimg1,tblsanpham.Tensanpham as pname,tblsanpham.Id as proid,tblorders.SanphamId as opid,tblorders.Soluong as qty,tblsanpham.Giasanpham as pprice,tblsanpham.Phivanchuyen as shippingcharge,tblorders.Phuongthucthanhtoan as paym,tblorders.Ngayorder as odate,tblorders.Id as orderid from tblorders join tblsanpham on tblorders.SanphamId=tblsanpham.Id where tblorders.UserId='".$_SESSION['id']."' and tblorders.Phuongthucthanhtoan is null");
+                                        <?php $query=mysqli_query($con,"select tblsanpham.Hinhanh1 as pimg1,tblorders.Id as opid,tblsanpham.Id as proid,tblorders.Tongtien as total,tblorders.Ngayorder as odate from tblctod join tblsanpham on tblsanpham.Id = tblctod.SanphamId join tblorders on tblctod.OrderId = tblorders.Id where tblorders.UserId='".$_SESSION['id']."' and tblorders.Phuongthucthanhtoan is null group by tblorders.Id");
 											$cnt=1;
 											$num=mysqli_num_rows($query);
 											if($num>0)
@@ -111,37 +100,18 @@ else{
 											while($row=mysqli_fetch_array($query))
 											{
 										?>
-                                        <tr style="border:1px solid #6AC2D6;font-size:1.7rem">
+                                        <tr style="border-bottom:1px solid #EEEEEE;font-size:1.7rem">
                                             <td><?php echo $cnt;?></td>
-                                            <td class="cart-image">
-                                                <a class="entry-thumbnail" href="detail.html">
-                                                    <img src="../admin/productimages/<?php echo $row['proid'];?>/<?php echo $row['pimg1'];?>"
-                                                        alt="" width="84" height="146">
-                                                </a>
-                                            </td>
-                                            <td class="cart-product-name-info">
-                                                <h4 class='cart-product-description'><a
-                                                        href="product-details.php?pid=<?php echo $row['opid'];?>">
-                                                        <?php echo $row['pname'];?></a></h4>
-
-
-                                            </td>
-                                            <td class="cart-product-quantity">
-                                                <?php echo $qty=$row['qty']; ?>
+                                            <td class="cart-product-sub-total">
+                                                <?php echo $row['opid'];?>
                                             </td>
                                             <td class="cart-product-sub-total">
-                                                <?php echo currency_format($price=$row['pprice']); ?>
+                                                <?php echo currency_format($price=$row['total']); ?>
                                             </td>
-                                            <td class="cart-product-sub-total">
-                                                <?php echo currency_format($shippcharge=$row['shippingcharge']); ?>
-                                            </td>
-                                            <td class="cart-product-grand-total">
-                                                <?php echo currency_format(($qty*$price)+$shippcharge);?></td>
-                                            <td class="cart-product-sub-total"><?php echo $row['paym']; ?> </td>
                                             <td class="cart-product-sub-total"><?php echo $row['odate']; ?> </td>
-
-                                            <td><a class="btn btn-danger" href="pending-orders.php?id=<?php echo $row['orderid']?>&del=delete"
-                                                    onClick="return confirm('Are you sure you want to delete?')">Xóa
+                                            <td style="text-align:center"><a class="btn btn-danger" href="pending-orders.php?id=<?php echo $row['opid']?>&del=delete"
+                                                    onClick="return confirm('Are you sure you want to delete?')">Xóa</a>
+                                                    <a class="btn btn-default" href="pending-orders-fail-details.php?id=<?php echo $row['opid'];?>">Xem</a>
                                             </td>
 
                                         </tr>
@@ -149,7 +119,7 @@ else{
                                         <tr>
                                             <td colspan="9">
                                                 <div class="cart-checkout-btn pull-right">
-                                                    <button type="submit" name="ordersubmit" class="btn btn-primary"><a
+                                                    <button type="submit" name="ordersubmit" class="btn btn-primary"><a style="color:white;font-size:1.5rem"
                                                             href="bill-ship-addresses2.php">Tiến hành thanh toán</a></button>
                                                 </div>
                                             </td>

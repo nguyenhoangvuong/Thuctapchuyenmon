@@ -1,3 +1,12 @@
+<?php
+if(isset($_GET['send'])){
+    echo $b = $_GET['send'];
+    $a = mysqli_query($con,"INSERT INTO `tblgopy`(`Gopy`) VALUES ('".$b."')");
+    if($a){
+        echo '<script>alert("Gửi thành công ! Cảm ơn bạn đã góp ý");</script>';
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,9 +69,9 @@
         </span>
         <!-- subcribe -->
         <div class="subcribe">
-            <form>
-                <input type="email" placeholder="Example@gmail.com" name="" id="" required>
-                <input type="submit" name="" id="" value="subcribe">
+            <form method="post">
+                <input style="width:500px;font-family:times new roman;font-size:1.7rem" type="text" placeholder="Góp ý của bạn..." name="send" id="" required>
+                <input type="submit" name="sendgopy" id="" value="Send">
             </form>
         </div>
     </footer>

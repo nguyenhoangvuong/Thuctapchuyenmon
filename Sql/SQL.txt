@@ -1,0 +1,3 @@
+spa dành cho ở localhost
+id16960737_spa dùng ở host
+do có 1 số thuộc tính khác nên chia 2 csdl

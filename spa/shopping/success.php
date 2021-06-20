@@ -6,7 +6,7 @@
         echo "<script>alert('Thanh cong!')</script>";
     }
     unset($_SESSION['cart']);
-    //header('location:order-history.php');
+    header('location:order-history.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,18 +14,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Successful</title>
+    <style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+.hero-image {
+  background-image: url("../images/success.jpg");
+  background-color: #cccccc;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
 
-    <link rel="stylesheet" href="style.css">
-
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+</style>
 </head>
 <body>
-<main id="cart-main">
-    <div class="site-title text-center">
-        <div><img src="./images/checked.png" alt=""></div>
-        <h1 class="font-title">Payment Done Successfully...!</h1>
-    </div>
-</main>
+<div class="hero-image">
+  <div class="hero-text">
+    <a style="background-color: white;padding:10px 20px;font-size:1.6rem;color:black;font-family:roboto;text-decoration:none;border-radius:10px" href="http://localhost:8080/Manage_Spa/spa/shopping">Trở về trang chủ</a>
+  </div>
+</div>
 </body>
 </html>

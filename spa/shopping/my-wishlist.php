@@ -153,7 +153,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                     </tr>
                                     <?php } } else{ ?>
                                     <tr>
-                                        <td style="font-size: 18px; font-weight:bold ">Không có sản phẩm yêu thích nào !
+                                        <td style="font-size: 18px; font-weight:bold;font-family:times new roman ">Không có sản phẩm yêu thích nào !
                                         </td>
 
                                     </tr>

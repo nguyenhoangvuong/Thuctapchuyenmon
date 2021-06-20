@@ -67,7 +67,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 	<div class="container">
 		<div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
-				<li><a href="#">Home</a></li>
+				<li><a href="index.php">Home</a></li>
 				<li class='active'>Giỏ hàng</li>
 			</ul>
 		</div>
@@ -98,12 +98,12 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 			<tbody>
 <?php 
 $orderid=$_POST['orderid'];
-//$email=$_POST['email'];
-$ret = mysqli_query($con,"select t.Email,t.Id from (select usr.Email,odrs.Id from tblusers as usr join tblorders as odrs on usr.Id=odrs.UserId) as t where (t.Id='$orderid')");
+$email=$_POST['email'];
+$ret = mysqli_query($con,"select t.Email,t.Id from (select usr.Email,odrs.Id from tblusers as usr join tblorders as odrs on usr.Id=odrs.UserId) as t where (t.Id='$orderid') and t.Email = '$email'");
 $num=mysqli_num_rows($ret);
 if($num>0)
 {
-$query=mysqli_query($con,"select tblsanpham.Hinhanh1 as pimg1,tblsanpham.Tensanpham as pname,tblorders.SanphamId as opid,tblorders.Soluong as qty,tblsanpham.Giasanpham as pprice,tblorders.Phuongthucthanhtoan as paym,tblorders.Ngayorder as odate,tblorders.Id as orderid from tblorders join tblsanpham on tblorders.SanphamId=tblsanpham.Id where tblorders.Id='$orderid' and tblorders.Phuongthucthanhtoan is not null");
+$query=mysqli_query($con,"select tblsanpham.Hinhanh1 as pimg1,tblsanpham.Tensanpham as pname,tblctod.SanphamId as opid,tblctod.Soluong as qty,tblsanpham.Giasanpham as pprice,tblorders.Phuongthucthanhtoan as paym,tblorders.Ngayorder as odate,tblorders.Id as orderid from tblctod join tblsanpham on tblctod.SanphamId=tblsanpham.Id join tblorders on tblorders.Id = tblctod.OrderId where orderid = '$orderid' and tblorders.Phuongthucthanhtoan is not null");
 $cnt=1;
 while($row=mysqli_fetch_array($query))
 {
@@ -112,7 +112,7 @@ while($row=mysqli_fetch_array($query))
 					<td><?php echo $cnt;?></td>
 					<td class="cart-image">
 						<a class="entry-thumbnail" href="detail.html">
-							<img src="../admin/productimages/<?php echo htmlentities($row['pname']);?>/<?php echo htmlentities($row['pimg1']);?>" alt="<?php echo htmlentities($row['pimg1']);?>" width="60" height="100">
+							<img src="../admin/productimages/<?php echo htmlentities($row['opid']);?>/<?php echo htmlentities($row['pimg1']);?>" alt="<?php echo htmlentities($row['pimg1']);?>" width="60" height="100">
 						</a>
 					</td>
 					<td class="cart-product-name-info">
@@ -142,13 +142,11 @@ while($row=mysqli_fetch_array($query))
 	</div>
 </div>
 
-		</div><!-- /.shopping-cart -->
-		</div> <!-- /.row -->
+		</div>
+		</div> 
 		</form>
-		<!-- ============================================== BRANDS CAROUSEL ============================================== -->
 <?php include('includes/brands-slider.php');?>
-<!-- ============================================== BRANDS CAROUSEL : END ============================================== -->	</div><!-- /.container -->
-</div><!-- /.body-content -->
+</div>
 <?php include('includes/footer1.php');?>
 
 	<script src="assets/js/jquery-1.11.1.min.js"></script>

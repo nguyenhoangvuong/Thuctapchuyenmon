@@ -90,8 +90,8 @@ if(isset($_POST['submit']))
                     </div>
                 </div>
             </div>
-            <?php include_once('includes/footer.php');?>
         </div>
+        <?php include_once('includes/footer.php');?>
         <script src="js/classie.js"></script>
         <script>
         var menuLeft = document.getElementById('cbp-spmenu-s1'),

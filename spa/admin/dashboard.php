@@ -86,20 +86,14 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                 <div class="row dashboard-header">
                     <div class="col-lg-3 col-md-6" style="font-family:'Ubuntu', sans-serif;">
                         <div class="card dashboard-product">
-                            <?php $query7=mysqli_query($con,"select tblhoadon.SanphamId as SanphamId, tblsanpham.Giasanpham
+                            <?php $query7=mysqli_query($con,"select tblhoadon.SanphamId as SanphamId, sum(tblsanpham.Giasanpham) as Gia
                         from tblhoadon 
                         join tblsanpham  on tblsanpham.Id=tblhoadon.SanphamId");
-                        while($row1=mysqli_fetch_array($query7))
-                        {
-                           $todays_sale1=$row1['Giasanpham'];
-                           $todysale1+=$todays_sale1;
-                        }
-                        $query8=mysqli_query($con,"select tblsanpham.Id,tblorders.SanphamId,tblorders.Soluong,tblsanpham.Giasanpham from tblsanpham join tblorders on tblsanpham.Id = tblorders.SanphamId where tblorders.Tinhtrangorder = 'Delivered'");
-								while($row7=mysqli_fetch_array($query8))
-								{
-								$saleOnline=$row7['Giasanpham']*$row7['Soluong'];
-								$todysale2+=$saleOnline;
-								}
+                        $row1=mysqli_fetch_array($query7);
+                           $todysale1=$row1['Gia'];
+                        $query8=mysqli_query($con,"select sum(Tongtien) as Tongtien from tblorders where tblorders.Tinhtrangorder = 'Delivered'");
+								$row7=mysqli_fetch_array($query8);
+								$todysale2=$row7['Tongtien'];
 							?>
                             <span>Sales Product</span>
                             <h2 class="dashboard-total-products">

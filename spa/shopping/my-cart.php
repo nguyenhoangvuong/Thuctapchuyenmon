@@ -2,9 +2,9 @@
     session_start();
     error_reporting(0);
     include('../includes/dbconnection.php');
-    if (strlen($_SESSION['id']==0)) {
-        header('location:login.php');
-    } 
+    // if (strlen($_SESSION['id']==0)) {
+    //     header('location:login.php');
+    // } 
     if(isset($_POST['submit'])){
         if(!empty($_SESSION['cart'])){
         foreach($_POST['quantity'] as $key => $val){
@@ -36,10 +36,13 @@
             $quantity=$_POST['quantity'];
             $pdd=$_SESSION['pid'];
             $value=array_combine($pdd,$quantity);
+                mysqli_query($con,"insert into tblorders(UserId) values('".$_SESSION['id']."')");
+                $id_order = mysqli_insert_id($con);
+                $_SESSION['b'] = $id_order;
                 foreach($value as $qty=> $val34){
-                    mysqli_query($con,"insert into tblorders(UserId,SanphamId,Soluong) values('".$_SESSION['id']."','$qty','$val34')");
-                    header('location:bill-ship-addresses2.php');
+                    mysqli_query($con,"insert into tblctod(OrderId,SanphamId,Soluong) values('$id_order','$qty','$val34')");
                 }
+                header('location:bill-ship-addresses2.php');
             }
     }
     if (!function_exists('currency_format')) {
@@ -219,8 +222,8 @@ $num=mysqli_num_rows($rt);
                                         </tr>
 
                                         <?php } }
-$_SESSION['pid']=$pdtid;
-				?>
+                                        $_SESSION['pid']=$pdtid;
+                                                        ?>
                                     </tbody>
                                 </table>
                         </div>
@@ -236,6 +239,7 @@ $_SESSION['pid']=$pdtid;
                                     </th>
                                 </tr>
                             </thead>
+                       
                             <tbody>
                                 <tr>
                                     <td>
@@ -295,8 +299,11 @@ $_SESSION['pid']=$pdtid;
                             </tbody>
                         </table>
                         <?php } else {
-                        echo "Giỏ hàng trống !";
-                                }?>
+                            ?>
+                                <div style="text-align:center"><img height=170 src="../shopping/img/empty-cart.png" alt='Giỏ hàng trống !'></div>
+                                <div style="text-align:center"><a style="font-size:1.7rem" href="index.php">Tiếp tục mua sắm</a></div>
+                            <?php
+                        }?>
                     </div>
                 </div>
             </div>

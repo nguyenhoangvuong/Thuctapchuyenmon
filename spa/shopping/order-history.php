@@ -72,7 +72,7 @@ else{
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
                     <li><a href="#">Home</a></li>
-                    <li class='active'>Lịch sử đơn hàng</li>
+                    <li class='active'>Lịch sử mua hàng</li>
                 </ul>
             </div>
         </div>
@@ -82,7 +82,7 @@ else{
             <div class="row inner-bottom-sm">
                 <div class="shopping-cart">
                     <div class="col-md-12 col-sm-12 shopping-cart-table ">
-                    <h2 align="center" style="margin-top:-20px">Lịch sử đơn hàng</h2>
+                    <h2 align="center" style="margin-top:-20px">Lịch sử mua hàng</h2>
                         <div class="table-responsive">
                             <form name="cart" method="post">
                                 <table class="table" style="border:0px">
@@ -102,15 +102,15 @@ else{
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $query=mysqli_query($con,"select tblsanpham.Hinhanh1 as pimg1,tblsanpham.Tensanpham as pname,tblsanpham.Id as proid,tblorders.SanphamId as opid,tblorders.Soluong as qty,tblsanpham.Giasanpham as pprice,tblsanpham.Phivanchuyen as shippingcharge,tblorders.Phuongthucthanhtoan as paym,tblorders.Ngayorder as odate,tblorders.Id as orderid from tblorders join tblsanpham on tblorders.SanphamId=tblsanpham.Id where tblorders.UserId='".$_SESSION['id']."' and tblorders.Phuongthucthanhtoan is not null");
+                                        <?php $query=mysqli_query($con,"select tblsanpham.Hinhanh1 as pimg1,tblsanpham.Tensanpham as pname,tblsanpham.Id as proid,tblctod.SanphamId as opid,tblctod.Soluong as qty,tblsanpham.Giasanpham as pprice,tblsanpham.Phivanchuyen as shippingcharge,tblorders.Phuongthucthanhtoan as paym,tblorders.Ngayorder as odate,tblorders.Id as orderid from tblctod join tblsanpham on tblctod.SanphamId=tblsanpham.Id join tblorders on tblctod.OrderId = tblorders.Id where tblorders.UserId='".$_SESSION['id']."' and tblorders.Phuongthucthanhtoan is not null");
 											$cnt=1;
 											while($row=mysqli_fetch_array($query))
 											{
 										?>
-                                        <tr style="border:0px;font-size:1.7rem">
+                                        <tr style="border:0px;font-size:1.7rem;border-bottom:1px solid #EEEEEE">
                                             <td><?php echo $cnt;?></td>
                                             <td class="cart-image">
-                                                <a class="entry-thumbnail" href="detail.html">
+                                                <a class="entry-thumbnail" href="#">
                                                     <img src="../admin/productimages/<?php echo $row['proid'];?>/<?php echo $row['pimg1'];?>"
                                                         alt="" width="84" height="146">
                                                 </a>
@@ -128,7 +128,11 @@ else{
                                             <td class="cart-product-sub-total"><?php echo currency_format($price=$row['pprice']); ?>
                                             </td>
                                             <td class="cart-product-sub-total">
-                                                <?php echo currency_format($shippcharge=$row['shippingcharge']); ?> </td>
+                                                <?php if($row['shippingcharge']==0){
+                                                    echo "Miễn phí";
+                                                }else{
+                                                    echo currency_format($shippcharge=$row['shippingcharge']);
+                                                }?> </td>
                                             <td class="cart-product-grand-total">
                                                 <?php echo currency_format(($qty*$price)+$shippcharge);?></td>
                                             <td class="cart-product-sub-total"><?php echo $row['paym']; ?> </td>

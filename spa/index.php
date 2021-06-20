@@ -5,7 +5,7 @@ error_reporting(0);
 include('includes/dbconnection.php');
 if(isset($_POST['submit']))
   {
-
+	
     $name=$_POST['name'];
     $email=$_POST['email'];
     $services=$_POST['services'];
@@ -13,18 +13,29 @@ if(isset($_POST['submit']))
     $atime=$_POST['atime'];
     $phone=$_POST['phone'];
     $aptnumber = mt_rand(100000000, 999999999);
-  
-    $query=mysqli_query($con,"insert into tblcuochen(Socuochen,Ten,Email,Sodienthoai,Ngayhen,Giohen,Dichvu) value('$aptnumber','$name','$email','$phone','$adate','$atime','$services')");
-    if ($query) {
-$ret=mysqli_query($con,"select Socuochen from tblcuochen where Email='$email' and  Sodienthoai='$phone'");
-$result=mysqli_fetch_array($ret);
-$_SESSION['aptno']=$result['Socuochen'];
- echo "<script>window.location.href='thank-you.php'</script>";	
-  }
-  else
-    {
-      $msg="Something Went Wrong. Please try again";
-    }
+	$today = date("Y-m-d");
+	if(strtotime($today) < strtotime($adate)){
+		$q = mysqli_query($con,"select * from tblkhachhang where Email = '$email'");
+		$a = mysqli_num_rows($q);
+		if($a == 0){
+			mysqli_query($con,"insert into tblkhachhang(Ten,Email,Sodienthoai) values('$name','$email','$phone')");
+		}
+		$query=mysqli_query($con,"insert into tblcuochen(Socuochen,Ten,Email,Sodienthoai,Ngayhen,Giohen,Dichvu) value('$aptnumber','$name','$email','$phone','$adate','$atime','$services')");
+		if ($query) {
+			$ret=mysqli_query($con,"select Socuochen from tblcuochen where Email='$email' and  Sodienthoai='$phone'");
+			$result=mysqli_fetch_array($ret);
+			$_SESSION['aptno']=$result['Socuochen'];
+			echo "<script>window.location.href='thank-you.php'</script>";	
+		}
+		else
+		{
+		$msg="Lỗi";
+		}
+	}
+	else
+	{
+		echo "<script>alert('Ngày hẹn đã qua.Vui lòng chọn ngày khác !!!');</script>";
+	}
   
 }
 

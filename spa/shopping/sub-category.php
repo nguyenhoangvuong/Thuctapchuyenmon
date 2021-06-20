@@ -67,16 +67,18 @@ if (!function_exists('currency_format')) {
     <link rel="stylesheet" href="assets/css/rateit.css">
     <link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="assets/css/config.css">
-
     <link href="assets/css/green.css" rel="alternate stylesheet" title="Green color">
     <link href="assets/css/blue.css" rel="alternate stylesheet" title="Blue color">
     <link href="assets/css/red.css" rel="alternate stylesheet" title="Red color">
     <link href="assets/css/orange.css" rel="alternate stylesheet" title="Orange color">
     <link href="assets/css/dark-green.css" rel="alternate stylesheet" title="Darkgreen color">
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="assets/images/favicon.ico">
-    
+    <link rel="stylesheet" type="text/css" href="css/style1.css">
+    <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
+
 </head>
 
 <body class="cnt-home">
@@ -94,13 +96,13 @@ if (!function_exists('currency_format')) {
             <div class='row outer-bottom-sm'>
                 <div class='col-md-3 sidebar'>
                     <div class="sidebar-module-container">
-                        <h3 class="section-title" style="font-family:times new roman">shop by</h3>
+                        <h3 class="section-title" style="font-family:times new roman;margin-top:-1px">shop by</h3>
                         <div class="sidebar-filter">
                             <div class="sidebar-widget wow fadeInUp outer-bottom-xs ">
-                                <div class="widget-header m-t-20">
-                                    <h4 class="widget-title" style="font-family:times new roman">Thể loại</h4>
+                                <div class="widget-header m-t-20" style="background-color:black" >
+                                    <h4 class="widget-title" style="font-family:times new roman;color:white;font-size:1.7rem">Thể loại</h4>
                                 </div>
-                                <div class="sidebar-widget-body m-t-10">
+                                <div class="sidebar-widget-body m-t-10" >
                                     <?php $sql=mysqli_query($con,"select Id,Tentheloai  from tbltheloai");
 while($row=mysqli_fetch_array($sql))
 {
@@ -108,7 +110,7 @@ while($row=mysqli_fetch_array($sql))
                                     <div class="accordion">
                                         <div class="accordion-group">
                                             <div class="accordion-heading">
-                                                <a href="category.php?cid=<?php echo $row['Id'];?>"
+                                                <a href="category.php?cid=<?php echo $row['Id'];?>" style="color:black;font-size:1.6rem"
                                                     class="accordion-toggle collapsed">
                                                     <?php echo $row['Tentheloai'];?>
                                                 </a>
@@ -119,15 +121,92 @@ while($row=mysqli_fetch_array($sql))
                                 </div>
                             </div>
                         </div>
+                        <div class="sidebar-widget wow fadeInUp outer-bottom-xs ">
+                            <div class="widget-header m-t-20" style="background-color:black">
+                                <h4 class="widget-title"
+                                    style="font-family:times new roman;font-size:1.7rem;color:white">Lọc theo mức giá</h4>
+                            </div>
+                            <div style="background-color:#F8D0C2">
+                                <div style="padding:10px" class="btn center-block">
+                                    <form action="" method="post"
+                                        style="font-family:times new roman;font-size:1.8rem;color:white">
+                                        <input type="radio" value="50000000" name="50000000"> Tất cả sản phẩm
+                                        <br>
+                                        <input type="radio" value="10000000" name="10000000"> Dưới 10.000.000đ
+                                        <br>
+                                        <input type="radio" value="5000000" name="5000000"> Dưới 5.000.000đ
+                                        <br>
+                                        <input type="radio" value="1000000" name="1000000"> Dưới 1.000.000đ
+                                        <br>
+                                        <input type="radio" value="100000" name="100000"> Dưới 100.000đ
+                                        <br>
+                                        <button type="radio" name="search_check" class="btn btn-danger"
+                                            style="width:100px">Tìm</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="sidebar-widget hot-deals wow fadeInUp">
+                            <h3 class="section-title" style="font-family:times new roman">Sản phẩm nổi bật</h3>
+                            <div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-xs">
+                                <?php
+								$ret=mysqli_query($con,"select tblsanpham.*,tblctod.SanphamId,count(*) as sl from tblctod join tblsanpham on tblsanpham.Id = tblctod.SanphamId group by tblctod.SanphamId order by sl desc limit 10");
+								while ($rws=mysqli_fetch_array($ret)) {
+								?>
+                                <div class="item" style="margin-left:10px">
+                                    <div class="products">
+                                        <div class="hot-deal-wrapper product-box-1">
+                                            <div class="image">
+                                                <img src="../admin/productimages/<?php echo htmlentities($rws['Id']);?>/<?php echo htmlentities($rws['Hinhanh1']);?>"
+                                                    width="200" height="334" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="product-info text-left m-t-20">
+                                            <h3 class="name"><a style="font-family:times new roman"
+                                                    href="product-details.php?pid=<?php echo htmlentities($rws['Id']);?>"><?php echo htmlentities($rws['Tensanpham']);?></a>
+                                            </h3>
+                                            <div class="rating rateit-small"></div>
+
+                                            <div class="product-price">
+                                                <span class="price">
+                                                    <?php echo currency_format(htmlentities($rws['Giasanpham']));?>
+                                                </span>
+                                                <span
+                                                    class="price-before-discount"><?php echo currency_format(htmlentities($rws['Giasanphamtruockhigiam']));?>
+                                                   </span>
+                                            </div>
+                                        </div>
+                                        <div class="cart clearfix animate-effect">
+                                            <div class="action">
+
+                                                <div class="add-cart-button btn-group">
+                                                    <button class="btn btn-primary icon" data-toggle="dropdown"
+                                                        type="button">
+                                                        <?php if($rws['Sanphamcosan']=='In Stock'){?>
+                                                        <a style="font-family:times new roman;font-size:1.6em"
+                                                            href="product-details.php?page=product&action=add&id=<?php echo $rws['Id']; ?>">
+                                                            <button class="btn btn-primary" type="button" style="font-size:1.6rem"><i class="fa fa-shopping-cart"></i>&emsp; Thêm vào giỏ
+                                                                hàng</button></a>
+                                                        <?php } else {?>
+                                                        <div class="action" style="color:white;font-family:times new roman">Hết hàng</div>
+                                                        <?php } ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                            </div>
+                        </div>
                 </div>
+                
                 <div class='col-md-9'>
                     <div id="category" class="category-carousel hidden-xs">
                         <div class="item">
-						    <div class="image">
-                                
-								<div class="full-width-slider">
-                                    <div class="item" style="background-image: url(assets/images/cover-fanpage-facebook-ladykin-korea.jpg);">
+                            <div class="image">
+                                <div class="full-width-slider" style="width:840px">
+                                    <div class="item" style="background-image: url(assets/images/6.png);">
                                     </div>
                                 </div>
                             </div>
@@ -157,7 +236,25 @@ while($row=mysqli_fetch_array($sql))
                                 <div class="category-product  inner-top-vs">
                                     <div class="row">
                                         <?php
-										$ret=mysqli_query($con,"select * from tblsanpham where TheloaiphuId='$cid'");
+                                        $check = '60000000';
+                                        if(isset($_POST['search_check'])){
+                                            if(isset($_POST['50000000'])){
+                                                $check = '50000000';
+                                            }
+                                            else if(isset($_POST['10000000'])){
+                                                $check = '10000000';
+                                            }
+                                            else if(isset($_POST['5000000'])){
+                                                $check = '5000000';
+                                            }
+                                            else if(isset($_POST['1000000'])){
+                                                $check = '1000000';
+                                            }
+                                            else if(isset($_POST['100000'])){
+                                                $check = '100000';
+                                            }
+                                        }
+										$ret=mysqli_query($con,"select * from tblsanpham where TheloaiphuId='$cid' and Giasanpham < '$check'");
 										$num=mysqli_num_rows($ret);
 										if($num>0)
 										{
@@ -166,7 +263,7 @@ while($row=mysqli_fetch_array($sql))
                                         <div class="col-sm-6 col-md-4 wow fadeInUp">
                                             <div class="products">
                                                 <div class="product">
-                                                    <div class="product-image">
+                                                    <div class="product-box-1">
                                                         <div class="image">
                                                             <a
                                                                 href="product-details.php?pid=<?php echo htmlentities($row['Id']);?>"><img
@@ -198,14 +295,11 @@ while($row=mysqli_fetch_array($sql))
                                                             <ul class="list-unstyled">
                                                                 <li class="add-cart-button btn-group">
                                                                     <?php if($row['Sanphamcosan']=='In Stock'){?>
-                                                                    <button class="btn btn-primary icon"
-                                                                        data-toggle="dropdown" type="button">
-                                                                        <i class="fa fa-shopping-cart"></i>
-                                                                    </button>
                                                                     <a
                                                                         href="category.php?page=product&action=add&id=<?php echo $row['Id']; ?>">
-                                                                        <button class="btn btn-primary"
-                                                                            type="button" style="font-family:times new roman;font-size:1.4rem;">Thêm vào giỏ hàng</button></a>
+                                                                        <button class="btn btn-primary" type="button"
+                                                                            style="font-family:times new roman;font-size:1.6rem;"><i class="fa fa-shopping-cart"></i>&emsp; Thêm
+                                                                            vào giỏ hàng</button></a>
                                                                     <?php } else {?>
                                                                     <div class="action" style="color:red">Hết hàng</div>
                                                                     <?php } ?>
@@ -239,7 +333,7 @@ while($row=mysqli_fetch_array($sql))
 
                             </div><!-- /.tab-pane -->
 
-
+                            <a href="#"><img style="position:fixed;bottom:20px;left:20px;outline:none;border:0px;font-size:3rem;width:40px;text-align:center" src="../shopping/img/up.png" alt="^" srcset=""></a></div>
 
                         </div><!-- /.search-result-container -->
 
@@ -247,8 +341,8 @@ while($row=mysqli_fetch_array($sql))
                 </div>
             </div>
             <?php include('includes/brands-slider.php');?>
-
         </div>
+        <div class="banner-box" style="background-image: url(../images/slides1.jpg);">
     </div>
     <?php include('includes/footer1.php');?>
     <script src="assets/js/jquery-1.11.1.min.js"></script>

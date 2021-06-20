@@ -1,3 +1,6 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <?php 
 if (!function_exists('currency_format')) {
     function currency_format($number, $suffix = 'đ') {
@@ -22,33 +25,24 @@ if (!function_exists('currency_format')) {
 <div class="main-header" style="height:90px">
     <div class="container">
         <div class="row" >
-            <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
-                <div class="logo"  style="height:100px;margin-top:-20px">
-                    <a href="index.php">
-                        <h2>
-                                <a href="index.php" class="image" style="color:#6AC2D6;font-family:courier,arial,helvetica;">
-                                    Spa - Shopping
-                                </a>
-                        </h2>
-                    </a>
-                </div>
+            <div class="col-xs-12 col-sm-12 col-md-3 logo-holder" style="margin-top:-5px">
+                <img width=200 height=67 src="http://localhost:8080/Manage_Spa/spa/shopping/img/logospa.png" alt="abc" srcset="">
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 top-search-holder">
                 <div class="search-area">
-                    <form name="search" method="post" action="search-result.php">
+                    <form method="post" action="search-result.php">
                         <div class="control-group">
-
-                            <input class="search-field" placeholder="Search here..." name="product"
+                            <input class="search-field" id="search" placeholder="Search here..." name="search" autocomplete="off"
                                 required="required" />
-
-                            <button class="search-button" type="submit" name="search"></button>
-
+                            <button class="search-button" type="submit" name="submit" value="Search"></button>
                         </div>
                     </form>
                 </div>
-             
+                <div class="col-md-5" style="position:absolute;margin-left:-16px;z-index: 99;">
+                   <div class="list-group" id="show-list" style="width:506px" style="position:absolute"></div>
+                </div>
+                
             </div>
-
             <div class="col-xs-12 col-sm-12 col-md-3 animate-dropdown top-cart-row">
                 <?php
 if(!empty($_SESSION['cart'])){
@@ -149,7 +143,7 @@ if(!empty($_SESSION['cart'])){
                         <li>
                             <div class="cart-item product-summary">
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12" style="font-size:1.5rem">
                                         Giỏ hàng của bạn trống
                                     </div>
                                 </div>
@@ -174,3 +168,30 @@ if(!empty($_SESSION['cart'])){
     </div><!-- /.container -->
 
 </div>
+<script>
+  $(document).ready(function () {
+  // Send Search Text to the server
+  $("#search").keyup(function () {
+    let searchText = $(this).val();
+    if (searchText != "") {
+      $.ajax({
+        url: "includes/action.php",
+        method: "post",
+        data: {
+          query: searchText,
+        },
+        success: function (response) {
+          $("#show-list").html(response);
+        },
+      });
+    } else {
+      $("#show-list").html("");
+    }
+  });
+  // Set searched text in input field on click of search button
+  $(document).on("click", "a", function () {
+    $("#search").val($(this).text());
+    $("#show-list").html("");
+  });
+});
+  </script>

@@ -10,7 +10,7 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <div class="nav-bg-class" >
+            <div class="nav-bg-class" style="margin-left:20%">
                 <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
                     <div class="nav-outer">
                         <ul class="nav navbar-nav">

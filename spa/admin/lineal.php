@@ -1,15 +1,14 @@
-
 <?php
 	require_once "includes/conexion.php"; 
 	$conexion=conexion();
-	$sql="select tblorders.Ngayorder,tblorders.Soluong,tblsanpham.Giasanpham from tblsanpham join tblorders on tblsanpham.Id = tblorders.SanphamId where tblorders.Tinhtrangorder = 'Delivered' order by tblorders.Ngayorder";
+	$sql="select date(tblorders.Ngayorder) as Ngay,sum(tblorders.Tongtien) from tblorders where tblorders.Tinhtrangorder = 'Delivered' group by(date(tblorders.Ngayorder))order by date(tblorders.Ngayorder)";
 	$result=mysqli_query($conexion,$sql);
 	$valoresY=array();//montos
 	$valoresX=array();//fechas
 
 	while ($ver=mysqli_fetch_row($result)) {
 		$valoresX[]=$ver[0];
-		$valoresY[]=$ver[1]*$ver[2];
+		$valoresY[]=$ver[1];
 	}
 
 	$datosX=json_encode($valoresX);

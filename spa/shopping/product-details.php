@@ -90,6 +90,7 @@ if(isset($_POST['submit']))
     <link rel="shortcut icon" href="assets/images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="css/style1.css">
     <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v11.0&appId=148977787268045&autoLogAppEvents=1" nonce="iJxzgNiV"></script>
 </head>
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0&appId=110064847734070&autoLogAppEvents=1" nonce="1EoTn8vC"></script>
@@ -146,12 +147,12 @@ if(isset($_POST['submit']))
                             <h3 class="section-title" style="font-family:times new roman">Sản phẩm nổi bật</h3>
                             <div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-xs">
                                 <?php
-								$ret=mysqli_query($con,"select * from tblsanpham order by rand() limit 4 ");
+								$ret=mysqli_query($con,"select tblsanpham.*,tblctod.SanphamId,count(*) as sl from tblctod join tblsanpham on tblsanpham.Id = tblctod.SanphamId group by tblctod.SanphamId order by sl desc limit 10");
 								while ($rws=mysqli_fetch_array($ret)) {
 								?>
-                                <div class="item">
+                                <div class="item" style="margin-left:10px">
                                     <div class="products">
-                                        <div class="hot-deal-wrapper">
+                                        <div class="hot-deal-wrapper product-box-1">
                                             <div class="image">
                                                 <img src="../admin/productimages/<?php echo htmlentities($rws['Id']);?>/<?php echo htmlentities($rws['Hinhanh1']);?>"
                                                     width="200" height="334" alt="">
@@ -383,13 +384,7 @@ if(isset($_POST['submit']))
                                         <div class="col-sm-2">
                                             <div class="cart-quantity">
                                                 <div class="quant-input">
-                                                    <div class="arrows">
-                                                        <div class="arrow plus gradient"><span class="ir"><i
-                                                                    class="icon fa fa-sort-asc"></i></span></div>
-                                                        <div class="arrow minus gradient"><span class="ir"><i
-                                                                    class="icon fa fa-sort-desc"></i></span></div>
-                                                    </div>
-                                                    <input type="text" value="1">
+                                                    <input type="text" value="1" readonly style="outline:none">
                                                 </div>
                                             </div>
                                         </div>
@@ -412,7 +407,7 @@ if(isset($_POST['submit']))
                                 <div class="product-social-link m-t-20 text-right">
                                     <div class="social-icons">
                                         <ul class="list-inline">
-                                            <div class="fb-share-button" data-href="http://localhost:8080/Manage_Spa/spa/shopping/product-details.php?pid=2" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2FManage_Spa%2Fspa%2Fshopping%2Fproduct-details.php%3Fpid%3D2&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
+                                        <div class="fb-share-button" data-href="https://hovuotsax12.000webhostapp.com/spa/shopping/product-details.php?pid=<?php echo $pid?>" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhovuotsax12.000webhostapp.com%2Fspa%2Fshopping%2Fproduct-details.php%3Fpid%3D61&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
                                             <li><a class="fa fa-facebook" href="http://facebook.com/vuongml0123"></a>
                                             </li>
                                             <li><a class="fa fa-twitter" href="#"></a></li>
@@ -587,10 +582,10 @@ if(isset($_POST['submit']))
                     while($rw=mysqli_fetch_array($qry))
                     {
 			    ?>
-                <div class="item item-carousel">
+                <div class="item item-carousel" style="margin-left:10px">
                     <div class="products">
                         <div class="product">
-                            <div class="product-image">
+                            <div class="product-box-1">
                                 <div class="image">
                                     <a href="product-details.php?pid=<?php echo htmlentities($rw['Id']);?>"><img
                                             src="assets/images/blank.gif"
@@ -599,7 +594,7 @@ if(isset($_POST['submit']))
                                 </div>
                             </div>
                             <div class="product-info text-left">
-                                <h3 class="name"><a
+                                <h3 class="name"><a style="font-family:times new roman"
                                         href="product-details.php?pid=<?php echo htmlentities($rw['Id']);?>"><?php echo htmlentities($rw['Tensanpham']);?></a>
                                 </h3>
                                 <div class="rating rateit-small"></div>
@@ -620,7 +615,7 @@ if(isset($_POST['submit']))
                                                 <i class="fa fa-shopping-cart"></i>
                                             </button>
                                             <a href="product-details.php?page=product&action=add&id=<?php echo $rw['Id']; ?>"
-                                                class="lnk btn btn-primary">Thêm vào giỏ hàng</a>
+                                                class="lnk btn btn-primary" style="font-family:times new roman;font-size:1.6rem">Thêm vào giỏ hàng</a>
                                         </li>
                                     </ul>
                                 </div>

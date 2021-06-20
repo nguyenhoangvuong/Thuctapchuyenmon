@@ -54,6 +54,9 @@
     <script src="js/metisMenu.min.js"></script>
     <script src="js/custom.js"></script>
     <link href="css/custom.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
 </head>
 
 <body class="cbp-spmenu-push">
@@ -66,7 +69,7 @@
                     <div class="table-responsive bs-example widget-shadow">
                         <h3 class="title1"></h3>
                         <form method="post">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered" id="example">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -92,13 +95,14 @@
                                     <?php 
 										$cnt=$cnt+1;
 									}?>
-                                    <tr>
+                                    
+                                </tbody>
+                                <tr>
                                         <td colspan="4" align="center">
                                             <button type="submit" name="submit" class="btn btn-primary">Xác
                                                 nhận</button>
                                         </td>
                                     </tr>
-                                </tbody>
                             </table>
                         </form>
                     </div>
@@ -108,6 +112,30 @@
     </div>
     <?php include_once('includes/footer.php');?>
     <script src="js/classie.js"></script>
+    <script>
+        $(document).ready(function() {
+        $('#example').dataTable({
+            "language": {
+                "sProcessing": "Đang xử lý...",
+                "sLengthMenu": "Xem _MENU_ mục",
+                "sZeroRecords": "Không tìm thấy dòng nào phù hợp",
+                "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
+                "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
+                "sInfoFiltered": "(được lọc từ _MAX_ mục)",
+                "sInfoPostFix": "",
+                "sSearch": "Tìm:",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "Đầu",
+                    "sPrevious": "Trước",
+                    "sNext": "Tiếp",
+                    "sLast": "Cuối"
+                }
+            }
+        });
+
+        });
+    </script>
     <script>
     var menuLeft = document.getElementById('cbp-spmenu-s1'),
         showLeftPush = document.getElementById('showLeftPush'),

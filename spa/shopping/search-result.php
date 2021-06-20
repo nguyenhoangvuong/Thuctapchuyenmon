@@ -9,7 +9,7 @@ if (!function_exists('currency_format')) {
         }
     }
 }
-$find="%{$_POST['product']}%";
+$find="%{$_POST['search']}%";
 if(isset($_GET['action']) && $_GET['action']=="add"){
 	$id=intval($_GET['id']);
 	if(isset($_SESSION['cart'][$id])){
@@ -75,6 +75,11 @@ header('location:login.php');
     <link rel="shortcut icon" href="assets/images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="css/style1.css">
     <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
+    <style>
+        .product{
+            display:none;
+        }
+    </style>
 </head>
 
 <body class="cnt-home">
@@ -98,7 +103,7 @@ header('location:login.php');
 											while($row=mysqli_fetch_array($sql))
 											{
 										?>
-                                        <a href="sub-category.php?scid=<?php echo $row['Id'];?>"
+                                        <a href="sub-category.php?scid=<?php echo $row['Id'];?>" style="font-family:times new roman"
                                             class="dropdown-toggle"><i class="icon fa fa-desktop fa-fw"></i>
                                             <?php echo $row['Theloaiphu'];?></a>
                                         <?php }?>
@@ -113,8 +118,8 @@ header('location:login.php');
                         <div class="sidebar-filter">
                             <!-- ============================================== SIDEBAR CATEGORY ============================================== -->
                             <div class="sidebar-widget wow fadeInUp outer-bottom-xs ">
-                                <div class="widget-header m-t-20">
-                                    <h4 class="widget-title" style="font-family:times new roman">Thể loại</h4>
+                                <div class="widget-header m-t-20" style="background-color:black">
+                                    <h4 class="widget-title" style="font-family:times new roman;font-size:1.7rem;color:white">Thể loại</h4>
                                 </div>
                                 <div class="sidebar-widget-body m-t-10">
                                     <?php $sql=mysqli_query($con,"select Id,Tentheloai  from tbltheloai");
@@ -124,7 +129,7 @@ header('location:login.php');
                                     <div class="accordion">
                                         <div class="accordion-group">
                                             <div class="accordion-heading">
-                                                <a href="category.php?cid=<?php echo $row['Id'];?>"
+                                                <a href="category.php?cid=<?php echo $row['Id'];?>" style="font-family:times new roman;font-size:1.6rem"
                                                     class="accordion-toggle collapsed">
                                                     <?php echo $row['Tentheloai'];?>
                                                 </a>
@@ -170,7 +175,7 @@ header('location:login.php');
                                         <div class="col-sm-6 col-md-4 wow fadeInUp">
                                             <div class="products loadmore">
                                                 <div class="product">
-                                                    <div class="product-image">
+                                                    <div class="product-box-1">
                                                         <div class="image">
                                                             <a
                                                                 href="product-details.php?pid=<?php echo htmlentities($row['Id']);?>"><img
@@ -227,11 +232,12 @@ header('location:login.php');
                                         </div>
                                         <?php } } else {?>
                                         <div class="col-sm-6 col-md-4 wow fadeInUp">
-                                            <h3>Không tìm thấy sản phẩm</h3>
+                                            <h3 style="font-family:times new roman">Không tìm thấy sản phẩm</h3>
                                         </div>
 
                                         <?php } ?>
                                     </div>
+                                    <button class="btn btn-danger center-block loadMore">Xem thêm</button>
                                 </div>
                             </div>
                         </div>
@@ -273,6 +279,17 @@ header('location:login.php');
         $('.show-theme-options').delay(2000).trigger('click');
     });
     </script>
+    <script>
+            $(".product").slice(0,6).show();
+
+            $(".loadMore").on("click",function(){
+                $(".product:hidden").slice(0,6).show();
+
+                if($(".product:hidden").length == 0){
+                    $(".loadMore").fadeOut();
+                }
+            })
+        </script>
 </body>
 
 </html>

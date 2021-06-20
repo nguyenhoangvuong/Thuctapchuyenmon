@@ -9,6 +9,7 @@ if (!function_exists('currency_format')) {
         }
     }
 }
+
 if(isset($_GET['action']) && $_GET['action']=="add"){
 	$id=intval($_GET['id']);
 	if(isset($_SESSION['cart'][$id])){
@@ -29,6 +30,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
 	}
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,6 +63,8 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
     <link rel="shortcut icon" href="assets/images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="css/style1.css">
     <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
+    <link rel="stylesheet prefetch" href="http://bootswatch.com/slate/bootstrap.min.css">
+    
     <style>
             .modal {
         display: none; /* Hidden by default */
@@ -150,6 +154,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                         </div>
                     </div>
                 </div>
+                
                 <div id="product-tabs-slider" class="scroll-tabs inner-bottom-vs  wow fadeInUp">
                     <div class="more-info-tab clearfix">
                         <h3 class="new-product-title pull-left" style="font-family:times new roman">Sản phẩm nổi bật
@@ -165,22 +170,25 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                         <div class="tab-pane in active" id="all">
                             <div class="product-slider">
                                 <div class="owl-carousel home-owl-carousel custom-carousel owl-theme" data-item="4">
-                                    <<?php
-										$ret=mysqli_query($con,"select * from tblsanpham order by RAND()");
+                                    <?php
+										$ret=mysqli_query($con,"select tblsanpham.*,tblctod.SanphamId,count(*) as sl from tblctod join tblsanpham on tblsanpham.Id = tblctod.SanphamId group by tblctod.SanphamId order by sl desc limit 10");
 										while ($row=mysqli_fetch_array($ret)) 
 										{
 									?> <div class="item item-carousel">
                                         <div class="products">
                                             <div class="product">
-                                                <div class="product-image">
-                                                    <div class="image">
+                                                <div class="product-box-1" style="margin-left:8px">
+                                                    <div style="margin-top:30px;position:fixed;right:0;margin-right:20px;top:0"><img src="img/new_60px.png" width=30 alt="new" srcset=""></div>
+                                                    <div>
                                                         <a
                                                             href="product-details.php?pid=<?php echo htmlentities($row['Id']);?>">
-                                                            <img src="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
+                                                            <img style="margin-left:-10px" src="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
                                                                 data-echo="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
-                                                                width="180" height="300" alt=""></a>
+                                                                width="180" height="300" alt="" class="w-100">
+                                                        </a>
                                                     </div>
                                                 </div>
+                                                
                                                 <div class="product-info text-left">
                                                     <h3 class="name" style="font-family:times new roman"><a
                                                             href="product-details.php?pid=<?php echo htmlentities($row['Id']);?>"><?php echo htmlentities($row['Tensanpham']);?></a>
@@ -197,10 +205,11 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                                     </div>
 
                                                 </div>
+                                                
                                                 <div class="action"><a
                                                         href="index.php?page=product&action=add&id=<?php echo $row['Id']; ?>"
                                                         class="lnk btn btn-primary"
-                                                        style="font-family:times new roman;">Thêm vào giỏ hàng</a></div>
+                                                        style="font-family:times new roman"><i class="fa fa-shopping-cart"></i>&emsp; Thêm vào giỏ hàng</a></div>
                                             </div>
                                         </div>
                                 </div>
@@ -219,8 +228,9 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                 <div class="item item-carousel">
                                     <div class="products">
                                         <div class="product">
-                                            <div class="product-image">
-                                                <div class="image">
+                                            <div class="product-box-1">
+                                                <div>
+                                                <div style="margin-top:30px;position:fixed;right:0;margin-right:20px;top:0"><img src="img/new_60px.png" width=30 alt="new" srcset=""></div>
                                                     <a
                                                         href="product-details.php?pid=<?php echo htmlentities($row['Id']);?>">
                                                         <img src="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
@@ -247,7 +257,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                             <div class="action"><a
                                                     href="index.php?page=product&action=add&id=<?php echo $row['Id']; ?>"
                                                     class="lnk btn btn-primary"
-                                                    style="font-family:times new roman;">Thêm vào giỏ hàng</a></div>
+                                                    style="font-family:times new roman;"><i class="fa fa-shopping-cart"></i>&emsp; Thêm vào giỏ hàng</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -266,8 +276,9 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                 <div class="item item-carousel">
                                     <div class="products">
                                         <div class="product">
-                                            <div class="product-image">
-                                                <div class="image">
+                                            <div class="product-box-1">
+                                            <div style="margin-top:30px;position:fixed;right:0;margin-right:20px;top:0"><img src="img/new_60px.png" width=30 alt="new" srcset=""></div>
+                                                <div>
                                                     <a
                                                         href="product-details.php?pid=<?php echo htmlentities($row['Id']);?>">
                                                         <img src="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
@@ -295,7 +306,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                             <div class="action"><a
                                                     href="index.php?page=product&action=add&id=<?php echo $row['Id']; ?>"
                                                     class="lnk btn btn-primary"
-                                                    style="font-family:times new roman;">Thêm vào giỏ hàng</a></div>
+                                                    style="font-family:times new roman;"><i class="fa fa-shopping-cart"></i>&emsp; Thêm vào giỏ hàng</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -321,8 +332,8 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                 <div class="item item-carousel">
                                     <div class="products">
                                         <div class="product">
-                                            <div class="product-image">
-                                                <div class="image">
+                                            <div class="product-box-1">
+                                                <div>
                                                     <a
                                                         href="product-details.php?pid=<?php echo htmlentities($row['Id']);?>"><img
                                                             src="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
@@ -348,7 +359,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                             </div>
                                             <div class="action"><a
                                                     href="index.php?page=product&action=add&id=<?php echo $row['Id']; ?>"
-                                                    class="lnk btn btn-primary" style="font-family:times new roman">thêm
+                                                    class="lnk btn btn-primary" style="font-family:times new roman"><i class="fa fa-shopping-cart"></i>&emsp; Thêm
                                                     vào giỏ hàng</a></div>
                                         </div>
                                     </div>
@@ -370,13 +381,13 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                 <div class="item item-carousel">
                                     <div class="products">
                                         <div class="product" style="width:235px">
-                                            <div class="product-image">
-                                                <div class="image">
+                                            <div class="product-box-1">
+                                                <div>
                                                     <a
                                                         href="product-details.php?pid=<?php echo htmlentities($row['Id']);?>"><img
                                                             src="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
                                                             data-echo="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
-                                                            width="300" height="300"></a>
+                                                            width="220" height="300"></a>
                                                 </div>
                                             </div>
 
@@ -400,7 +411,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                             <div class="action"><a
                                                     href="index.php?page=product&action=add&id=<?php echo $row['Id']; ?>"
                                                     class="lnk btn btn-primary"
-                                                    style="font-family:times new roman;">Thêm vào giỏ hàng</a></div>
+                                                    style="font-family:times new roman;"><i class="fa fa-shopping-cart"></i>&emsp; Thêm vào giỏ hàng</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -428,8 +439,8 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                 <div class="product-micro">
                                     <div class="row product-micro-row">
                                         <div class="col col-xs-6">
-                                            <div class="product-image">
-                                                <div class="image">
+                                            <div class="product-box-1" style="margin-left:10px">
+                                                <div>
                                                     <a href="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
                                                         data-lightbox="image-1"
                                                         data-title="<?php echo htmlentities($row['Tensanpham']);?>">
@@ -450,6 +461,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                                                 <div class="product-price">
                                                     <span class="price">
                                                         <?php echo currency_format(htmlentities($row['Giasanpham']));?>
+                                                        <br>
                                                     </span>
                                                     <span class="price-before-discount">
                                                         <?php echo currency_format(htmlentities($row['Giasanphamtruockhigiam']));?>
@@ -468,19 +480,25 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                     </div><?php } ?>
                 </div>
             </section>
+            <section>
+                <div  style="border-bottom:1px solid lightblue"></div>
+            </section>
+            <section>
+                <div class="banner-box" style="background-image: url(../img/Capture.png);">
+            </section>
             <section class="new-arrival">
                 <div class="arrival-heading">
-                    <strong style="font-family:times new roman">Sản phẩm mới</strong>
+                    <strong style="font-family:times new roman;font-size:1.8rem">Sản phẩm mới</strong>
                     <p style="font-family:times new roman">Chúng tôi luôn cập nhật những sản phẩm tốt và mới nhất</p>
                 </div>
                 <div class="product-container">
                     <?php
             $sql = mysqli_query($con,"SELECT * FROM tblsanpham where date(NgayDang)>=(DATE(NOW()) - INTERVAL 14 DAY)
             ORDER BY RAND()
-            LIMIT 3;");
+            LIMIT 5;");
             while($row11 = mysqli_fetch_array($sql)){
         ?>
-                    <div class="product-box">
+                    <div class="product-box" style="height:50%">
                         <div class="product-img">
                             <div class="action">
                                 <a href="index.php?page=product&action=add&id=<?php echo $row11['Id']; ?>"
@@ -493,14 +511,132 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                         </div>
                         <div class="product-details">
                             <a href="product-details.php?pid=<?php echo htmlentities($row11['Id']);?>"
-                                style="font-family:times new roman"
+                                style="font-family:times new roman;font-weight:400"
                                 class="p-name"><?php echo $row11['Tensanpham']; ?></a>
-                            <span class="p-price"><?php echo currency_format($row11['Giasanpham']); ?></span>
+                            <span class="p-price" style="font-weight:600;"><?php echo currency_format($row11['Giasanpham']); ?></span>
                         </div>
                     </div>
                     <?php
             }
         ?>
+                </div>
+            </section>
+            <section class="section featured-product inner-xs wow fadeInUp">
+            <div class="arrival-heading">
+                    <strong style="font-family:times new roman;font-size:1.8rem">Siêu giảm giá</strong>
+                    <p style="font-family:times new roman">Rất nhiều mặt hàng được giảm giá sốc !!!</p>
+                </div>
+                <div class="owl-carousel best-seller custom-carousel owl-theme outer-top-xs">
+                    <?php
+							$ret=mysqli_query($con,"select * from tblsanpham where (Giasanphamtruockhigiam-Giasanpham) > 50000");
+							while ($row=mysqli_fetch_array($ret)) 
+							{
+						?>
+                    <div class="item">
+                        <div class="products">
+                            <div class="product" style="margin-left:10px">
+                                <div class="product-micro">
+                                    <div class="row product-micro-row">
+                                        <div class="col col-xs-6">
+                                            <div class="product-box-1">
+                                                <div>
+                                                    <div style="margin-top:30px;position:fixed;margin-right:10px;top:0"><img src="img/sale_52px.png" width=30 alt="new" srcset=""></div>
+                                                    <a href="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
+                                                        data-lightbox="image-1"
+                                                        data-title="<?php echo htmlentities($row['Tensanpham']);?>">
+                                                        <img data-echo="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
+                                                            width="170" height="174" alt="">
+                                                        <div class="zoom-overlay"></div>
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col col-xs-6">
+                                            <div class="product-info">
+                                                <h3 class="name" style="font-family:times new roman;"><a
+                                                        href="product-details.php?pid=<?php echo htmlentities($row['Id']);?>"><?php echo htmlentities($row['Tensanpham']);?></a>
+                                                </h3>
+                                                <div class="rating rateit-small"></div>
+                                                <div class="product-price">
+                                                    <span class="price">
+                                                        <?php echo currency_format(htmlentities($row['Giasanpham']));?>
+                                                        <br>
+                                                    </span>
+                                                    <span class="price-before-discount">
+                                                        <?php echo currency_format(htmlentities($row['Giasanphamtruockhigiam']));?>
+                                                    </span>
+                                                </div>
+                                                <div class="action"><a
+                                                        href="index.php?page=product&action=add&id=<?php echo $row['Id']; ?>"
+                                                        class="lnk btn btn-primary"
+                                                        style="font-family:times new roman;">Thêm vào giỏ hàng</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><?php } ?>
+                </div>
+            </section>
+            <section class="section featured-product inner-xs wow fadeInUp">
+            <div class="arrival-heading">
+                    <strong style="font-family:times new roman;font-size:1.8rem">Miễn phí giao hàng</strong>
+                    <p style="font-family:times new roman">Thả ga mua sắm mà không lo phí ship !!!</p>
+                </div>
+                <div class="owl-carousel best-seller custom-carousel owl-theme outer-top-xs">
+                    <?php
+							$ret=mysqli_query($con,"select * from tblsanpham where Phivanchuyen = 0");
+							while ($row=mysqli_fetch_array($ret)) 
+							{
+						?>
+                    <div class="item">
+                        <div class="products">
+                            <div class="product" style="margin-left:10px">
+                                <div class="product-micro">
+                                    <div class="row product-micro-row">
+                                        <div class="col col-xs-6">
+                                            <div class="product-box-1">
+                                                <div>
+                                                    <div style="margin-bottom:40px;position:fixed;margin-right:10px;bottom:0"><img src="img/free_shipping_52px.png" width=30 alt="new" srcset=""></div>
+                                                    <a href="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
+                                                        data-lightbox="image-1"
+                                                        data-title="<?php echo htmlentities($row['Tensanpham']);?>">
+                                                        <img data-echo="../admin/productimages/<?php echo htmlentities($row['Id']);?>/<?php echo htmlentities($row['Hinhanh1']);?>"
+                                                            width="170" height="174" alt="">
+                                                        <div class="zoom-overlay"></div>
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col col-xs-6">
+                                            <div class="product-info">
+                                                <h3 class="name" style="font-family:times new roman;"><a
+                                                        href="product-details.php?pid=<?php echo htmlentities($row['Id']);?>"><?php echo htmlentities($row['Tensanpham']);?></a>
+                                                </h3>
+                                                <div class="rating rateit-small"></div>
+                                                <div class="product-price">
+                                                    <span class="price">
+                                                        <?php echo currency_format(htmlentities($row['Giasanpham']));?>
+                                                        <br>
+                                                    </span>
+                                                    <span class="price-before-discount">
+                                                        <?php echo currency_format(htmlentities($row['Giasanphamtruockhigiam']));?>
+                                                    </span>
+                                                </div>
+                                                <div class="action"><a
+                                                        href="index.php?page=product&action=add&id=<?php echo $row['Id']; ?>"
+                                                        class="lnk btn btn-primary"
+                                                        style="font-family:times new roman;">Thêm vào giỏ hàng</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><?php } ?>
                 </div>
             </section>
             <?php include('includes/brands-slider.php');?>
@@ -510,9 +646,9 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                     <div><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.4405475805665!2d106.80599801462142!3d10.854058560724392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175274f32968a43%3A0x578a57668fc28864!2zNDEsIDU4YSBD4bqndSBYw6J5LCBUw6JuIFBow7osIFF14bqtbiA5LCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1623304564925!5m2!1svi!2s" width="1150" height="500" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
                 </div>
             </div>
-            <button style="position:fixed;bottom:20px;left:10px;background-color:#F8D0C2;outline:none;border:0px;border-radius:5px" id="myBtn">Xem địa chỉ shop</button>
+            <button style="position:fixed;bottom:20px;left:10px;left:7px;outline:none;border:0px;font-size:3rem;width:40px;text-align:center" id="myBtn"><img width=53 src="../shopping/img/map.png" alt="" srcset=""></button>
         </div>
-        <a href="#" style="position:fixed;bottom:50px;left:20px;outline:none;background-color:#F8D0C2;border:0px;border-radius:50%;font-size:3rem;color:white">^</a>
+        <a href="#"><img style="position:fixed;bottom:70px;left:20px;outline:none;border:0px;font-size:3rem;width:40px;text-align:center" src="../shopping/img/up.png" alt="^" srcset=""></a></div>
 
     </div>
     <?php include('includes/footer.php');?>
@@ -565,6 +701,7 @@ window.onclick = function(event) {
         $('.show-theme-options').delay(2000).trigger('click');
     });
     </script>
+    
 
 </body>
 

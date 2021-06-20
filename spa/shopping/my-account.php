@@ -137,7 +137,7 @@ else
                                                 <form class="register-form" role="form" method="post">
                                                     <div class="form-group">
                                                         <label class="info-title" for="name">Tên<span>*</span></label>
-                                                        <input type="text"
+                                                        <input type="text" style="font-family:times new roman;font-size:1.6rem"
                                                             class="form-control unicase-form-control text-input"
                                                             value="<?php echo $row['Ten'];?>" id="name" name="name"
                                                             required="required">
@@ -182,22 +182,22 @@ else
                                     <div class="panel-body">
                                         <form class="register-form" role="form" method="post" name="chngpwd"
                                             onSubmit="return valid();">
-                                            <div class="form-group">
-                                                <label class="info-title" for="Current Password">Mật khẩu hiện tại<span>*</span></label>
+                                            <div class="form-group" style="font-family:times new roman;font-size:1.7rem;font-weight:200">
+                                                <label class="info-title" for="Current Password">Mật khẩu hiện tại<span style="color:red">*</span></label>
                                                 <input type="password"
                                                     class="form-control unicase-form-control text-input" id="cpass"
                                                     name="cpass" required="required">
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="font-family:times new roman;font-size:1.7rem;font-weight:200">
                                                 <label class="info-title" for="New Password">Mật khẩu mới
-                                                    <span>*</span></label>
+                                                    <span style="color:red">*</span></label>
                                                 <input type="password"
                                                     class="form-control unicase-form-control text-input" id="newpass"
                                                     name="newpass">
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="font-family:times new roman;font-size:1.7rem;font-weight:200">
                                                 <label class="info-title" for="Confirm Password">Xác thực mật khẩu
-                                                    <span>*</span></label>
+                                                    <span style="color:red">*</span></label>
                                                 <input type="password"
                                                     class="form-control unicase-form-control text-input" id="cnfpass"
                                                     name="cnfpass" required="required">

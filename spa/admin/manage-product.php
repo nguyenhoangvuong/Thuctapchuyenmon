@@ -109,7 +109,6 @@ if (strlen($_SESSION['bpmsaid']==0)) {
             <div class="main-page">
                 <div class="tables">
                     <div class="table-responsive bs-example widget-shadow">
-                        
                         <table class="table table-bordered" id="example">
                             <thead>
                                 <tr>
@@ -117,9 +116,9 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                     <th>Tên sản phẩm</th>
                                     <th>Thể loại</th>
                                     <th>Thể loại phụ</th>
-                                    <th>Sản phẩm công ty</th>
-                                    <th>Ngày tạo</th>
-                                    <th>Thao tác</th>
+                                    <th>C.ty</th>
+                                    <th width=165>Ngày tạo</th>
+                                    <th>T.Tác</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -153,30 +152,28 @@ if (strlen($_SESSION['bpmsaid']==0)) {
     <script src="js/classie.js"></script>
     <script>
         $(document).ready(function() {
+        $('#example').dataTable({
+            "language": {
+                "sProcessing": "Đang xử lý...",
+                "sLengthMenu": "Xem _MENU_ mục",
+                "sZeroRecords": "Không tìm thấy dòng nào phù hợp",
+                "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
+                "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
+                "sInfoFiltered": "(được lọc từ _MAX_ mục)",
+                "sInfoPostFix": "",
+                "sSearch": "Tìm:",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "Đầu",
+                    "sPrevious": "Trước",
+                    "sNext": "Tiếp",
+                    "sLast": "Cuối"
+                }
+            }
+        });
 
-// Cấu hình các nhãn phân trang
-$('#example').dataTable({
-    "language": {
-        "sProcessing": "Đang xử lý...",
-        "sLengthMenu": "Xem _MENU_ mục",
-        "sZeroRecords": "Không tìm thấy dòng nào phù hợp",
-        "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
-        "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
-        "sInfoFiltered": "(được lọc từ _MAX_ mục)",
-        "sInfoPostFix": "",
-        "sSearch": "Tìm:",
-        "sUrl": "",
-        "oPaginate": {
-            "sFirst": "Đầu",
-            "sPrevious": "Trước",
-            "sNext": "Tiếp",
-            "sLast": "Cuối"
-        }
-    }
-});
-
-});
-</script>
+        });
+    </script>
     </script>
     <script>
     var menuLeft = document.getElementById('cbp-spmenu-s1'),

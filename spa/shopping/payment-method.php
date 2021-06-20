@@ -57,7 +57,7 @@ else{
         <div class="container">
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
-                    <li><a href="home.html">Home</a></li>
+                    <li><a href="index.php">Home</a></li>
                     <li class='active'>Phương thức thanh toán</li>
                 </ul>
             </div>
@@ -68,12 +68,12 @@ else{
             <div class="checkout-box faq-page inner-bottom-sm">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Chọn phương thức thanh toán</h2>
+                        <h2 style="font-family:times new roman">Chọn phương thức thanh toán</h2>
                         <div class="panel-group checkout-steps" id="accordion">
                             <div class="panel panel-default checkout-step-01">
                                 <div class="panel-heading">
                                     <h4 class="unicase-checkout-title">
-                                        <a data-toggle="collapse" class="" data-parent="#accordion" href="#collapseOne">
+                                        <a data-toggle="collapse" class="" data-parent="#accordion" href="#collapseOne" style="font-family:times new roman">
                                             Chọn phương thức thanh toán
                                         </a>
                                     </h4>
@@ -82,12 +82,12 @@ else{
 
                                     <div class="panel-body">
                                         <form name="payment" method="post">
-                                            <input type="radio" name="paymethod" value="COD" checked="checked"> COD
+                                            <input type="radio" name="paymethod" value="COD" checked="checked" > Thanh toán khi nhận hàng
                                             <!-- <input type="radio" name="paymethod" value="Internet Banking"> Internet
                                             Banking
                                             <input type="radio" name="paymethod" value="Debit / Credit card"> Debit /
                                             Credit card <br /><br /> -->
-                                            <input type="submit" value="submit" name="submit" class="btn btn-primary">
+                                            <input type="submit" value="Xác nhận" name="submit" class="btn btn-primary">
                                         </form>
                                     </div>
                                 </div>
