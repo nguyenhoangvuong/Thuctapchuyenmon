@@ -79,8 +79,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                 </thead>
                                 <tbody>
                                     <?php
-                                $status = 'Delivered';
-								$ret=mysqli_query($con,"select tblusers.Ten as username,tblusers.Email as useremail,tblusers.Lienhe as usercontact,tblusers.Diachigiaohang as shippingaddress,tblusers.Thanhphovanchuyen as shippingcity,tblusers.Mapinvanchuyen as shippingpincode,tblorders.Ngayorder as orderdate,tblorders.Tongtien,tblorders.Id as id from tblorders join tblusers on tblorders.UserId = tblusers.Id where tblorders.Tinhtrangorder is null or tblorders.Tinhtrangorder !='$status'");
+								$ret=mysqli_query($con,"select tblusers.Ten as username,tblusers.Email as useremail,tblusers.Lienhe as usercontact,tblusers.Diachigiaohang as shippingaddress,tblusers.Thanhphovanchuyen as shippingcity,tblusers.Mapinvanchuyen as shippingpincode,tblorders.Ngayorder as orderdate,tblorders.Tongtien,tblorders.Id as id from tblorders join tblusers on tblorders.UserId = tblusers.Id where  tblorders.Tinhtrangorder ='In Process' or tblorders.Tinhtrangorder is null order by tblorders.Ngayorder desc");
 								$cnt=1;
 								while ($row=mysqli_fetch_array($ret)) {
 							?>
@@ -134,12 +133,16 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                         ?>
                             <?php
                         $st='Delivered';
+                        $st1 = 'Cancelled';
                         $rt = mysqli_query($con,"select * from tblorders where Id='$oid'");
                         while($num=mysqli_fetch_array($rt)){
                             $currrentSt=$num['Tinhtrangorder'];
                         }
                         if($st==$currrentSt){
                         ?><p class="infoma" id="delivered">Sản phẩm đã được giao</p><?php
+                        }
+                        else if($st1==$currrentSt){
+                            ?><p class="infoma" id="cancelled">Hóa đơn đã hủy</p><?php
                         }
                         else{
                             ?>
@@ -153,6 +156,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                                 <option value="">Chọn tình trạng</option>
                                                 <option value="In Process">Đang xử lý</option>
                                                 <option value="Delivered">Đã giao</option>
+                                                <option value="Cancelled">Hủy đơn</option>
                                             </select>
                                         </span>
                                     </td>

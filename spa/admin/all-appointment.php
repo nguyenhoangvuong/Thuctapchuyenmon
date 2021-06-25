@@ -41,14 +41,18 @@ if (strlen($_SESSION['bpmsaid']==0)) {
     <div class="main-content">
         <?php include_once('includes/sidebar.php');?>
         <?php include_once('includes/header.php');?>
-        
+
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="tables">
                     <div class="table-responsive bs-example widget-shadow">
-                        <h4>Tất cả cuộc hẹn:<form method="POST" action="export.php">
-                            <button class="input-group-addon " style="position:fixed;top:100px;width:80px;right:320px;background-color:GREEN;color:white;height:35px;border-radius:5px" name="btnExport" type="submit">Xuất Excel</button>
-                        </form></h4>
+                        <h4>Tất cả cuộc hẹn:
+                            <form method="POST" action="export.php">
+                                <button class="input-group-addon "
+                                    style="position:fixed;top:100px;width:80px;right:320px;background-color:GREEN;color:white;height:35px;border-radius:5px"
+                                    name="btnExport" type="submit">Xuất Excel</button>
+                            </form>
+                        </h4>
                         <div class="input-group" style="position:fixed;top:100px;width:270px;right:30px">
                             <div class="input-group-addon" style="background-color:#337ab7;color:white">
                                 Search
@@ -62,7 +66,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                 </div>
             </div>
         </div>
-        
+
         <?php include_once('includes/footer.php');?>
     </div>
     <script src="js/classie.js"></script>
@@ -72,7 +76,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
             url: "fetch1.php",
             method: "post",
             data: {
-                search: ""
+                search: "",
             },
             dataType: "text",
             success: function(data) {

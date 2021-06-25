@@ -96,7 +96,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                 <tbody>
                                     <?php
                                 $status = 'Delivered';
-								$ret=mysqli_query($con,"select tblusers.Ten as username,tblusers.Email as useremail,tblusers.Lienhe as usercontact,tblusers.Diachigiaohang as shippingaddress,tblusers.Thanhphovanchuyen as shippingcity,tblusers.Mapinvanchuyen as shippingpincode,tblorders.Ngayorder as orderdate,tblorders.Tongtien,tblorders.Id as id from tblorders join tblusers on tblorders.UserId = tblusers.Id where tblorders.Tinhtrangorder ='$status'");
+								$ret=mysqli_query($con,"select tblusers.Ten as username,tblusers.Email as useremail,tblusers.Lienhe as usercontact,tblusers.Diachigiaohang as shippingaddress,tblusers.Thanhphovanchuyen as shippingcity,tblusers.Mapinvanchuyen as shippingpincode,tblorders.Ngayorder as orderdate,tblorders.Tongtien,tblorders.Id as id,tblorders.Ngayorder from tblorders join tblusers on tblorders.UserId = tblusers.Id where tblorders.Tinhtrangorder ='$status' order by tblorders.Ngayorder desc");
 								$cnt=1;
 								while ($row=mysqli_fetch_array($ret)) {
 							?>

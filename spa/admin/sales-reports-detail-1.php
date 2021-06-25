@@ -50,7 +50,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
         <?php include_once('includes/header.php');?>
         <div id="page-wrapper">
             <div class="main-page">
-                <div class="tables">
+                <div class="tables"  id="exampl1">
                     <div class="table-responsive bs-example widget-shadow">
                         <?php
 						$fdate=$_POST['fromdate'];
@@ -74,12 +74,12 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                 <tr>
                                     <th>S.NO</th>
                                     <th>Tháng / Năm </th>
-                                    <th>Bán hàng</th>
+                                    <th>Doanh thu</th>
                                 </tr>
                             </thead>
                             
                             <?php
-                            $ret=mysqli_query($con,"select month(tblorders.Ngayorder) as lmonth,year(tblorders.Ngayorder) as lyear, tblsanpham.Id,tblorders.SanphamId,sum(tblorders.Soluong*tblsanpham.Giasanpham) as totalprice from tblsanpham join tblorders on tblsanpham.Id = tblorders.SanphamId where tblorders.Tinhtrangorder = 'Delivered' and date(tblorders.Ngayorder) between '$fdate' and '$tdate' group by lmonth,lyear");
+                            $ret=mysqli_query($con,"select month(tblorders.Ngayorder) as lmonth,year(tblorders.Ngayorder) as lyear,sum(Giasanpham) as totalprice from tblctod join tblsanpham on tblsanpham.ID= tblctod.SanphamId join tblorders on tblorders.Id = tblctod.OrderId where tblorders.Tinhtrangorder ='Delivered' and date(tblorders.Ngayorder) between '$fdate' and '$tdate' group by lmonth,lyear");
 							$cnt=1;
 							while ($row=mysqli_fetch_array($ret)) {
 						?>
@@ -118,7 +118,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                 </tr>
                             </thead>
                             <?php
-						$ret=mysqli_query($con,"select year(tblorders.Ngayorder) as lyear,sum(tblorders.Soluong+tblsanpham.Giasanpham) as totalprice from  tblorders join tblsanpham on tblsanpham.ID= tblorders.SanphamId where tblorders.Tinhtrangorder = 'Delivered' and date(tblorders.Ngayorder) between '$fdate' and '$tdate' group by lyear");
+						$ret=mysqli_query($con,"select year(tblorders.Ngayorder) as lyear,sum(tongtien) as totalprice from tblorders where Tinhtrangorder = 'Delivered' and date(tblorders.Ngayorder) between '$fdate' and '$tdate' group by lyear");
 						$cnt=1;
 						while ($row=mysqli_fetch_array($ret)) {
 					?>
@@ -133,10 +133,13 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 					}?>
                             <tr>
                                 <td colspan="2" align="center">Tổng cộng </td>
-                                <td><?php  echo $ftotal;?></td>
+                                <td><?php  echo currency_format($ftotal);?></td>
                             </tr>
                         </table>
                         <?php } ?>
+                        <p style="margin-top:1%" align="center">
+                            <i class="fa fa-print fa-2x" style="cursor: pointer;" OnClick="CallPrint(this.value)"></i>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -144,6 +147,16 @@ if (strlen($_SESSION['bpmsaid']==0)) {
     </div>
     <?php include_once('includes/footer.php');?>
     <script src="js/classie.js"></script>
+    <script>
+    function CallPrint(strid) {
+        var prtContent = document.getElementById("exampl1");
+        var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent.innerHTML);
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.document.close();
+    }
+    </script>
     <script>
     var menuLeft = document.getElementById('cbp-spmenu-s1'),
         showLeftPush = document.getElementById('showLeftPush'),

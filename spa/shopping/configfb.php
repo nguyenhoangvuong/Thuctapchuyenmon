@@ -1,8 +1,8 @@
 <?php
 require_once(__DIR__.'/Facebook/autoload.php');
 
-define('APP_ID', '148977787268045');
-define('APP_SECRET', '1eefb24d1733372f21d055933c9a393a');
+define('APP_ID', '881606892431106');
+define('APP_SECRET', 'beff5f454fc71692310a289d458d86c2');
 define('API_VERSION', 'v2.5');
 define('FB_BASE_URL', 'http://localhost:8080/Manage_Spa/spa/shopping/login.php');
 

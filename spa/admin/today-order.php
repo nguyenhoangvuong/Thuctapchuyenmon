@@ -74,7 +74,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                         <th>Địa chỉ giao hàng</th>
                                         <th>Tổng tiền</th>
                                         <th>Ngày đặt</th>
-                                        <th colspan="2" style="text-align:center">Thao Tác</th>
+                                        <th colspan="2" style="text-align:center">TTác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -83,7 +83,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                 $from = date('Y-m-d')." ".$f1;
                                 $t1 ="23:59:59";
                                 $to = date('Y-m-d')." ".$t1; 
-								$ret=mysqli_query($con,"select tblusers.Ten as username,tblusers.Email as useremail,tblusers.Lienhe as usercontact,tblusers.Diachigiaohang as shippingaddress,tblusers.Thanhphovanchuyen as shippingcity,tblusers.Mapinvanchuyen as shippingpincode,tblorders.Ngayorder as orderdate,tblorders.Tongtien,tblorders.Id as id from tblorders join tblusers on tblorders.UserId = tblusers.Id where tblorders.Ngayorder between '$from' and '$to'");
+								$ret=mysqli_query($con,"select tblusers.Ten as username,tblusers.Email as useremail,tblusers.Lienhe as usercontact,tblusers.Diachigiaohang as shippingaddress,tblusers.Thanhphovanchuyen as shippingcity,tblusers.Mapinvanchuyen as shippingpincode,tblorders.Ngayorder as orderdate,tblorders.Tongtien,tblorders.Id as id,tblorders.Tinhtrangorder as tinhtrang from tblorders join tblusers on tblorders.UserId = tblusers.Id where tblorders.Ngayorder between '$from' and '$to'");
 								$cnt=1;
 								while ($row=mysqli_fetch_array($ret)) {
 							?>
@@ -96,12 +96,28 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                         <td><?php  echo currency_format($row['Tongtien']);?>
                                         </td>
                                         <td><?php  echo $row['orderdate'];?></td>
-                                        <td><a class="btn btn-primary" href='today-order.php?oid=<?php echo $row['id']; ?>' id="myBtn"
-                                                class="user">Duyệt</a>
-                                            <?php $a =$row['id']; ?>
-                                        </td>
+
+                                        <?php if($row['tinhtrang'] != "Cancelled") {
+                                                ?>
                                         <td>
-                                            <a class="btn btn-danger" href='today-order-details.php?oid=<?php echo $a ?>'>Xem</a>
+                                            <a class="btn btn-primary"
+                                                href='today-order.php?oid=<?php echo $row['id']; ?>' id="myBtn"
+                                                class="user">Duyệt</a>
+                                        </td>
+                                        <?php
+                                            }
+                                            else{
+                                                ?>
+                                                <td>
+                                                <b style="color:red">Đã hủy</b>
+                                                </td>
+                                                <?php
+                                            }
+                                            ?>
+                                            <?php $a =$row['id']; ?>
+                                        <td>
+                                            <a class="btn btn-danger"
+                                                href='today-order-details.php?oid=<?php echo $a ?>'>Xem</a>
                                         </td>
                                     </tr>
 
@@ -123,7 +139,8 @@ if (strlen($_SESSION['bpmsaid']==0)) {
 
                         <div id='noidung'>
                             <h3 class="tittle">Đơn hàng</h3>
-                            <p style="font-weight: bold;text-align:center;margin-bottom:5px;font-size:1.2rem">ID : <span><?php echo $oid;?></span></p>
+                            <p style="font-weight: bold;text-align:center;margin-bottom:5px;font-size:1.2rem">ID :
+                                <span><?php echo $oid;?></span></p>
                             <?php
                             $re = mysqli_query($con,"select * from tbltheodoilichsu where OrderId = '$oid'");
                             while($rws = mysqli_fetch_array($re)){
@@ -138,6 +155,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                         ?>
                             <?php
                         $st='Delivered';
+                        $st1 = 'Cancelled';
                         $rt = mysqli_query($con,"select * from tblorders where Id='$oid'");
                         while($num=mysqli_fetch_array($rt)){
                             $currrentSt=$num['Tinhtrangorder'];
@@ -145,9 +163,12 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                         if($st==$currrentSt){
                         ?><p class="infoma" id="delivered">Sản phẩm đã được giao</p><?php
                         }
+                        else if($st1==$currrentSt){
+                            ?><p class="infoma" id="cancelled">Hóa đơn đã hủy</p><?php
+                        }
                         else{
                             ?>
-                            <table  class="infoma">
+                            <table class="infoma">
                                 <tr>
                                     <td>
                                         Tình trạng :
@@ -157,23 +178,25 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                                                 <option value="">Chọn tình trạng</option>
                                                 <option value="In Process">Đang xử lý</option>
                                                 <option value="Delivered">Đã giao</option>
+                                                <option value="Cancelled">Hủy đơn</option>
                                             </select>
                                         </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <p>Nhận xét :</p> 
+                                        <p>Nhận xét :</p>
                                     </td>
                                     <td>
-                                            <span>
-                                                <textarea name="remark" cols="26" rows="3" required="required"></textarea>
-                                            </span>
+                                        <span>
+                                            <textarea name="remark" cols="26" rows="3" required="required"></textarea>
+                                        </span>
                                     </td>
                                 </tr>
                             </table>
-                            <div class="upd"><input id="upd" class="btn btn-primary" type="submit" name="submit2"
-                                    value="Cập nhật" size="40" style="cursor: pointer;"></div>
+                            <div class="upd">
+                                <input id="upd" class="btn btn-primary" type="submit" name="submit2" value="Cập nhật" size="40" style="cursor: pointer;">
+                            </div>
                             <?php
                             }
                         ?>

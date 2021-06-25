@@ -123,8 +123,7 @@
                           <li>
                               <a href="pendding-order.php">Đơn hàng đang chờ
                                 <?php	
-                                    $status='Delivered';									 
-                                    $ret = mysqli_query($con,"select * from tblorders where Tinhtrangorder!='$status' || Tinhtrangorder is null ");
+                                    $ret = mysqli_query($con,"select * from tblorders where Tinhtrangorder='In Process' || Tinhtrangorder is null");
                                     $num = mysqli_num_rows($ret);
                                     {?><b class="label orange pull-right" style="background-color:#33FFFF;color:black;font-size:1rem;"><?php echo $num; ?></b>
                                     <?php 
@@ -139,6 +138,18 @@
                                     $ret = mysqli_query($con,"select * from tblorders where Tinhtrangorder ='$status'");
                                     $num = mysqli_num_rows($ret);
                                     {?><b class="label orange pull-right" style="background-color:#00FF00;color:black;font-size:1rem;"><?php echo $num; ?></b>
+                                    <?php 
+                                    } 
+                                ?>
+                              </a>
+                          </li>
+                          <li>
+                              <a href="cancelled.php">Đơn hàng đã hủy
+                              <?php	
+                                    $status1='Cancelled';									 
+                                    $ret = mysqli_query($con,"select * from tblorders where Tinhtrangorder ='$status1'");
+                                    $num = mysqli_num_rows($ret);
+                                    {?><b class="label orange pull-right" style="background-color:lightblue;color:black;font-size:1rem;"><?php echo $num; ?></b>
                                     <?php 
                                     } 
                                 ?>
@@ -177,19 +188,6 @@
                           <li><a href="bwdates-reports-ds.php"> Báo cáo giữa các ngày</a></li>
                           <!-- <li><a href="sales-reports.php">Báo cáo offline</a></li> -->
                           <li><a href="sales-reports-1.php">Báo cáo bán hàng online</a></li>
-                      </ul>
-                  </li>
-                  
-                  <li>
-                      <a href="search-appointment.php"><i class="fa fa-search nav_icon"></i>Tìm kiếm<span
-                              class="fa arrow"></span></a>
-                      <ul class="nav nav-second-level collapse">
-                          <li>
-                              <a href="search-appointment.php">Tìm kiếm cuộc hẹn</a>
-                          </li>
-                          <li>
-                              <a href="search-invoices.php">Tìm kiếm hóa đơn</a>
-                          </li>
                       </ul>
                   </li>
               </ul>

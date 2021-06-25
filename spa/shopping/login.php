@@ -256,7 +256,7 @@ if(isset($_POST['login']))
                             <p></p>
                             <div class="form-group">
                                 <label class="info-title" for="exampleInputEmail1" style="font-size:1.8rem">Địa chỉ Email <span>*</span></label>
-                                <input type="email" name="email" class="form-control unicase-form-control text-input"
+                                <input type="email" style="font-size:1.8rem" name="email" class="form-control unicase-form-control text-input"
                                     id="exampleInputEmail1">
                             </div>
                             <div class="form-group">

@@ -2,7 +2,7 @@
 include('includes/dbconnection.php');
 $sear= $_POST['search'];
 $ret=mysqli_query($con,"select distinct tblkhachhang.Ten,tblhoadon.BillId,tblhoadon.NgayDang from tblkhachhang   
-join tblhoadon on tblkhachhang.ID=tblhoadon.Userid where tblkhachhang.Ten like '%$sear%' || tblhoadon.BillId like '%$sear%' order by tblhoadon.ID desc");
+join tblhoadon on tblkhachhang.ID=tblhoadon.Userid where tblkhachhang.Ten like '%$sear%' || tblhoadon.BillId like '%$sear%' || tblhoadon.NgayDang like '%$sear%' order by tblhoadon.Ngaydang desc");
 $result = mysqli_num_rows($ret);
 if($result > 0){
     ?>

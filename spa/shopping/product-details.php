@@ -420,7 +420,7 @@ if(isset($_POST['submit']))
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="product-tabs inner-bottom-xs  wow fadeInUp">
                         <div class="row">
                             <div class="col-sm-3">
@@ -431,7 +431,7 @@ if(isset($_POST['submit']))
                             </div>
                             <div class="col-sm-9">
                                 <div class="tab-content">
-                                    <div id="description" class="tab-pane in active">
+                                    <div id="description" class="tab-pane in active" style="font-size:1.7rem">
                                         <div class="product-tab">
                                             <p class="text"><?php echo $row['Motasanpham'];?></p>
                                         </div>
@@ -529,14 +529,14 @@ if(isset($_POST['submit']))
                                                             <div class="row">
                                                                 <div class="col-sm-6">
                                                                     <div class="form-group">
-                                                                        <label for="exampleInputName" style="font-family:times new roman">Họ tên <span
+                                                                        <label for="exampleInputName" style="font-family:times new roman;font-size:1.5rem">Họ tên <span
                                                                                 class="astk">*</span></label>
                                                                         <input type="text" class="form-control txt"
                                                                             id="exampleInputName" placeholder=""
                                                                             name="name" required="required">
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="exampleInputSummary" style="font-family:times new roman">Tóm lược <span
+                                                                        <label for="exampleInputSummary" style="font-family:times new roman;font-size:1.5rem">Tóm lược <span
                                                                                 class="astk">*</span></label>
                                                                         <input type="text" class="form-control txt"
                                                                             id="exampleInputSummary" placeholder=""
@@ -546,11 +546,11 @@ if(isset($_POST['submit']))
 
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
-                                                                        <label for="exampleInputReview" style="font-family:times new roman" >Nhận xét <span
+                                                                        <label for="exampleInputReview" style="font-family:times new roman;font-size:1.5rem" >Nhận xét <span
                                                                                 class="astk">*</span></label>
 
                                                                         <textarea class="form-control txt txt-review"
-                                                                            id="exampleInputReview" rows="4"
+                                                                            id="exampleInputReview" rows="5"
                                                                             placeholder="" name="review"
                                                                             required="required"></textarea>
                                                                     </div>

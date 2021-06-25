@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2021 at 06:05 PM
+-- Generation Time: Jun 24, 2021 at 02:53 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `tblctod` (
   `OrderId` int(11) DEFAULT NULL,
   `SanphamId` int(11) NOT NULL,
   `Soluong` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tblctod`
@@ -88,7 +88,12 @@ INSERT INTO `tblctod` (`Id`, `OrderId`, `SanphamId`, `Soluong`) VALUES
 (38, 20, 62, 1),
 (39, 21, 62, 1),
 (40, 22, 63, 1),
-(41, 23, 62, 1);
+(41, 23, 62, 1),
+(42, 24, 61, 3),
+(43, 24, 81, 1),
+(44, 25, 82, 1),
+(45, 26, 63, 1),
+(46, 27, 81, 1);
 
 -- --------------------------------------------------------
 
@@ -134,7 +139,7 @@ INSERT INTO `tblcuochen` (`ID`, `Socuochen`, `Ten`, `Email`, `Sodienthoai`, `Nga
 (16, '242910382', 'Nguyá»…n HoÃ ng VÆ°Æ¡ng', 'hoangvuong1225@gmail.com', 1647689482, '6/18/2021', '1:00am', 'Tháº£i Ä‘á»™c chÃ¬', '2021-06-10 05:16:35', '', '', '0000-00-00 00:00:00'),
 (17, '153660636', 'Nguyá»…n HoÃ ng VÆ°Æ¡ng', 'hoangvuong1225@gmail.com', 1647689482, '6/25/2021', '12:30am', 'ChÄƒm sÃ³c da/Massage cÆ¡ báº£n', '2021-06-11 14:03:24', '', '', '0000-00-00 00:00:00'),
 (18, '587300209', 'Nguyá»…n HoÃ ng VÆ°Æ¡ng', 'hoangvuong1225@gmail.com', 1647689482, '6/24/2021', '12:30am', 'ChÄƒm sÃ³c da/Massage cÆ¡ báº£n', '2021-06-18 11:01:44', '', '', '0000-00-00 00:00:00'),
-(19, '482990931', 'Nguyá»…n HoÃ ng VÆ°Æ¡ng', 'hoangvuong1225@gmail.com', 1647689482, '6/24/2021', '12:30am', 'Wax', '2021-06-18 11:09:22', '', '', '0000-00-00 00:00:00');
+(19, '482990931', 'Nguyá»…n HoÃ ng VÆ°Æ¡ng', 'hoangvuong1225@gmail.com', 1647689482, '6/24/2021', '12:30am', 'Wax', '2021-06-18 11:09:22', 'abc', '1', '2021-06-21 05:56:13');
 
 -- --------------------------------------------------------
 
@@ -152,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `tbldanhgiasanpham` (
   `Tomluoc` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `Review` longtext CHARACTER SET utf8,
   `Ngayreview` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbldanhgiasanpham`
@@ -163,7 +168,8 @@ INSERT INTO `tbldanhgiasanpham` (`Id`, `SanphamId`, `Chatluong`, `Gia`, `Giatri`
 (2, 83, 3, 3, 3, 'Nguyá»…n HoÃ ng VÆ°Æ¡ng', 'á»•n', 'ok', '2021-06-12 06:38:51'),
 (3, 62, 2, 5, 4, 'Nguyá»…n HoÃ ng VÆ°Æ¡ng1', 'Sáº£n pháº©m tá»‘t', 'abc', '2021-06-15 03:33:23'),
 (4, 62, 2, 5, 4, 'Nguyá»…n HoÃ ng VÆ°Æ¡ng1', 'Sáº£n pháº©m tá»‘t', 'abc', '2021-06-15 03:33:29'),
-(5, 115, 4, 3, 2, 'Nguyá»…n HoÃ ng VÆ°Æ¡ng1', 'á»•n', 'haha', '2021-06-15 07:42:58');
+(5, 115, 4, 3, 2, 'Nguyá»…n HoÃ ng VÆ°Æ¡ng1', 'á»•n', 'haha', '2021-06-15 07:42:58'),
+(6, 61, 4, 3, 4, 'Vuong', 'abc', 'abc', '2021-06-21 04:27:07');
 
 -- --------------------------------------------------------
 
@@ -296,7 +302,7 @@ CREATE TABLE IF NOT EXISTS `tblnhatkynguoidung` (
   `Thoigianlogin` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `Thoigianlogout` varchar(255) DEFAULT NULL,
   `Trangthai` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblnhatkynguoidung`
@@ -372,7 +378,11 @@ INSERT INTO `tblnhatkynguoidung` (`Id`, `Emailnguoidung`, `Ipnguoidung`, `Thoigi
 (100, 'hoangvuong1225@gmail.com', 0x3a3a3100000000000000000000000000, '2021-06-16 14:45:35', NULL, 1),
 (101, 'hoangvuong1225@gmail.com', 0x3a3a3100000000000000000000000000, '2021-06-17 03:55:49', NULL, 1),
 (102, 'hoangvuong1225@gmail.com', 0x3a3a3100000000000000000000000000, '2021-06-18 02:08:43', '18-06-2021 09:20:23 AM', 1),
-(103, 'hoangvuong1225@gmail.com', 0x3a3a3100000000000000000000000000, '2021-06-18 02:20:28', NULL, 0);
+(103, 'hoangvuong1225@gmail.com', 0x3a3a3100000000000000000000000000, '2021-06-18 02:20:28', NULL, 0),
+(104, 'hoangvuong1225@gmail.com', 0x3a3a3100000000000000000000000000, '2021-06-21 04:27:52', '21-06-2021 11:28:41 AM', 1),
+(105, 'hoangvuong11225@gmail.com', 0x3a3a3100000000000000000000000000, '2021-06-21 04:28:46', '21-06-2021 12:51:26 PM', 1),
+(106, 'hoangvuong1225@gmail.com', 0x3a3a3100000000000000000000000000, '2021-06-21 05:51:31', '21-06-2021 12:54:42 PM', 1),
+(107, 'hoangvuong1225@gmail.com', 0x3a3a3100000000000000000000000000, '2021-06-21 05:54:47', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -387,7 +397,7 @@ CREATE TABLE IF NOT EXISTS `tblorders` (
   `Tinhtrangorder` varchar(20) DEFAULT NULL,
   `Tongtien` varchar(50) DEFAULT NULL,
   `Ngayorder` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tblorders`
@@ -405,7 +415,11 @@ INSERT INTO `tblorders` (`Id`, `UserId`, `Phuongthucthanhtoan`, `Tinhtrangorder`
 (19, 17, 'COD', 'Delivered', '1840000.00', '2021-06-16 15:35:13'),
 (20, 17, 'COD', NULL, '1117000.00', '2021-06-16 17:05:26'),
 (21, 17, 'COD', 'Delivered', '1117000.00', '2021-06-16 17:06:20'),
-(23, 13, 'COD', 'Delivered', '1117000.00', '2021-06-18 02:20:43');
+(23, 13, 'COD', 'Delivered', '1117000.00', '2021-06-18 02:20:43'),
+(24, 0, 'COD', NULL, '10643000.00', '2021-06-21 04:28:01'),
+(25, 4, NULL, NULL, '1840000.00', '2021-06-21 04:28:57'),
+(26, 0, NULL, NULL, '1037000.00', '2021-06-21 05:51:38'),
+(27, 14, NULL, NULL, '7115000.00', '2021-06-21 05:55:15');
 
 -- --------------------------------------------------------
 
@@ -637,7 +651,7 @@ CREATE TABLE IF NOT EXISTS `tblusers` (
   `Ngaycapnhat` varchar(255) DEFAULT NULL,
   `id_fb` varchar(100) NOT NULL,
   `Token` varchar(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblusers`
@@ -648,7 +662,7 @@ INSERT INTO `tblusers` (`Id`, `Ten`, `Email`, `Lienhe`, `Matkhau`, `Diachigiaoha
 (2, 'Amit ', 'amit@gmail.com', 8285703355, '5c428d8875d2948607f3e3fe134d71b4', NULL, NULL, NULL, '2017-03-15 10:21:22', NULL, '', ''),
 (3, 'hg', 'hgfhgf@gmass.com', 1121312312, '827ccb0eea8a706c4c34a16891f84e7b', NULL, NULL, NULL, '2018-04-29 02:30:32', NULL, '', ''),
 (4, 'Nguyá»…n HoÃ ng VÆ°Æ¡ng1', 'hoangvuong11225@gmail.com', 347689482, 'bf288aa8e84f49c6f74b5faa301243ed', '41/58A Cáº§u XÃ¢y, P.TÃ¢n PhÃº, Quáº­n 9 , TP. HCM', 'TP Há»“ ChÃ­ Minh', 1843, '2021-05-17 20:18:00', NULL, '', ''),
-(13, 'Nguyá»…n HoÃ ng VÆ°Æ¡ng', 'hoangvuong1225@gmail.com', NULL, NULL, '41/58A, Cau Xay, P.Tan Phu, Quan 9\r\nQngai', 'HCM', 6666, '2021-06-18 02:20:28', NULL, '503605900690878', '');
+(14, 'Nguyá»…n HoÃ ng VÆ°Æ¡ng', 'hoangvuong1225@gmail.com', NULL, NULL, NULL, NULL, NULL, '2021-06-21 05:54:47', NULL, '512998089751659', '');
 
 -- --------------------------------------------------------
 
@@ -792,7 +806,7 @@ MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `tblctod`
 --
 ALTER TABLE `tblctod`
-MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=42;
+MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT for table `tblcuochen`
 --
@@ -802,7 +816,7 @@ MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 -- AUTO_INCREMENT for table `tbldanhgiasanpham`
 --
 ALTER TABLE `tbldanhgiasanpham`
-MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tbldichvu`
 --
@@ -827,12 +841,12 @@ MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 -- AUTO_INCREMENT for table `tblnhatkynguoidung`
 --
 ALTER TABLE `tblnhatkynguoidung`
-MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=104;
+MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=108;
 --
 -- AUTO_INCREMENT for table `tblorders`
 --
 ALTER TABLE `tblorders`
-MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
+MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `tblsanpham`
 --
@@ -862,7 +876,7 @@ MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT for table `tblusers`
 --
 ALTER TABLE `tblusers`
-MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `tblyeuthich`
 --

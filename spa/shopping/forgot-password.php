@@ -2,47 +2,53 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-if(isset($_POST['change']))
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+include('../includes/dbconnection.php');
+if(isset($_POST['email']))
 {
-    $email=$_POST['email'];
-    $contact=$_POST['contact'];
-    $password=md5($_POST['password']);
-	$confirmpassword = md5($_POST['confirmpassword']);
-	$query=mysqli_query($con,"SELECT * FROM tblusers WHERE Email='$email' and Lienhe='$contact'");
-	$num=mysqli_fetch_array($query);
-	if($password == $confirmpassword){
-		if($num>0)
-		{
-			$extra="login.php";
-			mysqli_query($con,"update tblusers set Matkhau='$password' WHERE Email='$email' and Lienhe='$contact' ");
-			$host=$_SERVER['HTTP_HOST'];
-			$uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-			header("location:http://$host$uri/$extra");
-			$_SESSION['errmsg']="Thay đổi mật khẩu thành công !";
-			exit();
-		}
-		else
-		{
-			$extra="forgot-password.php";
-			$host  = $_SERVER['HTTP_HOST'];
-			$uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-			header("location:http://$host$uri/$extra");
-			$_SESSION['errmsg']="Email hoặc mật khẩu không đúng";
-			exit();
-		}
-	}
-	else
-		{
-			$extra="forgot-password.php";
-			$host  = $_SERVER['HTTP_HOST'];
-			$uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-			header("location:http://$host$uri/$extra");
-			$_SESSION['errmsg']="Mật khẩu và xác nhận mật khẩu không khớp";
-			exit();
-		}
-}
+    $emailTo = $_POST['email'];
+    $code = uniqid(true);
+    $query = mysqli_query($con,"insert into tblresetPassword(code,email) values('$code','$emailTo')");
+    if(!$query){
+        exit("Error");
+    }
+    $mail = new PHPMailer(true);
 
+    try {
+        //Server settings
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'hoangvuong1225@gmail.com';                     //SMTP username
+        $mail->Password   = 'Hoangvuong1';                               //SMTP password
+        $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
+        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    
+        //Recipients
+        $mail->setFrom('hoangvuong1225@gmail.com', 'Mailer');
+        $mail->addAddress($emailTo);     //Add a recipient
+        $mail->addReplyTo('hoangvuong1225@gmail.com', 'Information');
+    
+        //Content
+        $url = "http://".$_SERVER["HTTP_HOST"].dirname($_SERVER["PHP_SELF"])."/resetPassword.php?code=$code";
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = 'Here is the subject';
+        $mail->Body    = "<h1>Bạn đã yêu cầu làm mới mật khẩu</h1> Click <a href='$url'>tại đây</a> để tiếp tục yêu cầu !";
+        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    
+        $mail->send();
+        echo 'Reset password link has been sento your email';
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -94,16 +100,6 @@ if(isset($_POST['change']))
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
-    <script type="text/javascript">
-    function valid() {
-        if (document.register.password.value != document.register.confirmpassword.value) {
-            alert("Password and Confirm Password Field do not match  !!");
-            document.register.confirmpassword.focus();
-            return false;
-        }
-        return true;
-    }
-    </script>
 </head>
 
 <body class="cnt-home">
@@ -116,7 +112,7 @@ if(isset($_POST['change']))
         <div class="container">
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
-                    <li><a href="home.html">Home</a></li>
+                    <li><a href="index.php">Home</a></li>
                     <li class='active'>Quên mật khẩu</li>
                 </ul>
             </div>
@@ -129,40 +125,21 @@ if(isset($_POST['change']))
                 <div class="row">
                     <!-- Sign-in -->
                     <div class="col-md-6 col-sm-6 sign-in">
-                        <h4 class="">Quên mật khẩu</h4>
+                        <h4 style="font-family:times new roman" class="">Quên mật khẩu</h4>
                         <form class="register-form outer-top-xs" name="register" method="post">
                             <span style="color:red;">
                                 <?php
-echo htmlentities($_SESSION['errmsg']);
-?>
-                                <?php
-echo htmlentities($_SESSION['errmsg']="");
-?>
+                                echo htmlentities($_SESSION['errmsg']);
+                                ?>
+                                                                <?php
+                                echo htmlentities($_SESSION['errmsg']="");
+                                ?>
                             </span>
                             <div class="form-group">
                                 <label class="info-title" for="exampleInputEmail1">Email. <span>*</span></label>
                                 <input type="email" name="email" class="form-control unicase-form-control text-input"
                                     id="exampleInputEmail1" required>
                             </div>
-                            <div class="form-group">
-                                <label class="info-title" for="exampleInputPassword1">Liên hệ. <span>*</span></label>
-                                <input type="text" name="contact" class="form-control unicase-form-control text-input"
-                                    id="contact" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="info-title" for="password">Mật khẩu. <span>*</span></label>
-                                <input type="password" class="form-control unicase-form-control text-input"
-                                    id="password" name="password" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="info-title" for="confirmpassword">Xác nhận mật khẩu. <span>*</span></label>
-                                <input type="password" class="form-control unicase-form-control text-input"
-                                    id="confirmpassword" name="confirmpassword" required>
-                            </div>
-
-
-
                             <button type="submit" class="btn-upper btn btn-primary checkout-page-button"
                                 name="change">Xác nhận</button>
                         </form>

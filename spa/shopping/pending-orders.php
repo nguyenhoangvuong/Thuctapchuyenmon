@@ -8,7 +8,7 @@ header('location:login.php');
 }
 else{
 	if (isset($_GET['id'])) {
-		mysqli_query($con,"delete from tblorders  where UserId='".$_SESSION['id']."' and Tinhtrangorder is null and Id='".$_GET['id']."' ");
+		mysqli_query($con,"update tblorders set Tinhtrangorder = 'Cancelled' where UserId='".$_SESSION['id']."' and Tinhtrangorder is null and Id='".$_GET['id']."'");
 	}
 
     if (!function_exists('currency_format')) {
@@ -119,7 +119,7 @@ else{
                                             <td>
                                                 <?php if($row['Tinhtrangorder'] != 'In Process'){
                                                     ?>
-                                                    <a class="btn btn-danger" href="pending-orders.php?id=<?php echo $row['Id']?>&del=delete" onClick="return confirm('Are you sure you want to delete?')">Xóa</a>
+                                                    <a class="btn btn-danger" href="pending-orders.php?id=<?php echo $row['Id']?>&del=delete" onClick="return confirm('Are you sure you want to delete?')">Hủy</a>
                                                     <?php
                                                     
                                                 }

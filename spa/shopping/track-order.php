@@ -75,6 +75,7 @@ function f3() {
                 </tr>
                 <?php  }
                 $st='Delivered';
+                $st1 = 'Cancelled';
                 $rt = mysqli_query($con,"SELECT * FROM tblorders WHERE Id='$oid'");
                     while($num=mysqli_fetch_array($rt))
                     {
@@ -86,8 +87,13 @@ function f3() {
                     <td colspan="2"><b>
                             Sản phẩm được giao thành công </b></td>
                     <?php } 
- 
-  ?>
+                    if($st1==$currrentSt)
+                    { ?>
+                <tr>
+                    <td colspan="2"><b>
+                            Đơn hàng đã bị hủy </b></td>
+                    <?php } 
+                    ?>
             </table>
         </form>
     </div>

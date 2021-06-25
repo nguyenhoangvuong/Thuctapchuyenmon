@@ -102,7 +102,7 @@ else{
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $query=mysqli_query($con,"select tblsanpham.Hinhanh1 as pimg1,tblsanpham.Tensanpham as pname,tblsanpham.Id as proid,tblctod.SanphamId as opid,tblctod.Soluong as qty,tblsanpham.Giasanpham as pprice,tblsanpham.Phivanchuyen as shippingcharge,tblorders.Phuongthucthanhtoan as paym,tblorders.Ngayorder as odate,tblorders.Id as orderid from tblctod join tblsanpham on tblctod.SanphamId=tblsanpham.Id join tblorders on tblctod.OrderId = tblorders.Id where tblorders.UserId='".$_SESSION['id']."' and tblorders.Phuongthucthanhtoan is not null");
+                                        <?php $query=mysqli_query($con,"select tblsanpham.Hinhanh1 as pimg1,tblsanpham.Tensanpham as pname,tblsanpham.Id as proid,tblctod.SanphamId as opid,tblctod.Soluong as qty,tblsanpham.Giasanpham as pprice,tblsanpham.Phivanchuyen as shippingcharge,tblorders.Phuongthucthanhtoan as paym,tblorders.Ngayorder as odate,tblorders.Id as orderid from tblctod join tblsanpham on tblctod.SanphamId=tblsanpham.Id join tblorders on tblctod.OrderId = tblorders.Id where tblorders.UserId='".$_SESSION['id']."' and tblorders.Phuongthucthanhtoan is not null order by tblorders.Ngayorder desc");
 											$cnt=1;
 											while($row=mysqli_fetch_array($query))
 											{

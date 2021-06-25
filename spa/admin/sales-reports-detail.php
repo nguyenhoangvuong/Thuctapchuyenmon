@@ -79,7 +79,7 @@ if (strlen($_SESSION['bpmsaid']==0)) {
                             </thead>
                             
                             <?php
-                            $ret=mysqli_query($con,"select month(tblhoadon.NgayDang) as lmonth,year(tblhoadon.NgayDang) as lyear,sum(Chiphi) as totalprice,sum(Giasanpham) as totalprice1 from  tblhoadon join tbldichvu on tbldichvu.ID= tblhoadon.DichvuId join tblsanpham on tblsanpham.Id = tblhoadon.SanphamId where date(tblhoadon.NgayDang) between '$fdate' and '$tdate' group by lmonth,lyear");
+                            $ret=mysqli_query($con,"select month(tblorders.Ngayorder) as lmonth,year(tblorders.Ngayorder) as lyear,sum(Giasanpham) as totalprice from tblctod join tblsanpham on tblsanpham.ID= tblctod.SanphamId join tblorders on tblorders.Id = tblctod.OrderId where date(tblorders.Ngayorder) between '$f' and '$to' group by lmonth,lyear");
 							$cnt=1;
 							while ($row=mysqli_fetch_array($ret)) {
 						?>
