@@ -7,7 +7,7 @@ Họ và tên: Nguyễn Hoàng Vương
 Giảng viên: Thầy Nguyễn Lê Minh. 
 
 ## Phần 1: Công nghệ sử dụng:
-1. Visual Studio Code
+1. Bootstrap
 2. MySql
 3. XAMPP
 4. HTML/CSS/JS
@@ -15,9 +15,9 @@ Giảng viên: Thầy Nguyễn Lê Minh. 
 
 ## Phần 2: Các chức năng đã hoàn thành:
 1. Xây dựng cơ sở dữ liệu.
-2. Đăng nhập : Tài khoản đăng ký trước, Facebook
-3. Đăng xuất, xóa phiên làm việc
-4. Đổi mật khẩu, dùng gmail và số điện thoại đã cung cấp để đổi lại mật khẩu.
+2. Đăng nhập : Tài khoản đăng ký trước, Facebook.
+3. Đăng xuất, xóa phiên làm việc.
+4. Đổi mật khẩu, quên mật khẩu thông qua gửi mail.
 5. Đặt lịch hẹn, duyệt lịch hẹn.
 6. Quản lý sản phẩm.
 7. Quản lý thể loại, thể loại phụ.
@@ -52,9 +52,10 @@ Giảng viên: Thầy Nguyễn Lê Minh. 
 36. Hiển thị thông tin chi tiết sản phẩm.
 37. Deploy website.
 38. Chia sẻ sản phẩm lên facebook.
+39. Hủy đơn hàng.
 
 ## Phần 3: Các chức năng chưa hoàn thành:
-1. Đăng nhập gmail.
+
 
 ## Hướng dẫn sử dụng:
 1. Tải xuống tệp zip.
