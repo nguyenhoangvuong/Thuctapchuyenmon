@@ -493,9 +493,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
                 </div>
                 <div class="product-container">
                     <?php
-            $sql = mysqli_query($con,"SELECT * FROM tblsanpham where date(NgayDang)>=(DATE(NOW()) - INTERVAL 14 DAY)
-            ORDER BY RAND()
-            LIMIT 5;");
+            $sql = mysqli_query($con,"select * from tblsanpham order by Ngaydang desc limit 5");
             while($row11 = mysqli_fetch_array($sql)){
         ?>
                     <div class="product-box" style="height:50%">
